@@ -73,6 +73,12 @@ namespace DatabaseCommon
          command.Dispose();
          return rowAffected;
       }
+      public static int ExecuteQuery(SqlCommand command)
+      {
+         int rowAffected = command.ExecuteNonQuery();
+         command.Dispose();
+         return rowAffected;
+      }
       public static int ExecuteInsertQuery(SqlCommand command)
       {
          int rowAffected = command.ExecuteScalar().ToInt32();
@@ -106,6 +112,29 @@ namespace DatabaseCommon
       {
          SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeID);
          return DatabaseUtils.ExecuteInsertQuery(command);
+      }
+      public static T GetEntity<T>(string sql)
+      {
+         Object data = DatabaseUtils.ExcuteSelectQuery(sql);
+         if (data != null)
+         {
+            DataTable dt = (DataTable)data;
+            foreach (DataRow dr in dt.Rows)
+            {
+               return GetObject<T>(dr);
+            }
+         }
+         return default(T);
+      }
+      public static long UpdateEntity<T>(T dto)
+      {
+         SqlCommand command = GenerateUpdateQuery<T>(dto);
+         return ExecuteQuery(command);
+      }
+      public static long DeleteEntity<T>(long ID)
+      {
+         SqlCommand command = GenerateDeleteQuery<T>(ID);
+         return ExecuteQuery(command);
       }
       public static List<T> GetEntityList<T>()
       {
@@ -151,7 +180,9 @@ namespace DatabaseCommon
       }
       public static DTOAttribute GetCustomAttribute<T>(string propertyName)
       {
-         PropertyInfo propertyInfo = typeof(T).GetProperty(propertyName);
+         PropertyInfo propertyInfo = typeof(T).GetProperties().FirstOrDefault(n => n.Name.Equals(propertyName));
+         if (propertyInfo == null) return null;
+
          Object[] attribute = propertyInfo.GetCustomAttributes(typeof(DTOAttribute), true);
 
          if (attribute.Length == 0)
@@ -194,6 +225,47 @@ namespace DatabaseCommon
          }
          return result;
       }
+      private static SqlCommand GenerateDeleteQuery<T>(long ID = 0)
+      {
+         string result = "";
+
+         Entity entity = null;
+         string tableName = GetTableName<T>();
+         if (EntityMap.ContainsKey(tableName))
+         {
+            entity = EntityMap.GetValue(tableName);
+         }
+         else
+         {
+            entity = GetEntityProperties<T>(tableName);
+            EntityMap[tableName] = entity;
+         }
+         if (entity == null) { return null; }
+         if (entity.Properties.Count > 0)
+         {
+            string whereClause = "";
+
+            if (ID != 0)
+            {
+               if (entity.PrimaryKeyAttribute != null)
+               {
+                  whereClause += entity.PrimaryKeyAttribute.Column + " = " + ID;
+               }
+               if (whereClause.Equals("") || ID == 0) { return null; }
+               result += String.Format("DELETE FROM {0} WHERE {1}", tableName, whereClause);
+            }
+            else
+            {
+               result += String.Format("DELETE FROM {0}", tableName);
+            }
+         }
+
+         if (result == "")
+            return null;
+
+         SqlCommand command = new SqlCommand(result, Connection);
+         return command;
+      }
       private static SqlCommand GenerateSelectQuery<T>(long ID = -1)
       {
          Hashtable paraMap = new Hashtable();
@@ -225,6 +297,60 @@ namespace DatabaseCommon
             return null;
 
          SqlCommand command = new SqlCommand(result, Connection);
+         return command;
+      }
+      private static SqlCommand GenerateUpdateQuery<T>(T dto)
+      {
+         Hashtable paraMap = new Hashtable();
+         string result = "";
+
+         Entity entity = null;
+         string tableName = GetTableName<T>();
+         if (EntityMap.ContainsKey(tableName))
+         {
+            entity = EntityMap.GetValue(tableName);
+         }
+         else
+         {
+            entity = GetEntityProperties<T>(tableName);
+            EntityMap[tableName] = entity;
+         }
+         if (entity == null) { return null; }
+         int index = 1;
+         if (entity.Properties.Count > 0)
+         {
+            string columns = "";
+            string whereClause = "";
+
+            foreach (PropertyInfo info in entity.Properties)
+            {
+               DTOAttribute attr = entity.AttributeDictionary.GetValue(info.Name);
+               if (attr.isPrimaryKey) continue;
+               if (!String.IsNullOrEmpty(columns))
+                  columns += ", ";
+
+               columns += attr.Column;
+               columns += " = @" + attr.Column;
+               paraMap[info.Name] = "@" + attr.Column;
+               index++;
+            }
+
+            DTOAttribute attrKey = entity.PrimaryKeyAttribute;
+            if (attrKey != null)
+            {
+               whereClause += attrKey.Column + " = @" + attrKey.Column;
+               paraMap[entity.PrimaryKeyPropertyName] = "@" + attrKey.Column;
+            }
+            if (whereClause.Equals("")) { return null; }
+
+            result += String.Format("UPDATE {0} SET {1} WHERE {2}", tableName, columns, whereClause);
+         }
+
+         if (result == "")
+            return null;
+
+         SqlCommand command = new SqlCommand(result, Connection);
+         FillValues<T>(dto, command, entity, paraMap);
          return command;
       }
       private static SqlCommand GenerateInsertQuery<T>(T dto, bool insertIncludeID = false)
@@ -304,7 +430,7 @@ namespace DatabaseCommon
                continue;
             }
 
-            if (attribute.Column.Equals("UPDATE_DATE"))
+            if (attribute.Column.Equals("UPDATED_DATE"))
             {
                command.Parameters.Add(entry.Value.ToString(), SqlDbType.NVarChar).Value = DateTime.Now;
                continue;

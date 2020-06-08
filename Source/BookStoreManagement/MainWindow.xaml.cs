@@ -25,11 +25,6 @@ namespace BookStoreManagement
       public MainWindow()
       {
          InitializeComponent();
-         UserDto dto = new UserDto();
-         dto.FirstName = "Test1";
-         dto.LastName = "Test";
-         dto.UserId = 5;
-         UserDao.Insert(dto);
       }
    }
 }

@@ -69,9 +69,11 @@ namespace DatabaseCommon.Services
                case DATATYPE.DOUBLE:
                   info.SetValue(dto, Convert.ToDouble(columnValue)); break;
                case DATATYPE.STRING:
-               case DATATYPE.TIMESTAMP:
                   if (columnValue != null) info.SetValue(dto, columnValue.ToString());
                   else info.SetValue(dto, columnValue);
+                  break;
+               case DATATYPE.TIMESTAMP:
+                  if (columnValue != null) info.SetValue(dto, DateTime.Parse(columnValue.ToString()));
                   break;
                default:
                   info.SetValue(dto, columnValue); break;

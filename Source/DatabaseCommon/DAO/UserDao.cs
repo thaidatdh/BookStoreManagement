@@ -17,5 +17,9 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.InsertEntity<UserDto>(dto);
       }
+      public static bool Update(UserDto dto)
+      {
+         return DatabaseUtils.UpdateEntity<UserDto>(dto) > 0;
+      }
    }
 }
