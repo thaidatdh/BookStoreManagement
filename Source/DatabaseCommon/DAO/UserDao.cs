@@ -21,5 +21,10 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.UpdateEntity<UserDto>(dto) > 0;
       }
+      public static UserDto GetById(int Id)
+      {
+         return DatabaseUtils.GetEntity<UserDto>(Id);
+      }
+
    }
 }

@@ -41,9 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Const\CONST.cs" />
     <Compile Include="Const\DATATYPE.cs" />
+    <Compile Include="DAO\BookDao.cs" />
+    <Compile Include="DAO\CustomerDao.cs" />
     <Compile Include="DAO\StaffDao.cs" />
+    <Compile Include="DAO\TransactionDao.cs" />
+    <Compile Include="DAO\TransactionDetailDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
+    <Compile Include="DTO\DiscountDto.cs" />
+    <Compile Include="DTO\TransactionDetailDto.cs" />
+    <Compile Include="DTO\TransactionDto.cs" />
+    <Compile Include="DTO\PublisherDto.cs" />
+    <Compile Include="DTO\ProviderDto.cs" />
+    <Compile Include="DTO\AuthorDto.cs" />
+    <Compile Include="DTO\BookDto.cs" />
+    <Compile Include="DTO\ChangeInformation.cs" />
+    <Compile Include="DTO\CustomerDto.cs" />
+    <Compile Include="DTO\DefinitionDto.cs" />
     <Compile Include="DTO\StaffDto.cs" />
     <Compile Include="Services\DTOService.cs" />
     <Compile Include="Utils\DatabaseUtils.cs" />

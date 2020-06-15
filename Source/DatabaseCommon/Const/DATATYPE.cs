@@ -15,8 +15,6 @@ namespace DatabaseCommon.Const
       DOUBLE,
       BOOLEAN,
       TIMESTAMP,
-      NUMBER,
-      DATE,
-      TEXT
+      DATE
    }
 }

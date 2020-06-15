@@ -108,9 +108,9 @@ namespace DatabaseCommon
          }
          return new List<T>();
       }
-      public static int InsertEntity<T>(T dto, bool insertIncludeID = false)
+      public static int InsertEntity<T>(T dto, bool insertIncludeParentAttribute = false, bool insertIncludeID = false)
       {
-         SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeID);
+         SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeParentAttribute, insertIncludeID);
          return DatabaseUtils.ExecuteInsertQuery(command);
       }
       public static T GetEntity<T>(string sql)
@@ -126,9 +126,26 @@ namespace DatabaseCommon
          }
          return default(T);
       }
-      public static long UpdateEntity<T>(T dto)
+      public static T GetEntity<T>(int id)
       {
-         SqlCommand command = GenerateUpdateQuery<T>(dto);
+         string tableName = GetTableName<T>();
+         string PrimaryKey = GetEntityProperties<T>(tableName).PrimaryKeyPropertyName;
+         string sql = "SELECT * FROM " + tableName + " where " + PrimaryKey + " = " + id;
+         if (String.IsNullOrEmpty(PrimaryKey)) sql = "SELECT * FROM " + tableName;
+         Object data = DatabaseUtils.ExcuteSelectQuery(sql);
+         if (data != null)
+         {
+            DataTable dt = (DataTable)data;
+            foreach (DataRow dr in dt.Rows)
+            {
+               return GetObject<T>(dr);
+            }
+         }
+         return default(T);
+      }
+      public static int UpdateEntity<T>(T dto, bool includeParentAttribute = false)
+      {
+         SqlCommand command = GenerateUpdateQuery<T>(dto, includeParentAttribute);
          return ExecuteQuery(command);
       }
       public static long DeleteEntity<T>(long ID)
@@ -225,6 +242,41 @@ namespace DatabaseCommon
          }
          return result;
       }
+      private static Entity GetEntityProperties<T>(string tableName, bool includeParentAttribute = false)
+      {
+         Entity result = new Entity();
+         List<PropertyInfo> m_propertyInfos = new List<PropertyInfo>();
+         GetProperties<T>(ref m_propertyInfos);
+
+         if (tableName.Equals("") || m_propertyInfos.Count == 0) { return null; }
+
+         result.TableName = tableName;
+         result.Properties = m_propertyInfos;
+         result.AttributeDictionary = new Dictionary<string, DTOAttribute>();
+
+         if (includeParentAttribute)
+         {
+            var m_parentPropertyInfos = new List<PropertyInfo>();
+            GetProperties(typeof(T).BaseType, ref m_parentPropertyInfos);
+            if (m_parentPropertyInfos != null)
+               m_propertyInfos.AddRange(m_parentPropertyInfos);
+         }
+
+         if (m_propertyInfos.Count > 0)
+         {
+            foreach (PropertyInfo info in m_propertyInfos)
+            {
+               DTOAttribute attr = GetCustomAttribute<T>(info.Name);
+               result.AttributeDictionary[info.Name] = attr;
+               if (attr.isPrimaryKey && result.PrimaryKeyAttribute == null)
+               {
+                  result.PrimaryKeyAttribute = attr;
+                  result.PrimaryKeyPropertyName = info.Name;
+               }
+            }
+         }
+         return result;
+      }
       private static SqlCommand GenerateDeleteQuery<T>(long ID = 0)
       {
          string result = "";
@@ -299,7 +351,7 @@ namespace DatabaseCommon
          SqlCommand command = new SqlCommand(result, Connection);
          return command;
       }
-      private static SqlCommand GenerateUpdateQuery<T>(T dto)
+      private static SqlCommand GenerateUpdateQuery<T>(T dto, bool includeParentAttribute = false)
       {
          Hashtable paraMap = new Hashtable();
          string result = "";
@@ -312,7 +364,7 @@ namespace DatabaseCommon
          }
          else
          {
-            entity = GetEntityProperties<T>(tableName);
+            entity = GetEntityProperties<T>(tableName, includeParentAttribute);
             EntityMap[tableName] = entity;
          }
          if (entity == null) { return null; }
@@ -325,7 +377,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in entity.Properties)
             {
                DTOAttribute attr = entity.AttributeDictionary.GetValue(info.Name);
-               if (attr.isPrimaryKey) continue;
+               if (attr.isPrimaryKey || attr.Column.Equals("CREATE_DATE")) continue;
                if (!String.IsNullOrEmpty(columns))
                   columns += ", ";
 
@@ -353,7 +405,7 @@ namespace DatabaseCommon
          FillValues<T>(dto, command, entity, paraMap);
          return command;
       }
-      private static SqlCommand GenerateInsertQuery<T>(T dto, bool insertIncludeID = false)
+      private static SqlCommand GenerateInsertQuery<T>(T dto, bool insertIncludeParentAttribute = false,bool insertIncludeID = false)
       {
          Hashtable paraMap = new Hashtable();
          string result = "";
@@ -366,7 +418,7 @@ namespace DatabaseCommon
          }
          else
          {
-            entity = GetEntityProperties<T>(tableName);
+            entity = GetEntityProperties<T>(tableName, insertIncludeParentAttribute); //entity = GetEntityProperties<T>(tableName);
             EntityMap[tableName] = entity;
          }
          if (entity == null) { return null; }
@@ -449,11 +501,6 @@ namespace DatabaseCommon
                      cmd.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
                      break;
                   }
-               case DATATYPE.TEXT:
-                  {
-                     cmd.Parameters.Add(paraName, SqlDbType.NText).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
-                     break;
-                  }
                case DATATYPE.INTEGER:
                   {
                      cmd.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
@@ -520,12 +567,7 @@ namespace DatabaseCommon
                   data = defaultValue;
                }
                return data.ToNotNullString();
-            case DATATYPE.NUMBER:
-               if (data == null && defaultValue != null)
-               {
-                  data = defaultValue;
-               }
-               return data == null ? 0 : data;
+            case DATATYPE.INTEGER:
             case DATATYPE.BIGINT:
                if (data == null && defaultValue != null)
                {

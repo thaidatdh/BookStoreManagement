@@ -25,6 +25,8 @@ namespace BookStoreManagement
       public MainWindow()
       {
          InitializeComponent();
+         var a = new BookDto();
+         string t = a.UpdatedDate.ToString();
       }
    }
 }

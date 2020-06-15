@@ -1,4 +1,5 @@
-﻿using DatabaseCommon.Const;
+﻿using CommonLibrary.Utils;
+using DatabaseCommon.Const;
 using DatabaseCommon.Utils;
 using System;
 using System.Collections.Generic;
@@ -60,10 +61,11 @@ namespace DatabaseCommon.Services
             {
                case DATATYPE.BOOLEAN:
                   info.SetValue(dto, Convert.ToBoolean(columnValue)); break;
-               case DATATYPE.GENERATED_ID:
                case DATATYPE.BIGINT:
-               case DATATYPE.NUMBER:
-                  info.SetValue(dto, columnValue); break;
+                  info.SetValue(dto, columnValue.ToInt64()); break;
+               case DATATYPE.GENERATED_ID:
+               case DATATYPE.INTEGER:
+                  info.SetValue(dto, columnValue.ToInt32()); break;
                case DATATYPE.DATE:
                   info.SetValue(dto, Convert.ToString(columnValue)); break;
                case DATATYPE.DOUBLE:
@@ -73,7 +75,7 @@ namespace DatabaseCommon.Services
                   else info.SetValue(dto, columnValue);
                   break;
                case DATATYPE.TIMESTAMP:
-                  if (columnValue != null) info.SetValue(dto, DateTime.Parse(columnValue.ToString()));
+                  if (columnValue != null) info.SetValue(dto, TypesUtils.Parse.ToDateTime(columnValue.ToString()));
                   break;
                default:
                   info.SetValue(dto, columnValue); break;
@@ -83,12 +85,14 @@ namespace DatabaseCommon.Services
       public static object GetValue(string columnName, DATATYPE dataType, Object data)
       {
          DataRow dr = (DataRow)data;
+         if (!dr.Table.Columns.Contains(columnName)) return "";
+
          switch (dataType)
          {
             case DATATYPE.BOOLEAN:
                return (dr[columnName] == null || dr[columnName].Equals(0)) ? false : dr[columnName];
-            case DATATYPE.NUMBER:
             case DATATYPE.GENERATED_ID:
+            case DATATYPE.INTEGER:
                return dr[columnName];
             case DATATYPE.STRING:
                return dr[columnName];

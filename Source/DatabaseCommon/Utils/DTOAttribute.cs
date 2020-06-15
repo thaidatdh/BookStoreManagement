@@ -14,7 +14,7 @@ namespace DatabaseCommon
       public string Column { get; set; }
       public DATATYPE DataType { get; set; }
       public bool isPrimaryKey { get; set; }
-      public string DefaultValue { get; set; }
+      public object DefaultValue { get; set; }
       public PropertyInfo PropertyInfo { get; set; }
 
       public DTOAttribute()
@@ -24,7 +24,7 @@ namespace DatabaseCommon
          this.DefaultValue = "";
          this.DataType = DATATYPE.STRING;
       }
-      public DTOAttribute(string column, string DefaultValue, DATATYPE DataType, bool isPrimaryKey = false)
+      public DTOAttribute(string column, object DefaultValue, DATATYPE DataType, bool isPrimaryKey = false)
       {
          this.Column = column;
          this.isPrimaryKey = isPrimaryKey;
