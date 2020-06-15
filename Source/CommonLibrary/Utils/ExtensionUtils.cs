@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatabaseCommon.Utils
+namespace CommonLibrary.Utils
 {
    public static class ExtensionUtils
    {

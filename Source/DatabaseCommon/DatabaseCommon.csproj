@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="Const\CONST.cs" />
     <Compile Include="Const\DATATYPE.cs" />
+    <Compile Include="DAO\DefinitionDao.cs" />
+    <Compile Include="DAO\ProviderDao.cs" />
+    <Compile Include="DAO\PublisherDao.cs" />
+    <Compile Include="DAO\AuthorDao.cs" />
     <Compile Include="DAO\BookDao.cs" />
     <Compile Include="DAO\CustomerDao.cs" />
     <Compile Include="DAO\StaffDao.cs" />

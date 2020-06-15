@@ -27,8 +27,8 @@ namespace DatabaseCommon.DTO
       public string Format { get; set; }
       [DTO(Column = "SIZE", DataType = DATATYPE.STRING)]
       public string Size { get; set; }
-      [DTO(Column = "PAGE", DataType = DATATYPE.INTEGER)]
-      public int Page { get; set; }
+      [DTO(Column = "PAGE", DataType = DATATYPE.STRING)]
+      public string Page { get; set; }
       [DTO(Column = "DESCRIPTION", DataType = DATATYPE.STRING)]
       public string Description { get; set; }
       [DTO(Column = "PRICE", DataType = DATATYPE.BIGINT)]

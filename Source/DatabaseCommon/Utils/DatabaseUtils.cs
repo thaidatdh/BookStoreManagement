@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Reflection;
 using System.Collections;
-using DatabaseCommon.Utils;
+using CommonLibrary.Utils;
 using DatabaseCommon.Const;
 
 namespace DatabaseCommon

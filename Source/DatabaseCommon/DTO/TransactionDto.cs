@@ -32,7 +32,7 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "ENTRY_DATE", DataType = DATATYPE.STRING)]
       public long EntryDate { get; set; }
       [DTO(Column = "TYPE", DataType = DATATYPE.STRING)]
-      public long Type { get; set; }
+      public string Type { get; set; }
 
       private List<TransactionDetailDto> listDetail;
       public List<TransactionDetailDto> TransactionDetails 
