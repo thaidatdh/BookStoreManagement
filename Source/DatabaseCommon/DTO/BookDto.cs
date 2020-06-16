@@ -37,6 +37,8 @@ namespace DatabaseCommon.DTO
       public string Remaining { get; set; }
       [DTO(Column = "LOCATION", DataType = DATATYPE.STRING)]
       public string Location { get; set; }
+      [DTO(Column = "PHOTO_LINK", DataType = DATATYPE.STRING)]
+      public string PhotoLink { get; set; }
       [DTO(Column = "CATEGORY_ID", DataType = DATATYPE.STRING)]
       public string CategoryId { get; set; }
       [DTO(Column = "AUTHOR_ID", DataType = DATATYPE.STRING)]

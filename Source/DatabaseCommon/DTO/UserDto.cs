@@ -34,6 +34,8 @@ namespace DatabaseCommon.DTO
       public string Gender { get; set; }
       [DTO(Column = "NOTE", DataType = DATATYPE.STRING)]
       public string Note { get; set; }
+      [DTO(Column = "PHOTO_LINK", DataType = DATATYPE.STRING)]
+      public string PhotoLink { get; set; }
       [DTO(Column = "USER_TYPE", DataType = DATATYPE.STRING, DefaultValue = CONST.USERS.DEFAULT_USER_TYPE)]
       public string UserType { get; set; }
    }
