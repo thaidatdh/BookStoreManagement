@@ -62,5 +62,18 @@ namespace CommonLibrary.Utils
       {
          return value == null ? "" : value.ToString();
       }
+      public static String ToKey(this string key)
+      {
+         string[] arr = new String[] { ",", ".", " ", "(", ")", "-", "#", "\\", "]", "[", "{", "}", ":"
+                  , "!", "@", "$", "%", "^", "&", "*", "_", "=", "+", "!", "~", "<", ">", "?"};
+         if (key != null && !key.Equals(""))
+         {
+            for (int i = 0; i < arr.Length; i++)
+            {
+               key = key.Replace(arr[i], String.Empty);
+            }
+         }
+         return key.ToUpper();
+      }
    }
 }

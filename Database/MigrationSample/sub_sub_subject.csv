@@ -1,0 +1,101 @@
+id,title,sub_subject,slug,count
+1,"African Literature Anthologies",1,african-literature-anthologies,33
+2,"American Literature Anthologies",1,american-literature-anthologies,1335
+3,"Ancient & Medieval Literature Anthologies",1,ancient-medieval-literature-anthologies,51
+4,"Asian Literature Anthologies",1,asian-literature-anthologies,125
+5,"Australian & Oceanian Literature Anthologies",1,australian-oceanian-literature-anthologies,11
+6,"Canadian Literature Anthologies",1,canadian-literature-anthologies,31
+7,"Caribbean & West Indian Literature Anthologies",1,caribbean-west-indian-literature-anthologies,9
+8,"Drama Anthologies",1,drama-anthologies,193
+9,"English & Irish Literature Anthologies",1,english-irish-literature-anthologies,541
+10,"European Literature Anthologies",1,european-literature-anthologies,192
+11,"Gay & Lesbian Literature Anthologies",1,gay-lesbian-literature-anthologies,74
+12,"General & Miscellaneous Literature Anthologies",1,general-miscellaneous-literature-anthologies,1279
+13,"German Literature Anthologies",1,german-literature-anthologies,29
+14,"Hispanic & Latin American Literature Anthologies",1,hispanic-latin-american-literature-anthologies,55
+15,"Jewish Literature Anthologies",1,jewish-literature-anthologies,76
+16,"Native American Literature Anthologies",1,native-american-literature-anthologies,29
+17,"Poetry Anthologies",1,poetry-anthologies,630
+18,"Russian Literature Anthologies",1,russian-literature-anthologies,24
+19,"Women Authors - Literature Anthologies",1,women-authors-literature-anthologies,176
+20,"Apocalyptic Christian Fiction",2,apocalyptic-christian-fiction,136
+21,"Biblical Fiction",2,biblical-fiction,252
+22,"Christian Allegories",2,christian-allegories,253
+23,"Christian Anthologies",2,christian-anthologies,13
+24,"Christian fiction * African American",2,christian-fiction-african-american,6
+25,"Christian Fiction - Amish",2,christian-fiction-amish,353
+26,"Christian Fiction - Community",2,christian-fiction-community,437
+27,"Christian Fiction - Contemporary",2,christian-fiction-contemporary,501
+28,"Christian Fiction - Family",2,christian-fiction-family,333
+29,"Christian Fiction - Historical",2,christian-fiction-historical,531
+30,"Christian Fiction - Inspirational Lives",2,christian-fiction-inspirational-lives,83
+31,"Christian Fiction - Multigenerational Sagas",2,christian-fiction-multigenerational-sagas,24
+32,"Christian Fiction - Seasonal & Holiday",2,christian-fiction-seasonal-holiday,88
+33,"Christian Fiction - Trials & Tests of Faith",2,christian-fiction-trials-tests-of-faith,190
+34,"Christian Fiction Classics",2,christian-fiction-classics,158
+35,"Christian Mystery",2,christian-mystery,299
+36,"Christian Romance - Contemporary",2,christian-romance-contemporary,637
+37,"Christian Romance - Historical",2,christian-romance-historical,298
+38,"Christian Science Fiction & Fantasy",2,christian-science-fiction-fantasy,542
+39,"Christian Thrillers",2,christian-thrillers,614
+40,"Christian Westerns",2,christian-westerns,152
+41,"American Drama",3,american-drama,1540
+42,"Ancient Greek & Roman Drama",3,ancient-greek-roman-drama,458
+43,"British & Irish Drama",3,british-irish-drama,3091
+44,"Canadian Drama",3,canadian-drama,169
+45,"European Drama",3,european-drama,1146
+46,"French Drama",3,french-drama,259
+47,"General & Miscellaneous Drama",3,general-miscellaneous-drama,5055
+48,"German Drama",3,german-drama,261
+49,"Italian Drama",3,italian-drama,46
+50,"Russian Drama",3,russian-drama,170
+51,"Spanish Drama",3,spanish-drama,209
+52,"Confessional Erotica",4,confessional-erotica,54
+53,"Domination & Submission - Fiction",4,domination-submission-fiction,173
+54,"Erotic Poetry",4,erotic-poetry,12
+55,"Erotica * African American",4,erotica-african-american,2
+56,"Erotica * Fiction",4,erotica-fiction,129
+57,"Erotica Anthologies",4,erotica-anthologies,317
+58,"Erotica Classics",4,erotica-classics,15
+59,"Erotica for Couples",4,erotica-for-couples,11
+60,"Erotica Short Stories",4,erotica-short-stories,79
+61,"Fantastic & Science Fiction Erotica",4,fantastic-science-fiction-erotica,98
+62,"Gay Erotica",4,gay-erotica,150
+63,"Historical Erotica",4,historical-erotica,36
+64,"Lesbian Erotica",4,lesbian-erotica,66
+65,"Literary Erotica",4,literary-erotica,119
+66,"Open Minded Erotica",4,open-minded-erotica,50
+67,"Paranormal Erotica & Erotic Horror",4,paranormal-erotica-erotic-horror,201
+68,"S & M Fiction",4,s-m-fiction,85
+69,"Sensual Fiction",4,sensual-fiction,112
+70,"Traditional Victorian Erotica",4,traditional-victorian-erotica,21
+71,"Women's Erotica",4,women-s-erotica,151
+72,"American Essays",5,american-essays,1319
+73,"European Essays",5,european-essays,614
+74,"General & Miscellaneous Essays",5,general-miscellaneous-essays,419
+75,"African Fiction & Literature Classics",6,african-fiction-literature-classics,21
+76,"American Fiction & Literature Classics",6,american-fiction-literature-classics,2214
+77,"Ancient Fiction & Literature Classics",6,ancient-fiction-literature-classics,339
+78,"Asian Fiction & Literature Classics",6,asian-fiction-literature-classics,79
+79,"Classics By Subject",6,classics-by-subject,2240
+80,"English, Irish, Scottish Fiction & Literature Classics",6,english-irish-scottish-fiction-literature-classics,4066
+81,"European Fiction & Literature Classics",6,european-fiction-literature-classics,1065
+82,"Latin American / Caribbean Fiction & Literature Classics",6,latin-american-caribbean-fiction-literature-classics,30
+83,"Animals - Fiction",7,animals-fiction,1192
+84,"Arts & Entertainment - Fiction",7,arts-entertainment-fiction,4154
+85,"Body, Mind & Health - Fiction",7,body-mind-health-fiction,1745
+86,"Business, Work, & Money - Fiction",7,business-work-money-fiction,1741
+87,"Character Types - Fiction",7,character-types-fiction,7874
+88,"Conflicts - Fiction",7,conflicts-fiction,3634
+89,"Crimes - Fiction",7,crimes-fiction,6646
+90,"Disasters & Accidents - Fiction",7,disasters-accidents-fiction,839
+91,"Family & Friendship - Fiction",7,family-friendship-fiction,10254
+92,"Fiction - 2009 Holiday Recommendations",7,fiction-2009-holiday-recommendations,1076
+93,"Games & Hobbies - Fiction",7,games-hobbies-fiction,596
+94,"Historical Figures - Fiction",7,historical-figures-fiction,2617
+95,"Holidays - Fiction",7,holidays-fiction,1196
+96,"Humorous Fiction",7,humorous-fiction,4132
+97,"Literary Styles & Movements - Fiction",7,literary-styles-movements-fiction,11108
+98,"Love & Relationships - Fiction",7,love-relationships-fiction,6359
+99,"Motivations - Fiction",7,motivations-fiction,2297
+100,"Occupations - Fiction",7,occupations-fiction,9973

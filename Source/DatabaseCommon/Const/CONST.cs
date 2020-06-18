@@ -19,7 +19,12 @@ namespace DatabaseCommon.Const
          public const string GENDER_FEMALE = "FEMALE";
          public const string GENDER_NOT_SPECIFY = "NOT_SPECIFY";
 
-
+         public const string DEFAULT_PHOTO_LINK = "\\persistent\\images\\default_user_photo.png";
+      }
+      public class STAFF
+      {
+         public const string DEFAULT_PASSWORD = "hello123";
+         public const string DEFAULT_ENCRYPTED_PASSWORD = "27cc6994fc1c01ce6659c6bddca9b69c4c6a9418065e612c69d110b3f7b11f8a";
       }
       public class DEFINITION
       {
@@ -30,6 +35,10 @@ namespace DatabaseCommon.Const
          public const int DEFINITION_TYPE_STORE = 1;
          public const int DEFINITION_TYPE_AUTHORIZATION = 2;
          public const int DEFINITION_TYPE_CATEGORY = 3;
+      }
+      public class BOOK
+      {
+         public const string DEFAULT_PHOTO_LINK = "\\persistent\\images\\default_book_photo.png";
       }
    }
 }

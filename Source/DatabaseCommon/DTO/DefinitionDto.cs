@@ -18,7 +18,7 @@ namespace DatabaseCommon.DTO
       }
       [DTO(Column = "DEFINITION_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int AuthorId { get; set; }
-      [DTO(Column = "DEFINITION_TYOE", DataType = DATATYPE.INTEGER)]
+      [DTO(Column = "DEFINITION_TYPE", DataType = DATATYPE.INTEGER)]
       public int DefinitionType { get; set; }
       [DTO(Column = "VALUE_1", DataType = DATATYPE.STRING)]
       public string Value1 { get; set; }

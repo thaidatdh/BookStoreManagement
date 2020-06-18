@@ -9,6 +9,7 @@ namespace CommonLibrary
 {
    public class FormatUtils
    {
+      private const string AES_ENCRYPT_KEY = "BSDB!THCMUSTKPM";
       public static string FormatDate(string date)
       {
          try
@@ -67,24 +68,17 @@ namespace CommonLibrary
          }
          else
          {
-            if (input.Length > 20)
+            string digits = getDigits(input);
+            if (digits.Length >= 10 && digits.Length < 20)
             {
-               string digits = getDigits(input);
-               if (digits.Length >= 10 && digits.Length < 20)
-               {
-                  _phone = digits.Insert(6, "-");
-                  _phone = digits.Insert(3, "-");
-               }
-               else if (digits.Length > 20)
-               {
-                  _phone = digits.Substring(0, 10);
-                  _phone = _phone.Insert(6, "-");
-                  _phone = _phone.Insert(3, "-");
-               }
+               _phone = digits.Insert(6, "-");
+               _phone = digits.Insert(3, "-");
             }
-            else
+            else if (digits.Length > 20)
             {
-               _phone = input;
+               _phone = digits.Substring(0, 10);
+               _phone = _phone.Insert(6, "-");
+               _phone = _phone.Insert(3, "-");
             }
          }
          return _phone.Replace("\\", "").Replace(@"\", "");

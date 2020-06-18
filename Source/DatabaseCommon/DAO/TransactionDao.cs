@@ -15,7 +15,7 @@ namespace DatabaseCommon.DAO
       }
       public static int Insert(TransactionDto dto)
       {
-         int TransactionId = DatabaseUtils.InsertEntity<TransactionDto>(dto);
+         int TransactionId = DatabaseUtils.InsertEntity<TransactionDto>(dto, true);
          if (dto.TransactionDetails != null && dto.TransactionDetails.Count > 0)
          {
             foreach (TransactionDetailDto detailDto in dto.TransactionDetails)

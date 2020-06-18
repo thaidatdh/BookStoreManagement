@@ -15,11 +15,11 @@ namespace DatabaseCommon.DAO
       }
       public static int Insert(AuthorDto dto)
       {
-         return DatabaseUtils.InsertEntity<AuthorDto>(dto);
+         return DatabaseUtils.InsertEntity<AuthorDto>(dto, true);
       }
       public static bool Update(AuthorDto dto)
       {
-         return DatabaseUtils.UpdateEntity<AuthorDto>(dto) > 0;
+         return DatabaseUtils.UpdateEntity<AuthorDto>(dto, true) > 0;
       }
       public static AuthorDto GetById(int Id)
       {

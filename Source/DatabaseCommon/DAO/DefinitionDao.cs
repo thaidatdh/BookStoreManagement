@@ -17,11 +17,11 @@ namespace DatabaseCommon.DAO
       }
       public static int Insert(DefinitionDto dto)
       {
-         return DatabaseUtils.InsertEntity<DefinitionDto>(dto);
+         return DatabaseUtils.InsertEntity<DefinitionDto>(dto, true);
       }
       public static bool Update(DefinitionDto dto)
       {
-         return DatabaseUtils.UpdateEntity<DefinitionDto>(dto) > 0;
+         return DatabaseUtils.UpdateEntity<DefinitionDto>(dto, true) > 0;
       }
       public static DefinitionDto GetById(int Id)
       {

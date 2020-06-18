@@ -1,0 +1,101 @@
+id,title,subject,slug,count
+1,Anthologies,1,anthologies,0
+2,"Christian Fiction",1,christian-fiction,0
+3,Drama,1,drama,0
+4,Erotica,1,erotica,0
+5,Essays,1,essays,0
+6,"Fiction &amp; Literature Classics",1,fiction-amp-literature-classics,0
+7,"Fiction Subjects",1,fiction-subjects,0
+8,"Gay &amp; Lesbian",1,gay-amp-lesbian,0
+9,"Graphic Novels &amp; Comic Books",1,graphic-novels-amp-comic-books,0
+10,"Historical Fiction",1,historical-fiction,0
+11,Horror,1,horror,0
+12,Letters,1,letters,0
+13,"Literary Criticism",1,literary-criticism,0
+14,"Mystery &amp; Crime",1,mystery-amp-crime,0
+15,Poetry,1,poetry,0
+16,Romance,1,romance,0
+17,"Science Fiction &amp; Fantasy",1,science-fiction-amp-fantasy,0
+18,"Short Stories",1,short-stories,0
+19,"Teen Fiction",1,teen-fiction,0
+20,Thrillers,1,thrillers,0
+21,"War &amp; Military Fiction",1,war-amp-military-fiction,0
+22,Westerns,1,westerns,0
+23,"Women's Fiction",1,women-s-fiction,0
+24,"Alternative Comics",2,alternative-comics,0
+25,Batman,2,batman,144
+26,"Biographical &amp; Non-Fiction Comic Books",2,biographical-amp-non-fiction-comic-books,290
+27,"DC Comics",2,dc-comics,0
+28,"Gay &amp; Lesbian",2,gay-amp-lesbian,40
+29,Horror,2,horror,455
+30,"International Graphic Novels",2,international-graphic-novels,243
+31,Manga,2,manga,0
+32,"Marvel Comics",2,marvel-comics,0
+33,"Newspaper &amp; Magazine Comic Strips",2,newspaper-amp-magazine-comic-strips,67
+34,Sandman,2,sandman,26
+35,Spider-Man,2,spider-man,108
+36,Superman,2,superman,74
+37,Vertigo,2,vertigo,170
+38,"Women's Comics",2,women-s-comics,135
+39,"Wonder Woman",2,wonder-woman,34
+40,X-Men,2,x-men,144
+41,"Ghost Stories",3,ghost-stories,535
+42,"Gothic Horror",3,gothic-horror,712
+43,"Horror - Inner Demons",3,horror-inner-demons,195
+44,"Horror - Lost, Abandoned, and Alone",3,horror-lost-abandoned-and-alone,79
+45,"Horror - Sacred and Profane",3,horror-sacred-and-profane,130
+46,"Horror Anthologies",3,horror-anthologies,241
+47,"Horror Classics",3,horror-classics,71
+48,"Horror Comics",3,horror-comics,469
+49,"Horror Short Stories",3,horror-short-stories,396
+50,"Paranormal Erotica &amp; Erotic Horror",3,paranormal-erotica-amp-erotic-horror,182
+51,"Psychological Horror",3,psychological-horror,425
+52,"Supernatural Horror",3,supernatural-horror,656
+53,Vampires,3,vampires,550
+54,"Werewolves &amp; Other Beasts",3,werewolves-amp-other-beasts,129
+55,Zombies,3,zombies,209
+56,"Crime Fiction",4,crime-fiction,0
+57,"Detective Fiction",4,detective-fiction,0
+58,"Multicultural Detectives",4,multicultural-detectives,0
+59,"Mystery &amp; Crime Anthologies",4,mystery-amp-crime-anthologies,334
+60,"Mystery &amp; Crime Classics",4,mystery-amp-crime-classics,114
+61,"Police Stories",4,police-stories,0
+62,"Women Detectives",4,women-detectives,0
+63,"Other Mystery Categories",4,other-mystery-categories,0
+64,"American Poetry",5,american-poetry,0
+65,"Ancient &amp; Classical Poetry",5,ancient-amp-classical-poetry,0
+66,"Arabic &amp; Middle Eastern Poetry",5,arabic-amp-middle-eastern-poetry,0
+67,"Asian Poetry",5,asian-poetry,0
+68,"Chinese Poetry",5,chinese-poetry,0
+69,"Eastern European Poetry",5,eastern-european-poetry,0
+70,"English, Irish, &amp; Scottish Poetry",5,english-irish-amp-scottish-poetry,0
+71,"French Poetry",5,french-poetry,0
+72,"German Poetry",5,german-poetry,0
+73,"Greek Poetry, Modern",5,greek-poetry-modern,22
+74,"Indic &amp; South Asian Poetry",5,indic-amp-south-asian-poetry,0
+75,"Italian Poetry",5,italian-poetry,0
+76,"Japanese Poetry",5,japanese-poetry,0
+77,"Latin American &amp; Caribbean Poetry",5,latin-american-amp-caribbean-poetry,0
+78,"Latin Poetry, Medieval &amp; Modern",5,latin-poetry-medieval-amp-modern,0
+79,"Scandinavian Poetry",5,scandinavian-poetry,0
+80,"Spanish Poetry",5,spanish-poetry,0
+81,"Contemporary Romance",6,contemporary-romance,0
+82,"Futuristic &amp; Fantasy Romance",6,futuristic-amp-fantasy-romance,596
+83,"Historical Romance",6,historical-romance,0
+84,"Romance Classics",6,romance-classics,56
+85,"Contemporary Romantic Suspense",6,contemporary-romantic-suspense,2877
+86,"Romantic Themes",6,romantic-themes,0
+87,"Paranormal Romance",6,paranormal-romance,0
+88,"Other Romance Categories",6,other-romance-categories,0
+89,"Alternate Realities",7,alternate-realities,0
+90,"Dark Fantasy",7,dark-fantasy,837
+91,"Epic Fantasy",7,epic-fantasy,1846
+92,"Fantasy Classics",7,fantasy-classics,169
+93,"High-Tech &amp; Hard Science Fiction",7,high-tech-amp-hard-science-fiction,0
+94,"Media Tie-Ins",7,media-tie-ins,0
+95,"Role-Playing Game Fiction",7,role-playing-game-fiction,0
+96,"Sci Fi Classics",7,sci-fi-classics,149
+97,"Social Science Fiction",7,social-science-fiction,0
+98,"Space Exploration &amp; Discovery",7,space-exploration-amp-discovery,0
+99,"Star Trek",7,star-trek,0
+100,"Star Wars",7,star-wars,76

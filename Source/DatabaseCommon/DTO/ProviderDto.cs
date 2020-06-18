@@ -27,7 +27,7 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "EMAIL", DataType = DATATYPE.STRING)]
       public string Email { get; set; }
       [DTO(Column = "NOTE", DataType = DATATYPE.STRING)]
-      public string LastName { get; set; }
+      public string Note { get; set; }
    }
 }
 

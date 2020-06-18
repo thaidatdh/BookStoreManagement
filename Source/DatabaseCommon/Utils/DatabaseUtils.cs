@@ -108,9 +108,9 @@ namespace DatabaseCommon
          }
          return new List<T>();
       }
-      public static int InsertEntity<T>(T dto, bool insertIncludeParentAttribute = false, bool insertIncludeID = false)
+      public static int InsertEntity<T>(T dto, bool insertIncludeParentAttribute = false, bool insertIncludeID = false, bool isIncludeIdentityId = true)
       {
-         SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeParentAttribute, insertIncludeID);
+         SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeParentAttribute, insertIncludeID, isIncludeIdentityId);
          return DatabaseUtils.ExecuteInsertQuery(command);
       }
       public static T GetEntity<T>(string sql)
@@ -405,7 +405,7 @@ namespace DatabaseCommon
          FillValues<T>(dto, command, entity, paraMap);
          return command;
       }
-      private static SqlCommand GenerateInsertQuery<T>(T dto, bool insertIncludeParentAttribute = false,bool insertIncludeID = false)
+      private static SqlCommand GenerateInsertQuery<T>(T dto, bool insertIncludeParentAttribute = false,bool insertIncludeID = false, bool isIdentityId = true)
       {
          Hashtable paraMap = new Hashtable();
          string result = "";
@@ -458,7 +458,7 @@ namespace DatabaseCommon
 
          if (result == "")
             return null;
-         if (insertIncludeID)
+         if (insertIncludeID && isIdentityId)
          {
             string IdentityInsertOn = "SET IDENTITY_INSERT " + tableName + " ON;\n";
             string IdentityInsertOff = "\nSET IDENTITY_INSERT " + tableName + " OFF;";

@@ -15,13 +15,14 @@ namespace DatabaseCommon.DAO
       }
       public static int Insert(CustomerDto dto)
       {
-         int UserId = DatabaseUtils.InsertEntity<UserDto>(dto);
+         dto.UserType = Const.CONST.USERS.USER_TYPE_CUSTOMER;
+         int UserId = DatabaseUtils.InsertEntity<UserDto>(dto, true);
          dto.UserId = UserId;
-         return DatabaseUtils.InsertEntity<CustomerDto>(dto, false, true);
+         return DatabaseUtils.InsertEntity<CustomerDto>(dto, false, true, false);
       }
       public static bool Update(CustomerDto dto)
       {
-         return DatabaseUtils.UpdateEntity<UserDto>(dto) > 0 && DatabaseUtils.UpdateEntity<CustomerDto>(dto) > 0;
+         return DatabaseUtils.UpdateEntity<UserDto>(dto, true) > 0 && DatabaseUtils.UpdateEntity<CustomerDto>(dto) > 0;
       }
    }
 }

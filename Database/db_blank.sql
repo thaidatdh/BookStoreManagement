@@ -1,6 +1,6 @@
 /*
-VERSION: 1.0.0
-DATE: 14/06/2020
+VERSION: 1.0.1
+DATE: 18/06/2020
 */
 /*CREATE DATABASE*/
 USE master;
@@ -46,10 +46,6 @@ CREATE TABLE staff (
 	start_date NVARCHAR(8),
 	end_date NVARCHAR(8),
 	active BIT DEFAULT 1,
-	create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-	created_by INT,
-	updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-	updated_by INT
 );
 
 SET IDENTITY_INSERT users ON;
@@ -58,7 +54,7 @@ INSERT INTO users(user_id, first_name, last_name, user_type) VALUES (2,'','GUEST
 SET IDENTITY_INSERT users OFF;
 
 SET IDENTITY_INSERT staff ON;
-INSERT INTO staff(staff_id, user_id, username, password, active) VALUES (1,1,'admin','12',1);
+INSERT INTO staff(staff_id, user_id, username, password, active) VALUES (1,1,'admin','27cc6994fc1c01ce6659c6bddca9b69c4c6a9418065e612c69d110b3f7b11f8a',1);
 SET IDENTITY_INSERT staff OFF;
 
 INSERT INTO customer(user_id) VALUES (1);
@@ -100,7 +96,7 @@ CREATE TABLE author (
 
 DROP TABLE IF EXISTS publisher;
 CREATE TABLE publisher (
-	author_id INT PRIMARY KEY IDENTITY(1,1),
+	publisher_id INT PRIMARY KEY IDENTITY(1,1),
 	name NVARCHAR(MAX),
 	address NVARCHAR(50),
 	email NVARCHAR(50),
@@ -114,7 +110,7 @@ CREATE TABLE publisher (
 
 DROP TABLE IF EXISTS provider;
 CREATE TABLE provider (
-	author_id INT PRIMARY KEY IDENTITY(1,1),
+	provider_id INT PRIMARY KEY IDENTITY(1,1),
 	name NVARCHAR(MAX),
 	address NVARCHAR(50),
 	email NVARCHAR(50),
@@ -138,10 +134,10 @@ CREATE TABLE definition (
 	updated_by INT
 );
 SET IDENTITY_INSERT definition ON;
-INSERT INTO definition(definition_id, definition_type, value_1, value_2) VALUES (1,1,'STORE','BookStore');
-INSERT INTO definition(definition_id, definition_type, value_1, value_2) VALUES (2,1,'ADDRESS','');
-INSERT INTO definition(definition_id, definition_type, value_1, value_2) VALUES (3,1,'CONTACT','');
-INSERT INTO definition(definition_id, definition_type, value_1, value_2) VALUES (4,2,'ADMIN','ALL');
+INSERT INTO definition(definition_id, definition_type, value_1, value_2, created_by, updated_by) VALUES (1,1,'STORE','BookStore',1,1);
+INSERT INTO definition(definition_id, definition_type, value_1, value_2, created_by, updated_by) VALUES (2,1,'ADDRESS','',1,1);
+INSERT INTO definition(definition_id, definition_type, value_1, value_2, created_by, updated_by) VALUES (3,1,'CONTACT','',1,1);
+INSERT INTO definition(definition_id, definition_type, value_1, value_2, created_by, updated_by) VALUES (4,2,'ADMIN','ALL',1,1);
 SET IDENTITY_INSERT definition OFF;
 
 DROP TABLE IF EXISTS discount;

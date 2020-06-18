@@ -16,7 +16,7 @@ namespace DatabaseCommon.DTO
       {
          DTOService.PassValueByAttribute<UserDto>(data, this);
       }
-      [DTO(Column = "PROVIDER_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
+      [DTO(Column = "PUBLISHER_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int AuthorId { get; set; }
       [DTO(Column = "NAME", DataType = DATATYPE.STRING)]
       public string Name { get; set; }
@@ -27,7 +27,7 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "EMAIL", DataType = DATATYPE.STRING)]
       public string Email { get; set; }
       [DTO(Column = "NOTE", DataType = DATATYPE.STRING)]
-      public string LastName { get; set; }
+      public string Note { get; set; }
    }
 }
 
