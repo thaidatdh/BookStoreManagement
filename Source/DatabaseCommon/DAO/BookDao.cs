@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseCommon.DAO
 {
-   public class BookDao
+   public class BookDao : GenericDao<BookDto>
    {
       public static List<BookDto> GetAll()
       {

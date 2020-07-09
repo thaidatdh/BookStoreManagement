@@ -26,5 +26,7 @@ namespace DatabaseCommon.DTO
       public string BankNumber { get; set; }
       [DTO(Column = "BANK_NAME", DataType = DATATYPE.STRING)]
       public string BankName { get; set; }
+      [DTO(Column = "POINT", DataType = DATATYPE.INTEGER)]
+      public string Point { get; set; }
    }
 }

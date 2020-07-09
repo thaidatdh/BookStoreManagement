@@ -52,6 +52,7 @@
     <Compile Include="DAO\StaffDao.cs" />
     <Compile Include="DAO\TransactionDao.cs" />
     <Compile Include="DAO\TransactionDetailDao.cs" />
+    <Compile Include="DAO\GenericDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
     <Compile Include="DTO\DiscountDto.cs" />
     <Compile Include="DTO\TransactionDetailDto.cs" />

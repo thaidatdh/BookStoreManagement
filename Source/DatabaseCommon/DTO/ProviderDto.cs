@@ -28,6 +28,8 @@ namespace DatabaseCommon.DTO
       public string Email { get; set; }
       [DTO(Column = "NOTE", DataType = DATATYPE.STRING)]
       public string Note { get; set; }
+	  [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
+      public bool IsDeleted { get; set; }  
    }
 }
 

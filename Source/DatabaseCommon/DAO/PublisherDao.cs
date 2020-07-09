@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseCommon.DAO
 {
-   public class PublisherDao
+   public class PublisherDao : GenericDao<PublisherDto>
    {
       public static List<PublisherDto> GetAll()
       {

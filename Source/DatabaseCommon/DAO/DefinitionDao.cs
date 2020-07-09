@@ -9,7 +9,7 @@ using DatabaseCommon.Const;
 
 namespace DatabaseCommon.DAO
 {
-   public class DefinitionDao
+   public class DefinitionDao : GenericDao<DefinitionDto>
    {
       public static List<DefinitionDto> GetAll()
       {

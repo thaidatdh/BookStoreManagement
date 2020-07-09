@@ -34,6 +34,7 @@ CREATE TABLE customer (
 	momo NVARCHAR(MAX),
 	bank_number NVARCHAR(MAX),
 	bank_name NVARCHAR(MAX)
+	point INT DEFAULT 0
 );
 
 DROP TABLE IF EXISTS staff;
