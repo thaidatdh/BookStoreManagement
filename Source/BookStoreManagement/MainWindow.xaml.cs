@@ -1,4 +1,5 @@
-﻿using DatabaseCommon.DAO;
+﻿using BookStoreManagement.Utils;
+using DatabaseCommon.DAO;
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookStoreManagement.UI;
 
 namespace BookStoreManagement
 {
@@ -25,6 +27,7 @@ namespace BookStoreManagement
       public MainWindow()
       {
          InitializeComponent();
+         DatabaseCommon.DatabaseUtils.Open();
       }
       private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
       {
@@ -43,24 +46,19 @@ namespace BookStoreManagement
          UserControl usc = null;
          GridMain.Children.Clear();
 
-         /*switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+         switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
          {
             case "ItemHome":
-               usc = new UserControlHome();
+               usc = new UserAuthorizationControl();
                GridMain.Children.Add(usc);
                break;
-            case "ItemCreate":
+            /*case "ItemCreate":
                usc = new UserControlCreate();
                GridMain.Children.Add(usc);
-               break;
+               break;*/
             default:
                break;
-         }*/
-      }
-
-      private void ButtonCloseApplication_Click(object sender, RoutedEventArgs e)
-      {
-         Application.Current.Shutdown();
+         }
       }
    }
 }

@@ -14,10 +14,10 @@ namespace DatabaseCommon.DTO
       public DefinitionDto() : base() { }
       public DefinitionDto(Object data) : base(data)
       {
-         DTOService.PassValueByAttribute<UserDto>(data, this);
+         DTOService.PassValueByAttribute<DefinitionDto>(data, this);
       }
       [DTO(Column = "DEFINITION_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
-      public int AuthorId { get; set; }
+      public int DefinitionId { get; set; }
       [DTO(Column = "DEFINITION_TYPE", DataType = DATATYPE.INTEGER)]
       public int DefinitionType { get; set; }
       [DTO(Column = "VALUE_1", DataType = DATATYPE.STRING)]

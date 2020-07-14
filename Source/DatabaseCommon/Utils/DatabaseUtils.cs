@@ -29,7 +29,8 @@ namespace DatabaseCommon
       {
          get
          {
-            return @"Server=.;Database=BSDB;User Id=sa;Password=hello123;";
+            //return @"Server=.;Database=BSDB;User Id=sa;Password=hello123;";
+            return @"Server=.;Database=BSDB;Integrated Security = True;";
          }
       }
       private static SqlConnection Connection
