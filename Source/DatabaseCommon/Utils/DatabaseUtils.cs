@@ -144,6 +144,20 @@ namespace DatabaseCommon
          }
          return default(T);
       }
+      public static string GetTableName(Type type)
+      {
+         string str = type.Name;
+         if (type.IsDefined(typeof(TableAttribute), true))
+            str = ((TableAttribute[])type.GetCustomAttributes(typeof(TableAttribute), true))[0].Name;
+         return str;
+      }
+      internal static string GetInheritanceColumn(Type type)
+      {
+         string str = type.Name;
+         if (type.IsDefined(typeof(TableAttribute), true))
+            str = ((TableAttribute[])type.GetCustomAttributes(typeof(TableAttribute), true))[0].InheritanceColumn;
+         return str;
+      }
       public static int UpdateEntity<T>(T dto, bool includeParentAttribute = false)
       {
          SqlCommand command = GenerateUpdateQuery<T>(dto, includeParentAttribute);
@@ -196,6 +210,79 @@ namespace DatabaseCommon
 
          list = DTOProperties[type];
       }
+      public static List<S> GetPropertyValueList<S>(string sql, List<string> valueNames)
+      {
+         List<S> result = new List<S>();
+
+         var constructorParameters = typeof(S).GetConstructors().Count() != 0 ? typeof(S).GetConstructors()[0].GetParameters() : null;
+
+         Object data = DatabaseUtils.ExcuteSelectQuery(sql);
+         if (data != null)
+         {
+            DataTable dt = (DataTable)data;
+
+            bool dynamicType = typeof(S).Name.Contains("AnonymousType");
+
+            foreach (DataRow dr in dt.Rows)
+            {
+               if (dynamicType)
+               {
+                  var rowValue = new List<object>();
+                  for (Int32 i = 0; i < dt.Columns.Count; i++)
+                  {
+                     var value = dr[i];
+                     if (value is DBNull)
+                        value = GetDefaultGeneric(dt.Columns[i].DataType);
+
+                     rowValue.Add(value);
+                  }
+
+                  var dfsdf = ParseAnomynousSourceFormat(rowValue, constructorParameters);
+                  result.Add((S)Activator.CreateInstance(typeof(S), ParseAnomynousSourceFormat(rowValue, constructorParameters)));
+               }
+               else
+               {
+                  for (Int32 i = 0; i < dt.Columns.Count; i++)
+                  {
+                     var value = dr[i];
+                     if (value is DBNull)
+                        value = GetDefaultGeneric(dt.Columns[i].DataType);
+
+                     if (typeof(S) == typeof(int))
+                        result.Add((S)((object)value.ToInt32()));
+                     else if (typeof(S) == typeof(long))
+                        result.Add((S)((object)value.ToInt64()));
+                     else result.Add((S)value);
+                  }
+               }
+            }
+         }
+         return result;
+      }
+      public static T GetDefaultGeneric<T>(T input) => default(T);
+      private static object[] ParseAnomynousSourceFormat(List<object> listSources, ParameterInfo[] constructorParameters)
+      {
+         for (int i = 0; i < listSources.Count; i++)
+         {
+            var parameter = constructorParameters[i];
+
+            var objectValue = listSources[i];
+
+            //if (listSources[i] is DBNull)
+            //   listSources[i] = GetDefaultGeneric(parameter);
+            if (parameter.ParameterType == typeof(int))
+               listSources[i] = listSources[i].ToInt32();
+            else if (parameter.ParameterType == typeof(long))
+               listSources[i] = listSources[i].ToInt64();
+            else if (parameter.ParameterType == typeof(double))
+               listSources[i] = listSources[i].ToDouble();
+
+            if (objectValue is DateTime)
+               listSources[i] = listSources[i].ToString();
+         }
+
+         return listSources.ToArray();
+      }
       public static DTOAttribute GetCustomAttribute<T>(string propertyName)
       {
          PropertyInfo propertyInfo = typeof(T).GetProperties().FirstOrDefault(n => n.Name.Equals(propertyName));
@@ -215,6 +302,47 @@ namespace DatabaseCommon
             return attr;
          }
 
+         return null;
+      }
+      public static DTOAttribute GetCustomAttribute(Type type, string propertyName, bool isFollowChangeset = false)
+      {
+         PropertyInfo propertyInfo = type.GetProperty(propertyName);
+         Object[] attribute = propertyInfo.GetCustomAttributes(typeof(DTOAttribute), true);
+
+         if (attribute.Length > 0)
+         {
+            if (attribute.Length == 1)
+            {
+               DTOAttribute myAttribute = (DTOAttribute)attribute[0];
+               myAttribute.PropertyInfo = propertyInfo;
+               return myAttribute;
+            }
+            else
+            {
+               List<DTOAttribute> list = attribute.Select(x => (DTOAttribute)x).ToList();
+               foreach (DTOAttribute attr in list)
+               {
+                  if (attr != null)
+                  {
+                     attr.PropertyInfo = propertyInfo;
+                     return attr;
+                  }
+               }
+            }
+         }
+         return null;
+      }
+      public static object GetPropertyValue(string sql, string property_name)
+      {
+         Object data = DatabaseUtils.ExcuteSelectQuery(sql);
+         if (data != null)
+         {
+            DataTable dt = (DataTable)data;
+            foreach (DataRow dr in dt.Rows)
+            {
+               return dr[property_name];
+            }
+         }
          return null;
       }
       private static Entity GetEntityProperties<T>(string tableName)

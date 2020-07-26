@@ -28,6 +28,7 @@ namespace BookStoreManagement
       {
          InitializeComponent();
          DatabaseCommon.DatabaseUtils.Open();
+         var t = StaffDao.Where(n => n.UserId > 0);
       }
       private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
       {

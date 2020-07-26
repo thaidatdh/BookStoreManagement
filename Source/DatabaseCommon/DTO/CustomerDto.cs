@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseCommon.DTO
 {
-   [Table("CUSTOMER")]
+   [Table("CUSTOMER", "USER_ID")]
    public class CustomerDto : UserDto
    {
       public CustomerDto() : base() { }

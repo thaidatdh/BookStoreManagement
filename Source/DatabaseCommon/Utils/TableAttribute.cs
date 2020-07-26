@@ -10,9 +10,11 @@ namespace DatabaseCommon
    internal class TableAttribute : Attribute
    {
       public string Name { get; set; }
-      public TableAttribute(string name)
+      public string InheritanceColumn { get; set; }
+      public TableAttribute(string name, string InheritanceColumn = null)
       {
          this.Name = name;
+         this.InheritanceColumn = InheritanceColumn;
       }
    }
 }
