@@ -29,5 +29,9 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.GetEntity<BookDto>("SELECT * FROM BOOK WHERE BARCODE='" + barcode.Replace("'","''") + "'");
       }
+      public static bool Delete(int Id)
+      {
+         return DatabaseUtils.ExecuteQuery("UPDATE BOOK SET IS_DELETED = 1 WHERE BOOK_ID=" + Id) > 0;
+      }
    }
 }

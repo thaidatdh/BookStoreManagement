@@ -50,7 +50,7 @@ namespace DatabaseCommon.Services
          foreach (PropertyInfo info in entity.Properties)
          {
             DTOAttribute dtoAttr = entity.AttributeDictionary.GetValue(info.Name);
-
+            if (dtoAttr == null) continue;
             object columnValue = GetValue(dtoAttr.Column, dtoAttr.DataType, data);
             if (columnValue == null) continue;
             var columnValueType = columnValue.GetType();

@@ -24,5 +24,9 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.UpdateEntity<UserDto>(dto, true) > 0 && DatabaseUtils.UpdateEntity<StaffDto>(dto) > 0;
       }
+      public static bool DeActive(int Id)
+      {
+         return DatabaseUtils.ExecuteQuery("UPDATE STAFF SET ACTIVE = 0 WHERE STAFF_ID=" + Id) > 0;
+      }
    }
 }

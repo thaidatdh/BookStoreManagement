@@ -12,6 +12,7 @@ namespace DatabaseCommon.DAO
 {
    public class DefinitionDao : GenericDao<DefinitionDto>
    {
+      private static Dictionary<int, DefinitionDto> DefinitionIdMap = new Dictionary<int, DefinitionDto>();
       public static List<DefinitionDto> GetAll()
       {
          return DatabaseUtils.GetEntityList<DefinitionDto>();
@@ -30,7 +31,13 @@ namespace DatabaseCommon.DAO
       }
       public static DefinitionDto GetById(int Id)
       {
-         return DatabaseUtils.GetEntity<DefinitionDto>(Id);
+         if (DefinitionIdMap.ContainsKey(Id))
+         {
+            return DefinitionIdMap.GetValue(Id);
+         }
+         DefinitionDto dto = DatabaseUtils.GetEntity<DefinitionDto>(Id);
+         DefinitionIdMap[Id] = dto;
+         return dto;
       }
       public static Dictionary<string, string> GetStoreInformation()
       {

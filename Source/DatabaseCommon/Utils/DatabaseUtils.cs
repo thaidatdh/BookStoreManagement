@@ -130,7 +130,7 @@ namespace DatabaseCommon
       public static T GetEntity<T>(int id)
       {
          string tableName = GetTableName<T>();
-         string PrimaryKey = GetEntityProperties<T>(tableName).PrimaryKeyPropertyName;
+         string PrimaryKey = GetEntityProperties<T>(tableName).PrimaryKeyAttribute.Column;
          string sql = "SELECT * FROM " + tableName + " where " + PrimaryKey + " = " + id;
          if (String.IsNullOrEmpty(PrimaryKey)) sql = "SELECT * FROM " + tableName;
          Object data = DatabaseUtils.ExcuteSelectQuery(sql);
@@ -192,7 +192,7 @@ namespace DatabaseCommon
       }
       public static void InitDTOProperties()
       {
-         DTOProperties = Assembly.GetExecutingAssembly().GetTypes().Where(n => n.IsClass && n.Namespace == "DatabaseCommon.DTO").ToDictionary(k => k, v => v.GetProperties(System.Reflection.BindingFlags.Public
+         DTOProperties = Assembly.GetExecutingAssembly().GetTypes().Where(n => n.IsClass && n.Namespace == "DatabaseCommon.DTO").ToDictionary(k => k, v => v.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic
              | System.Reflection.BindingFlags.Instance
              | System.Reflection.BindingFlags.DeclaredOnly).ToList());
       }
@@ -361,6 +361,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in m_propertyInfos)
             {
                DTOAttribute attr = GetCustomAttribute<T>(info.Name);
+               if (attr == null) continue;
                result.AttributeDictionary[info.Name] = attr;
                if (attr.isPrimaryKey && result.PrimaryKeyAttribute == null)
                {

@@ -66,7 +66,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BUS\AuthorBUS.cs" />
+    <Compile Include="BUS\BookBUS.cs" />
+    <Compile Include="BUS\CustomerBUS.cs" />
     <Compile Include="BUS\DefinitionBUS.cs" />
+    <Compile Include="BUS\ProviderBUS.cs" />
+    <Compile Include="BUS\PublisherBUS.cs" />
+    <Compile Include="BUS\StaffBUS.cs" />
+    <Compile Include="Config\Manager.cs" />
+    <Compile Include="UI\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserAuthorizationControl.xaml.cs">
       <DependentUpon>UserAuthorizationControl.xaml</DependentUpon>
     </Compile>
@@ -84,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UserAuthorizationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

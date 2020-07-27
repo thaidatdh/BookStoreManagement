@@ -1,6 +1,7 @@
 ﻿using CommonLibrary.Utils;
 using DatabaseCommon.DTO;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -249,6 +250,8 @@ namespace DatabaseCommon.DAO
             var type = objectValue.GetType();
             if (type == typeof(string) && !methodAction.StartsWith("like"))
                return "'" + objectValue + "'";
+            if (type == typeof(bool))
+               return objectValue.ToString().ToLower().Equals("true") ? "1" : "0";
          }
          else
          {

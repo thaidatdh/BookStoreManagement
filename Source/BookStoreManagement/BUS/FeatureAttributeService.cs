@@ -56,14 +56,25 @@ namespace BookStoreManagement.BUS
                   id = temp.Id;
                   name = temp.Name;
                   ListFeatureAttribute.Add(temp);
+                  UpdateFeatureMap(id, name);
+               }
+               var methods = f.GetMethods().Where(m => m.GetCustomAttributes(typeof(FeatureAttribute), false).Length > 0).Select(n => n.GetCustomAttribute(typeof(FeatureAttribute))).ToList();
+               foreach(FeatureAttribute method in methods)
+               {
+                  id = method.Id;
+                  name = method.Name;
+                  ListFeatureAttribute.Add(method);
+                  UpdateFeatureMap(id, name);
                }
             }
-               
-            if (id > 0 && !String.IsNullOrEmpty(name))
-            {
-               FeaturePropertiesMap[id] = name;
-               FeaturePropertiesNameMap[name] = id;
-            }
+         }
+      }
+      private static void UpdateFeatureMap(int id, string name)
+      {
+         if (id > 0 && !String.IsNullOrEmpty(name))
+         {
+            FeaturePropertiesMap[id] = name;
+            FeaturePropertiesNameMap[name] = id;
          }
       }
       public static bool isAuthorized(string userType, int featureId)
@@ -76,6 +87,23 @@ namespace BookStoreManagement.BUS
          if (!AuthorizationMap.ContainsKey(userType))
             return false;
          return AuthorizationMap.GetValue(userType).Contains(featureId);
+      }
+      public static bool isAuthorized(Type featureType)
+      {
+         if (Config.Manager.CURRENT_USER == null)
+            return false;
+         string userType = Config.Manager.CURRENT_USER.UserType;
+         var feature = featureType.GetCustomAttributes(typeof(FeatureAttribute), true).FirstOrDefault() as FeatureAttribute;
+         if (feature == null) 
+            return false;
+         if (FeaturePropertiesMap == null || FeaturePropertiesMap.Count == 0)
+            InitFeatureProperties();
+         if (AuthorizationMap == null || AuthorizationMap.Count == 0)
+            AuthorizationMap = DefinitionDao.GetUserAuthorizationMap();
+         //Check
+         if (!AuthorizationMap.ContainsKey(userType))
+            return false;
+         return AuthorizationMap.GetValue(userType).Contains(feature.Id);
       }
    }
 }

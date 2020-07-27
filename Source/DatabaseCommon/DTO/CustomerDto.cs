@@ -14,7 +14,7 @@ namespace DatabaseCommon.DTO
       public CustomerDto() : base() { }
       public CustomerDto(Object data) : base((Object)data)
       {
-         DTOService.PassValueByAttribute<StaffDto>(data, this);
+         DTOService.PassValueByAttribute<CustomerDto>(data, this);
       }
       [DTO(Column = "USER_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int UserId { get; set; }
@@ -28,5 +28,7 @@ namespace DatabaseCommon.DTO
       public string BankName { get; set; }
       [DTO(Column = "POINT", DataType = DATATYPE.INTEGER)]
       public string Point { get; set; }
+      [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
+      public bool IsDeleted { get; set; }
    }
 }

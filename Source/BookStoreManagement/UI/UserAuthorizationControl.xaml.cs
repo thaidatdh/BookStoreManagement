@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.XPath;
 using BookStoreManagement.BUS;
+using DatabaseCommon.Const;
 
 namespace BookStoreManagement.UI
 {
@@ -39,7 +40,7 @@ namespace BookStoreManagement.UI
          InitComoboxType();
       }
       private List<CheckBox> ListCheckbox = new List<CheckBox>();
-      private void InitListControlsCheckbox()
+      public void InitListControlsCheckbox()
       {
          ListPanel = new List<StackPanel>() { ListControls1, ListControls2, ListControls3 };
          ListControls1.Children.Clear();
