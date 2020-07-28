@@ -20,11 +20,11 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "TRANSACTION_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int TransactionId { get; set; }
       [DTO(Column = "CUSTOMER_ID", DataType = DATATYPE.INTEGER)]
-      public int CustomerId { get; set; }
+      public int? CustomerId { get; set; }
       [DTO(Column = "PROVIDER_ID", DataType = DATATYPE.INTEGER)]
-      public int ProviderId { get; set; }
+      public int? ProviderId { get; set; }
       [DTO(Column = "STAFF_ID", DataType = DATATYPE.INTEGER)]
-      public int StaffId { get; set; }
+      public int? StaffId { get; set; }
       [DTO(Column = "AMOUNT", DataType = DATATYPE.BIGINT)]
       public long Amount { get; set; }
       [DTO(Column = "DISCOUNT", DataType = DATATYPE.BIGINT)]

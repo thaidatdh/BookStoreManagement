@@ -39,7 +39,7 @@ namespace DatabaseCommon.DAO
          DefinitionIdMap[Id] = dto;
          return dto;
       }
-      public static Dictionary<string, string> GetStoreInformation()
+      public static Dictionary<string, string> GetStoreInfo()
       {
          return DatabaseUtils.GetEntityList<DefinitionDto>("SELECT * FROM DEFINITION WHERE DEFINITION_TYPE = 1").GroupBy(n => n.Value1).ToDictionary(n => n.Key, n => n.ToList().Select(x => x.Value2).First());
       }
