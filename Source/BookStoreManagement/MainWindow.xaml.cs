@@ -98,9 +98,9 @@ namespace BookStoreManagement
             case "Book":
                //if (FeatureAttributeService.isAuthorized(typeof(BookManagementControl)))
                //{
-               //   usc = new BookManagementControl();
-               //   GridMain.Children.Add(usc);
-               //   isAuthorized = true;
+                  usc = new BookManagementControl();
+                  GridMain.Children.Add(usc);
+                  isAuthorized = true;
                //}
                break;
             case "Customer":
