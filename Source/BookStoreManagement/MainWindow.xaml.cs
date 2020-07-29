@@ -91,22 +91,24 @@ namespace BookStoreManagement
       private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          UserControl usc = null;
-         GridMain.Children.Clear();
          bool isAuthorized = false;
+         if (ListViewMenu.SelectedIndex == -1) return;
          switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
          {
             case "Book":
-               //if (FeatureAttributeService.isAuthorized(typeof(BookManagementControl)))
-               //{
+               if (FeatureAttributeService.isAuthorized(typeof(BookManagementControl)))
+               {
                   usc = new BookManagementControl();
+                  GridMain.Children.Clear();
                   GridMain.Children.Add(usc);
                   isAuthorized = true;
-               //}
+               }
                break;
             case "Customer":
                //if (FeatureAttributeService.isAuthorized(typeof(CustomerManagementControl)))
                //{
                //   usc = new CustomerManagementControl();
+               //   GridMain.Children.Clear();
                //   GridMain.Children.Add(usc);
                //   isAuthorized = true;
                //}
@@ -123,6 +125,7 @@ namespace BookStoreManagement
                //if (FeatureAttributeService.isAuthorized(typeof(ProviderManagementControl)))
                //{
                //   usc = new ProviderManagementControl();
+               //   GridMain.Children.Clear();
                //   GridMain.Children.Add(usc);
                //   isAuthorized = true;
                //}
@@ -131,6 +134,7 @@ namespace BookStoreManagement
                //if (FeatureAttributeService.isAuthorized(typeof(PublisherManagementControl)))
                //{
                //   usc = new PublisherManagementControl();
+               //   GridMain.Children.Clear();
                //   GridMain.Children.Add(usc);
                //   isAuthorized = true;
                //}
@@ -139,6 +143,7 @@ namespace BookStoreManagement
                //if (FeatureAttributeService.isAuthorized(typeof(CategoryManagementControl)))
                //{
                //   usc = new CategoryManagementControl();
+               //   GridMain.Children.Clear();
                //   GridMain.Children.Add(usc);
                //   isAuthorized = true;
                //}
@@ -147,6 +152,7 @@ namespace BookStoreManagement
                //if (FeatureAttributeService.isAuthorized(typeof(AuthorManagementControl)))
                //{
                //   usc = new AuthorManagementControl();
+               //   GridMain.Children.Clear();
                //   GridMain.Children.Add(usc);
                //   isAuthorized = true;
                //}
@@ -155,6 +161,7 @@ namespace BookStoreManagement
                //if (FeatureAttributeService.isAuthorized(typeof(TransactionManagementControl)))
                //{
                //   usc = new TransactionManagementControl();
+               //   GridMain.Children.Clear();
                //   GridMain.Children.Add(usc);
                //   isAuthorized = true;
                //}
@@ -166,6 +173,7 @@ namespace BookStoreManagement
          {
             MessageBox.Show("You are not authorized for this feature!");
          }
+         ListViewMenu.SelectedIndex = -1;
       }
 
       private void btnProfile_Click(object sender, RoutedEventArgs e)

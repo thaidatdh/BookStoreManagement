@@ -17,6 +17,7 @@ namespace BookStoreManagement.BUS
          var featureMap = FeatureAttributeService.GetFeaturePropertiesNameMap();
          List<int> values = FeaturesName.Select(n => featureMap.GetValue(n)).Where(n => n != 0).ToList();
          var authorizationMap = FeatureAttributeService.GetAuthorizationMap();
+         FeatureAttributeService.UpdateAuthorizationNameMap(name, values);
          authorizationMap.Remove(dto.Value1);
          authorizationMap[name] = values;
 
@@ -38,6 +39,7 @@ namespace BookStoreManagement.BUS
 
          var authorizationMap = FeatureAttributeService.GetAuthorizationMap();
          authorizationMap[name] = values;
+         FeatureAttributeService.UpdateAuthorizationNameMap(name, values);
          return dto;
       }
       public static bool DeleteAuthorization(DefinitionDto dto)

@@ -59,7 +59,7 @@ namespace DatabaseCommon.Services
             switch (dtoAttr.DataType)
             {
                case DATATYPE.BOOLEAN:
-                  info.SetValue(dto, Convert.ToBoolean(columnValue)); break;
+                  info.SetValue(dto, columnValue.ToBoolean()); break;
                case DATATYPE.BIGINT:
                   info.SetValue(dto, columnValue.ToInt64()); break;
                case DATATYPE.GENERATED_ID:
@@ -68,7 +68,7 @@ namespace DatabaseCommon.Services
                case DATATYPE.DATE:
                   info.SetValue(dto, Convert.ToString(columnValue)); break;
                case DATATYPE.DOUBLE:
-                  info.SetValue(dto, Convert.ToDouble(columnValue)); break;
+                  info.SetValue(dto, columnValue.ToDouble()); break;
                case DATATYPE.STRING:
                   if (columnValue != null) info.SetValue(dto, columnValue.ToString());
                   else info.SetValue(dto, columnValue);
