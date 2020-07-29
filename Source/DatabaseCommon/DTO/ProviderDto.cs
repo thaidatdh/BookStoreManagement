@@ -17,7 +17,7 @@ namespace DatabaseCommon.DTO
          DTOService.PassValueByAttribute<ProviderDto>(data, this);
       }
       [DTO(Column = "PROVIDER_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
-      public int AuthorId { get; set; }
+      public int ProviderId { get; set; }
       [DTO(Column = "NAME", DataType = DATATYPE.STRING)]
       public string Name { get; set; }
       [DTO(Column = "ADDRESS", DataType = DATATYPE.STRING)]

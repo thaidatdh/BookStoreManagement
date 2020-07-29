@@ -32,6 +32,17 @@ namespace CommonLibrary.Utils
                return 0;
             }
          }
+         public static long ToInt64(object obj)
+         {
+            try
+            {
+               return Convert.ToInt64(obj);
+            }
+            catch
+            {
+               return 0;
+            }
+         }
       }
    }
 }

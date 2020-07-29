@@ -16,7 +16,13 @@ namespace BookStoreManagement.BUS
          if (dto == null) 
             return false;
          Config.Manager.CURRENT_USER = dto;
+         DatabaseCommon.DatabaseUtils.CurrentUserId = dto.UserId;
          return true;
+      }
+      public static void Logout()
+      {
+         Config.Manager.CURRENT_USER = null;
+         DatabaseCommon.DatabaseUtils.CurrentUserId = 0;
       }
    }
 }

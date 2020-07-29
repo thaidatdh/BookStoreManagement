@@ -41,6 +41,7 @@ namespace BookStoreManagement.UI
       IPagedList<BookDto> listBooks;
       List<BookDto> allShowedBooks;
       List<BookDto> allBooks;
+      bool isInitial = false;
       public BookManagementControl()
       {
          InitializeComponent();
@@ -50,13 +51,13 @@ namespace BookStoreManagement.UI
       private async void UserControl_Loaded(object sender, RoutedEventArgs e)
       {
          await reloadTable(pageNumber);
+         this.Dispatcher.Invoke(new Action(() => isInitial = true));
       }
       private async Task<IPagedList<BookDto>> GetPagedListAsync(int pagedNumber = 1)
       {
          return await Task.Factory.StartNew(() =>
          {
-            if (allBooks == null || allBooks.Count == 0)
-               allBooks = BookDao.Where(n => n.IsDeleted == false).ToList();
+            allBooks = BookBUS.GetAllNotDeletedBooks();
             if (allShowedBooks == null)
             {
                allShowedBooks = new List<BookDto>();
@@ -123,8 +124,8 @@ namespace BookStoreManagement.UI
          if (selectedItem == null)
             return;
          //Code here
+         MainWindow.AddSubChild(new BookInfoControl(selectedItem, FormMode.View));
       }
-
       private void btnAdd_Click(object sender, RoutedEventArgs e)
       {
          if (!FeatureAttributeService.isAuthorized("Add New Book", "Book Management"))
@@ -142,6 +143,7 @@ namespace BookStoreManagement.UI
          if (selectedItem == null)
             return;
          //Code here
+         MainWindow.AddSubChild(new BookInfoControl());
       }
 
       private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -161,6 +163,7 @@ namespace BookStoreManagement.UI
          if (selectedItem == null)
             return;
          //Code here
+         MainWindow.AddSubChild(new BookInfoControl(selectedItem, FormMode.Edit));
       }
       
       private async void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -185,7 +188,7 @@ namespace BookStoreManagement.UI
          {
             allShowedBooks.Remove(selectedItem);
             allBooks.Remove(selectedItem);
-            BookDao.Delete(selectedItem.BookId);
+            BookBUS.Delete(selectedItem);
             await reloadTable(pageNumber);
          }
       }
@@ -202,16 +205,26 @@ namespace BookStoreManagement.UI
       }
       private async void btnPrevious_Click(object sender, RoutedEventArgs e)
       {
-         if (!listBooks.HasPreviousPage)
+         if (listBooks == null || !listBooks.HasPreviousPage)
             return;
          await reloadTable(--pageNumber);
       }
 
       private async void btnNext_Click(object sender, RoutedEventArgs e)
       {
-         if (!listBooks.HasNextPage)
+         if (listBooks == null || !listBooks.HasNextPage)
             return;
          await reloadTable(++pageNumber);
+      }
+
+      private async void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+      {
+         bool isInit = false;
+         this.Dispatcher.Invoke(new Action(() => isInit = isInitial));
+         if (this.Visibility == Visibility.Visible && isInit)
+         {
+            await reloadTable(pageNumber);
+         }
       }
    }
 }

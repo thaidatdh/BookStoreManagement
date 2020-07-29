@@ -73,9 +73,9 @@ namespace DatabaseCommon.DTO
       {
          get
          {
-            if (ProviderId > 0)
+            if (PublisherId > 0)
             {
-               return PublisherDao.GetById(ProviderId);
+               return PublisherDao.GetById(PublisherId);
             }
             else
             {

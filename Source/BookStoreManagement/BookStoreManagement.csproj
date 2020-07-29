@@ -83,6 +83,9 @@
     <Compile Include="BUS\PublisherBUS.cs" />
     <Compile Include="BUS\StaffBUS.cs" />
     <Compile Include="Config\Manager.cs" />
+    <Compile Include="UI\BookInfoControl.xaml.cs">
+      <DependentUpon>BookInfoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\BookManagementControl.xaml.cs">
       <DependentUpon>BookManagementControl.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,8 @@
     <Compile Include="UI\UserAuthorizationControl.xaml.cs">
       <DependentUpon>UserAuthorizationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ControlUtils.cs" />
+    <Compile Include="Utils\CustomType.cs" />
     <Compile Include="Utils\FeatureAttribute.cs" />
     <Compile Include="BUS\FeatureAttributeService.cs" />
     <Page Include="MainWindow.xaml">
@@ -106,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\BookInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\BookManagementControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

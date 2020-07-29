@@ -43,6 +43,39 @@ namespace BookStoreManagement
          AuthorizationButton = btnAuthorization;
          HideLoginMenu();
       }
+      public static void AddSubChild(UserControl subControl)
+      {
+         if (subControl == null || MainGrid == null)
+            return;
+         foreach (UserControl control in MainGrid.Children)
+         {
+            control.Visibility = Visibility.Collapsed;
+         }
+         MainGrid.Children.Add(subControl);
+         subControl.Visibility = Visibility.Visible;
+      }
+      public static void ReplaceMainControl(UserControl Control)
+      {
+         if (Control == null || MainGrid == null)
+            return;
+         MainGrid.Children.Clear();
+         MainGrid.Children.Add(Control);
+         Control.Visibility = Visibility.Visible;
+      }
+      public static void RemoveSubChild(UserControl subControl)
+      {
+         if (subControl == null || MainGrid == null)
+            return;
+         MainGrid.Children.Remove(subControl);
+         subControl.Visibility = Visibility.Collapsed;
+         UserControl LastControl = null;
+         foreach (UserControl control in MainGrid.Children)
+         {
+            LastControl = control;
+         }
+         if (LastControl != null)
+            LastControl.Visibility = Visibility.Visible;
+      }
       private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
       {
          ButtonCloseMenu.Visibility = Visibility.Visible;
@@ -189,7 +222,9 @@ namespace BookStoreManagement
       private void btnLogOut_Click(object sender, RoutedEventArgs e)
       {
          HideLoginMenu();
-         GridMain.Children.Clear();
+         StaffBUS.Logout();
+         UserControl userControl = new LoginControl();
+         ReplaceMainControl(userControl);
       }
 
       private void btnAuthorization_Click(object sender, RoutedEventArgs e)

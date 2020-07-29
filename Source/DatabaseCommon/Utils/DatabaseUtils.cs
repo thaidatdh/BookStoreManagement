@@ -14,6 +14,7 @@ namespace DatabaseCommon
 {
    public class DatabaseUtils
    {
+      public static int CurrentUserId { get; set; }
       public class Entity
       {
          public string TableName { get; set; }
@@ -65,6 +66,7 @@ namespace DatabaseCommon
          DataTable result = new DataTable(TableName);
          dataAdapter.Fill(result);
          dataAdapter.Dispose();
+         command.Dispose();
          return result;
       }
       public static int ExecuteQuery(string sql)
@@ -397,6 +399,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in m_propertyInfos)
             {
                DTOAttribute attr = GetCustomAttribute<T>(info.Name);
+               if (attr == null) continue;
                result.AttributeDictionary[info.Name] = attr;
                if (attr.isPrimaryKey && result.PrimaryKeyAttribute == null)
                {
@@ -507,7 +510,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in entity.Properties)
             {
                DTOAttribute attr = entity.AttributeDictionary.GetValue(info.Name);
-               if (attr.isPrimaryKey || attr.Column.Equals("CREATE_DATE")) continue;
+               if (attr == null || attr.isPrimaryKey || attr.Column.Equals("CREATE_DATE")) continue;
                if (!String.IsNullOrEmpty(columns))
                   columns += ", ";
 
@@ -605,59 +608,66 @@ namespace DatabaseCommon
             string propertyName = entry.Key.ToString();
             object value = typeof(T).GetProperty(propertyName).GetValue(dto, (object[])null);
             DTOAttribute attribute = entity.AttributeDictionary.GetValue(propertyName);
+            var valueType = attribute.DataType;
+            var defaultValue = attribute.DefaultValue;
+            string paraName = entry.Value.ToString();
 
-            if (attribute.Column.Equals("CREATE_DATE"))
+            if (attribute.Column.Equals("CREATE_DATE") && value.Equals(default(DateTime)))
             {
-               command.Parameters.Add(entry.Value.ToString(), SqlDbType.NVarChar).Value = DateTime.Now;
+               command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = DateTime.Now;
                continue;
             }
 
             if (attribute.Column.Equals("UPDATED_DATE"))
             {
-               command.Parameters.Add(entry.Value.ToString(), SqlDbType.NVarChar).Value = DateTime.Now;
+               command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = DateTime.Now;
                continue;
             }
-            //--------------------------------------------------
 
-            var valueType = attribute.DataType;
-            var defaultValue = attribute.DefaultValue;
-
-            string paraName = entry.Value.ToString();
-            SqlCommand cmd = (SqlCommand)command;
+            if (attribute.Column.Equals("CREATED_BY") && value.ToInt32() == 0)
+            {
+               command.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(CurrentUserId, valueType, defaultValue).ToInt32();
+               continue;
+            }
+            if (attribute.Column.Equals("UPDATED_BY"))
+            {
+               command.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(CurrentUserId, valueType, defaultValue).ToInt32();
+               continue;
+            }
             switch (valueType)
             {
                case DATATYPE.STRING:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
+                     command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
                      break;
                   }
                case DATATYPE.INTEGER:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
+                     command.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
                      break;
                   }
                case DATATYPE.BIGINT:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.BigInt).Value = (long)ParseDataSQL(value, valueType, defaultValue);
+                     command.Parameters.Add(paraName, SqlDbType.BigInt).Value = (long)ParseDataSQL(value, valueType, defaultValue);
                      break;
                   }
                case DATATYPE.GENERATED_ID:
                   {
                      int Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
                      if (Value != 0)
-                        cmd.Parameters.Add(paraName, SqlDbType.Int).Value = Value;
+                        command.Parameters.Add(paraName, SqlDbType.Int).Value = Value;
                      else
-                        cmd.Parameters.Add(paraName, SqlDbType.Int).Value = null;
+                        command.Parameters.Add(paraName, SqlDbType.Int).Value = null;
                      break;
                   }
                case DATATYPE.BOOLEAN:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.Bit).Value = ParseDataSQL(value, valueType, defaultValue).ToBoolean();
+                     command.Parameters.Add(paraName, SqlDbType.Bit).Value = ParseDataSQL(value, valueType, defaultValue).ToBoolean();
                      break;
                   }
                case DATATYPE.TIMESTAMP:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.Timestamp).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
+                     command.Parameters.Add(paraName, SqlDbType.Timestamp).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
 
                      break;
                   }
@@ -665,16 +675,16 @@ namespace DatabaseCommon
                   {
                      int digit = 2;
                      string key = attribute.Column.ToUpper();
-                     cmd.Parameters.Add(paraName, SqlDbType.Float).Value = ParseDataSQL(value, valueType, defaultValue).ToDouble(digit);
+                     command.Parameters.Add(paraName, SqlDbType.Float).Value = ParseDataSQL(value, valueType, defaultValue).ToDouble(digit);
                      break;
                   }
                case DATATYPE.DATE:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
+                     command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
                      break;
                   }
                default:
-                  cmd.Parameters.Add(paraName, SqlDbType.Int).Value = null;
+                  command.Parameters.Add(paraName, SqlDbType.Int).Value = null;
                   break;
             }
          }

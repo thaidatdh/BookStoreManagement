@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookStoreManagement.UI"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-            d:DesignHeight="708" d:DesignWidth="1080" Foreground="Black" Loaded="UserControl_Loaded">
+            d:DesignHeight="708" d:DesignWidth="1080" Foreground="Black" Loaded="UserControl_Loaded" IsVisibleChanged="UserControl_IsVisibleChanged">
    <Grid Background="White" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
       <StackPanel Orientation="Vertical">
          <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold">Book Management</Label>
