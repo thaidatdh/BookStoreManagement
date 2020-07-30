@@ -121,6 +121,17 @@ namespace BookStoreManagement
                AuthorizationButton.Visibility = Visibility.Collapsed;
          }
       }
+      private bool isShowed(Type controlType)
+      {
+         foreach (UIElement element in GridMain.Children)
+         {
+            if (element.GetType().ToString().Equals(controlType.ToString()))
+            {
+               return true;
+            }
+         }
+         return false;
+      }
       private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          UserControl usc = null;
@@ -131,71 +142,96 @@ namespace BookStoreManagement
             case "Book":
                if (FeatureAttributeService.isAuthorized(typeof(BookManagementControl)))
                {
-                  usc = new BookManagementControl();
-                  GridMain.Children.Clear();
-                  GridMain.Children.Add(usc);
+                  if (!isShowed(typeof(BookManagementControl)))
+                  {
+                     usc = new BookManagementControl();
+                     GridMain.Children.Clear();
+                     GridMain.Children.Add(usc);
+                  }
                   isAuthorized = true;
                }
                break;
             case "Customer":
                //if (FeatureAttributeService.isAuthorized(typeof(CustomerManagementControl)))
                //{
-               //   usc = new CustomerManagementControl();
-               //   GridMain.Children.Clear();
-               //   GridMain.Children.Add(usc);
+               //   if (!isShowed(typeof(CustomerManagementControl)))
+               //   {
+               //      usc = new CustomerManagementControl();
+               //      GridMain.Children.Clear();
+               //      GridMain.Children.Add(usc);
+               //   }
                //   isAuthorized = true;
                //}
                break;
             case "Staff":
                //if (FeatureAttributeService.isAuthorized(typeof(StaffManagementControl)))
                //{
-               //   usc = new StaffManagementControl();
-               //   GridMain.Children.Add(usc);
+               //   if (!isShowed(typeof(StaffManagementControl)))
+               //   {
+               //      usc = new StaffManagementControl();
+               //      GridMain.Children.Clear();
+               //      GridMain.Children.Add(usc);
+               //   }
                //   isAuthorized = true;
                //}
                break;
             case "Provider":
                //if (FeatureAttributeService.isAuthorized(typeof(ProviderManagementControl)))
                //{
-               //   usc = new ProviderManagementControl();
-               //   GridMain.Children.Clear();
-               //   GridMain.Children.Add(usc);
+               //   if (!isShowed(typeof(ProviderManagementControl)))
+               //   {
+               //      usc = new ProviderManagementControl();
+               //      GridMain.Children.Clear();
+               //      GridMain.Children.Add(usc);
+               //   }
                //   isAuthorized = true;
                //}
                break;
             case "Publisher":
                //if (FeatureAttributeService.isAuthorized(typeof(PublisherManagementControl)))
                //{
-               //   usc = new PublisherManagementControl();
-               //   GridMain.Children.Clear();
-               //   GridMain.Children.Add(usc);
+               //   if (!isShowed(typeof(PublisherManagementControl)))
+               //   {
+               //      usc = new PublisherManagementControl();
+               //      GridMain.Children.Clear();
+               //      GridMain.Children.Add(usc);
+               //   }
                //   isAuthorized = true;
                //}
                break;
             case "Category":
-               //if (FeatureAttributeService.isAuthorized(typeof(CategoryManagementControl)))
-               //{
-               //   usc = new CategoryManagementControl();
-               //   GridMain.Children.Clear();
-               //   GridMain.Children.Add(usc);
-               //   isAuthorized = true;
-               //}
+               if (FeatureAttributeService.isAuthorized(typeof(CategoryManagementControl)))
+               {
+                  if (!isShowed(typeof(CategoryManagementControl)))
+                  {
+                     usc = new CategoryManagementControl();
+                     GridMain.Children.Clear();
+                     GridMain.Children.Add(usc);
+                  }
+                  isAuthorized = true;
+               }
                break;
             case "Author":
                //if (FeatureAttributeService.isAuthorized(typeof(AuthorManagementControl)))
                //{
-               //   usc = new AuthorManagementControl();
-               //   GridMain.Children.Clear();
-               //   GridMain.Children.Add(usc);
+               //   if (!isShowed(typeof(AuthorManagementControl)))
+               //   {
+               //      usc = new AuthorManagementControl();
+               //      GridMain.Children.Clear();
+               //      GridMain.Children.Add(usc);
+               //   }
                //   isAuthorized = true;
                //}
                break;
             case "Transaction":
                //if (FeatureAttributeService.isAuthorized(typeof(TransactionManagementControl)))
                //{
-               //   usc = new TransactionManagementControl();
-               //   GridMain.Children.Clear();
-               //   GridMain.Children.Add(usc);
+               //   if (!isShowed(typeof(TransactionManagementControl)))
+               //   {
+               //      usc = new CustomerManagementControl();
+               //      GridMain.Children.Clear();
+               //      GridMain.Children.Add(usc);
+               //   }
                //   isAuthorized = true;
                //}
                break;

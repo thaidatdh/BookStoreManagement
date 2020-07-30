@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -209,6 +210,47 @@ namespace BookStoreManagement.UI
          await InitializeComponentComboBox();
          if (!mode.Equals(FormMode.New))
             await InitializeComponentValue(BookDto);
+      }
+
+      private void btnBrowse_Click(object sender, RoutedEventArgs e)
+      {
+         MessageBox.Show("This button not yet implemented!");
+      }
+
+      private void txtPage_TextChanged(object sender, TextChangedEventArgs e)
+      {
+         if (String.IsNullOrEmpty(txtPage.Text.Trim()))
+            return;
+         if (Regex.IsMatch(txtPage.Text,"[^0-9]"))
+         {
+            string value = txtPage.Text;
+            txtPage.Text = Regex.Replace(value, "[^0-9]", "");
+         }
+      }
+
+      private void txtRemain_TextChanged(object sender, TextChangedEventArgs e)
+      {
+         if (String.IsNullOrEmpty(txtRemain.Text.Trim()))
+            return;
+         if (Regex.IsMatch(txtRemain.Text, "[^0-9]"))
+         {
+            string value = txtRemain.Text;
+            txtRemain.Text = Regex.Replace(value, "[^0-9]", "");
+         }
+      }
+
+      private void txtPrice_TextChanged(object sender, TextChangedEventArgs e)
+      {
+         if (String.IsNullOrEmpty(txtPrice.Text.Trim()))
+            return;
+         string value = txtPrice.Text;
+         if (Regex.IsMatch(txtPrice.Text, "[^0-9,.]"))
+         {
+            value = Regex.Replace(value, "[^0-9,.]", "");
+         }
+         txtPrice.Text = FormatUtils.FormatMoney(value, true).ToString();
+         txtPrice.SelectionStart = txtPrice.Text.Length;
+         txtPrice.SelectionLength = 0;
       }
    }
 }

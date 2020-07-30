@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,7 +46,7 @@ namespace BookStoreManagement.UI
       public BookManagementControl()
       {
          InitializeComponent();
-         cbType.ItemsSource = new List<string> { "Name", "Author", "Publisher", "Published Date", "ID", "Barcode", "Category" };
+         cbType.ItemsSource = new List<string> { "Name", "Author", "Publisher", "Published Date", "ID", "Barcode", "Category", "Format", "Size", "Page", "Remaining" };
          cbType.SelectedIndex = 0;
       }
       private async void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -86,7 +87,7 @@ namespace BookStoreManagement.UI
                break;
             case "PUBLISHEDDATE":
                temp = FormatUtils.FormatDate(value);
-               allShowedBooks = allBooks.Where(n => (String.IsNullOrEmpty(temp) ? false : n.PublishedDate.ToUpper().Contains(temp)) || n.PublishedDate.ToUpper().Contains(value)).ToList();
+               allShowedBooks = allBooks.Where(n => (String.IsNullOrEmpty(temp) ? false : n.PublishedDate.ToUpper().Contains(temp)) || n.PublishedDate.ToUpper().Contains(value.ToKey())).ToList();
                break;
             case "ID":
                allShowedBooks = allBooks.Where(n => n.BookId.ToString().ToUpper().Contains(value)).ToList();
@@ -96,6 +97,21 @@ namespace BookStoreManagement.UI
                break;
             case "CATEGORY":
                allShowedBooks = allBooks.Where(n => n.ListCategoryDto.Select(a => a.Value1).Where(a => a.ToUpper().Contains(value)).Any()).ToList();
+               break;
+            case "FORMAT":
+               allShowedBooks = allBooks.Where(n => n.Format.ToUpper().Contains(value)).ToList();
+               break;
+            case "PAGE":
+               allShowedBooks = allBooks.Where(n => n.Page.ToUpper().Contains(value)).ToList();
+               break;
+            case "SIZE":
+               allShowedBooks = allBooks.Where(n => n.Size.ToUpper().Contains(value)).ToList();
+               break;
+            case "REMAINING":
+               if (!Regex.IsMatch(value, "[^0-9]"))
+               {
+                  allShowedBooks = allBooks.Where(n => n.Remaining == value.ToInt32()).ToList();
+               }
                break;
          }
          
@@ -111,6 +127,7 @@ namespace BookStoreManagement.UI
             return;
          }
          //Code Here if authorized
+         MessageBox.Show("This feature not yet implemented!");
       }
 
       private void btnView_Click(object sender, RoutedEventArgs e)

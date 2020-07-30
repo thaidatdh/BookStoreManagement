@@ -89,6 +89,9 @@
     <Compile Include="UI\BookManagementControl.xaml.cs">
       <DependentUpon>BookManagementControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\CategoryManagementControl.xaml.cs">
+      <DependentUpon>CategoryManagementControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\BookManagementControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\CategoryManagementControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

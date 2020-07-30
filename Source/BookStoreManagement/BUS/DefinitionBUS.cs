@@ -21,6 +21,34 @@ namespace BookStoreManagement.BUS
          }
          return ListCategories;
       }
+      public static int InsertCategory(string categoryName)
+      {
+         DefinitionDto dto = new DefinitionDto();
+         dto.DefinitionType = CONST.DEFINITION.DEFINITION_TYPE_CATEGORY;
+         dto.Value1 = categoryName;
+         int id = DefinitionDao.Insert(dto);
+         dto.DefinitionId = id;
+         ListCategories.Add(dto);
+         return id;
+      }
+      public static bool UpdateCategory(DefinitionDto dto)
+      {
+         DefinitionDto oldDto = ListCategories.FirstOrDefault(n => n.DefinitionId == dto.DefinitionId);
+         bool result = DefinitionDao.Update(dto);
+         if (result)
+         {
+            if (oldDto != null)
+               ListCategories.Remove(oldDto);
+            ListCategories.Add(dto);
+            ListCategories.OrderBy(n => n.DefinitionId);
+         }
+         return result;
+      }
+      public static void DeleteCategory(DefinitionDto dto)
+      {
+         if (dto != null)
+            ListCategories.Remove(dto);
+      }
       public static String GetListCategoryId(String categoryName)
       {
          List<string> CategoryNameList = categoryName.Split(new char[] { ',' }).Select(n => n.ToKey()).ToList();

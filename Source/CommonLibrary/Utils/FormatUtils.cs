@@ -27,9 +27,21 @@ namespace CommonLibrary
       {
          return value.ToString("#,###");
       }
+      public static object FormatMoney(string value, bool toString = false)
+      {
+         long moneyLong = FormatMoney(value);
+         if (!toString)
+         {
+            return moneyLong;
+         }
+         else
+         {
+            return FormatMoney(moneyLong);
+         }
+      }
       public static long FormatMoney(string value)
       {
-         return TypesUtils.Parse.ToInt64(value.ToNotNullString().Replace(",","").Trim());
+         return TypesUtils.Parse.ToInt64(Regex.Replace(value, "[^0-9]",""));
       }
       private static String trimCharacter(String input)
       {
