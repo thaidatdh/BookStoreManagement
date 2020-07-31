@@ -8,7 +8,7 @@ using DatabaseCommon.Services;
 
 namespace DatabaseCommon.DTO
 {
-   [Table("TRANSACTION")]
+   [Table("TRANSACTION_DETAIL")]
    public class TransactionDetailDto
    {
       public TransactionDetailDto() { }

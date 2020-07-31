@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="708" d:DesignWidth="1080">
-   <Grid Background="White" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+   <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
       <Grid Height="500" Width="350" >
          <Rectangle Width="280" Height="300" VerticalAlignment="Center" Margin="0,0" RadiusY="10" RadiusX="10" Fill="White">
             <Rectangle.Effect>

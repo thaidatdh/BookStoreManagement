@@ -20,7 +20,7 @@ namespace CommonLibrary
          }
          catch
          {
-            return "";
+            return Regex.Replace(date, "[^0-9]","");
          }
       }
       public static string FormatMoney(long value)

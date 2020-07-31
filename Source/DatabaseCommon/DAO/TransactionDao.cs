@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseCommon.DAO
 {
-   class TransactionDao : GenericDao<TransactionDto>
+   public class TransactionDao : GenericDao<TransactionDto>
    {
       public static List<TransactionDto> GetAll()
       {
@@ -25,6 +25,36 @@ namespace DatabaseCommon.DAO
             }
          }
          return TransactionId;
+      }
+      public static int Update(TransactionDto dto)
+      {
+         if (dto.TransactionId == 0)
+         {
+            return Insert(dto);
+         }
+         DatabaseUtils.UpdateEntity<TransactionDto>(dto, true);
+         if (dto.TransactionDetails == null || dto.TransactionDetails.Count == 0)
+         {
+            TransactionDetailDao.DeleteAllTransactionDetail(dto.TransactionId);
+         }
+         if (dto.TransactionDetails != null && dto.TransactionDetails.Count > 0)
+         {
+            List<TransactionDetailDto> oldDetailList = TransactionDetailDao.Where(n => n.TransactionId == dto.TransactionId).ToList();
+            foreach (TransactionDetailDto old in oldDetailList)
+            {
+               TransactionDetailDto newDto = dto.TransactionDetails.FirstOrDefault(n => n.TransactionDetailId == old.TransactionDetailId);
+               if (newDto == null)
+                  TransactionDetailDao.Delete(old);
+               else
+                  TransactionDetailDao.Update(newDto);
+            }
+            foreach (TransactionDetailDto detailDto in dto.TransactionDetails.Where(n => n.TransactionDetailId == 0))
+            {
+               detailDto.TransactionId = dto.TransactionId;
+               int id = DatabaseUtils.InsertEntity<TransactionDetailDto>(detailDto);
+            }
+         }
+         return dto.TransactionId;
       }
       public static TransactionDto GetById(int Id)
       {
