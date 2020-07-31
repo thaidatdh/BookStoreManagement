@@ -33,7 +33,7 @@ CREATE TABLE customer (
 	credit_card NVARCHAR(MAX),
 	momo NVARCHAR(MAX),
 	bank_number NVARCHAR(MAX),
-	bank_name NVARCHAR(MAX)
+	bank_name NVARCHAR(MAX),
 	point INT DEFAULT 0
 );
 
