@@ -14,7 +14,7 @@ namespace DatabaseCommon.DTO
       public TransactionDetailDto() { }
       public TransactionDetailDto(Object data)
       {
-         DTOService.PassValueByAttribute<UserDto>(data, this);
+         DTOService.PassValueByAttribute<TransactionDetailDto>(data, this);
       }
       [DTO(Column = "TRANSACTION_DETAIL_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int TransactionDetailId { get; set; }

@@ -1,4 +1,5 @@
-﻿using DatabaseCommon.DTO;
+﻿using CommonLibrary.Utils;
+using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace DatabaseCommon.DAO
 {
    public class PublisherDao : GenericDao<PublisherDto>
    {
+      private static Dictionary<int, PublisherDto> PublisherIdMap = new Dictionary<int, PublisherDto>();
       public static List<PublisherDto> GetAll()
       {
          return DatabaseUtils.GetEntityList<PublisherDto>();
@@ -23,7 +25,17 @@ namespace DatabaseCommon.DAO
       }
       public static PublisherDto GetById(int Id)
       {
-         return DatabaseUtils.GetEntity<PublisherDto>(Id);
+         if (PublisherIdMap.ContainsKey(Id))
+         {
+            return PublisherIdMap.GetValue(Id);
+         }
+         PublisherDto dto = DatabaseUtils.GetEntity<PublisherDto>(Id);
+         PublisherIdMap[Id] = dto;
+         return dto;
+      }
+      public static bool Delete(int Id)
+      {
+         return DatabaseUtils.ExecuteQuery("UPDATE PUBLISHER SET IS_DELETED = 1 WHERE PUBLISHER_ID=" + Id) > 0;
       }
    }
 }

@@ -14,7 +14,7 @@ namespace DatabaseCommon.DTO
       public DiscountDto() : base() { }
       public DiscountDto(Object data) : base(data)
       {
-         DTOService.PassValueByAttribute<UserDto>(data, this);
+         DTOService.PassValueByAttribute<DiscountDto>(data, this);
       }
       [DTO(Column = "DISCOUNT_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int DiscountId { get; set; }

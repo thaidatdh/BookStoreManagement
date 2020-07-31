@@ -24,5 +24,9 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.UpdateEntity<UserDto>(dto, true) > 0 && DatabaseUtils.UpdateEntity<CustomerDto>(dto) > 0;
       }
+      public static bool Delete(int Id)
+      {
+         return DatabaseUtils.ExecuteQuery("UPDATE CUSTOMER SET IS_DELETED = 1 WHERE CUSTOMER_ID=" + Id) > 0;
+      }
    }
 }

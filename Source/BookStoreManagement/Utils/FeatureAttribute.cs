@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStoreManagement.Utils
 {
-   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+   [AttributeUsage(AttributeTargets.Class| AttributeTargets.Method, AllowMultiple = true)]
    public class FeatureAttribute : Attribute
    {
       public string Name { get; set; }

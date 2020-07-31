@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using CommonLibrary.Utils;
 using DatabaseCommon.Const;
+using DatabaseCommon.DAO;
 using DatabaseCommon.Services;
 
 namespace DatabaseCommon.DTO
@@ -15,7 +17,7 @@ namespace DatabaseCommon.DTO
       public BookDto() : base() { }
       public BookDto(Object data) : base(data)
       {
-         DTOService.PassValueByAttribute<UserDto>(data, this);
+         DTOService.PassValueByAttribute<BookDto>(data, this);
       }
       [DTO(Column = "BOOK_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int BookId { get; set; }
@@ -34,7 +36,7 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "PRICE", DataType = DATATYPE.BIGINT)]
       public long Price { get; set; }
       [DTO(Column = "REMAINING", DataType = DATATYPE.INTEGER)]
-      public string Remaining { get; set; }
+      public int Remaining { get; set; }
       [DTO(Column = "LOCATION", DataType = DATATYPE.STRING)]
       public string Location { get; set; }
       [DTO(Column = "PHOTO_LINK", DataType = DATATYPE.STRING, DefaultValue = CONST.BOOK.DEFAULT_PHOTO_LINK)]
@@ -49,6 +51,90 @@ namespace DatabaseCommon.DTO
       public string PublishedDate { get; set; }
       [DTO(Column = "PROVIDER_ID", DataType = DATATYPE.INTEGER)]
       public int ProviderId { get; set; }
+      [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
+      public bool IsDeleted { get; set; }
+
+      //Get Dto methods
+
+      public ProviderDto ProviderDto {
+         get
+         {
+            if (ProviderId > 0)
+            {
+               return ProviderDao.GetById(ProviderId);
+            }
+            else
+            {
+               return null;
+            }
+         }
+      }
+      public PublisherDto PublisherDto
+      {
+         get
+         {
+            if (PublisherId > 0)
+            {
+               return PublisherDao.GetById(PublisherId);
+            }
+            else
+            {
+               return null;
+            }
+         }
+      }
+
+      private List<int> _listAuthorId { get; set; }
+      public List<int> ListAuthorId
+      {
+         get
+         {
+            if (_listAuthorId == null)
+            {
+               _listAuthorId = AuthorId.Split(new char[] { ',' }).Where(n => !String.IsNullOrEmpty(n.Trim())).Select(n => TypesUtils.Parse.ToInt32(n.Trim())).Distinct().ToList();
+            }
+            AuthorId = String.Join(",", _listAuthorId.Distinct());
+            return _listAuthorId;
+         }
+         set
+         {
+            _listAuthorId = value;
+            AuthorId = String.Join(",", _listAuthorId.Distinct());
+         }
+      }
+      public List<AuthorDto> ListAuthorDto
+      {
+         get
+         {
+            return ListAuthorId.Select(n => AuthorDao.GetById(n)).ToList();
+         }
+      }
+      private List<int> _listCategoryId { get; set; }
+      public List<int> ListCategoryId
+      {
+         get
+         {
+            if (_listCategoryId == null)
+            {
+               _listCategoryId = CategoryId.Split(new char[] { ',' }).Where(n => !String.IsNullOrEmpty(n.Trim())).Select(n => TypesUtils.Parse.ToInt32(n.Trim())).Distinct().ToList();
+            }
+            CategoryId = String.Join(",", _listCategoryId.Distinct());
+            return _listCategoryId;
+         }
+         set
+         {
+            _listCategoryId = value;
+            CategoryId = String.Join(",", _listCategoryId.Distinct());
+         }
+      }
+      public List<DefinitionDto> ListCategoryDto
+      {
+         get
+         {
+            return ListCategoryId.Select(n => DefinitionDao.GetById(n)).ToList();
+         }
+      }
+
    }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonLibrary.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,26 @@ namespace CommonLibrary
          {
             return "";
          }
+      }
+      public static string FormatMoney(long value)
+      {
+         return value.ToString("#,###");
+      }
+      public static object FormatMoney(string value, bool toString = false)
+      {
+         long moneyLong = FormatMoney(value);
+         if (!toString)
+         {
+            return moneyLong;
+         }
+         else
+         {
+            return FormatMoney(moneyLong);
+         }
+      }
+      public static long FormatMoney(string value)
+      {
+         return TypesUtils.Parse.ToInt64(Regex.Replace(value, "[^0-9]",""));
       }
       private static String trimCharacter(String input)
       {
@@ -87,7 +108,7 @@ namespace CommonLibrary
       {
          return date.ToString("yyyyMMdd");
       }
-      public static DateTime ParseDate(string formatedDate)
+      public static DateTime? ParseDate(string formatedDate)
       {
          try
          {
@@ -95,7 +116,7 @@ namespace CommonLibrary
          }
          catch
          {
-            return DateTime.MinValue;
+            return null;
          }
       }
    }

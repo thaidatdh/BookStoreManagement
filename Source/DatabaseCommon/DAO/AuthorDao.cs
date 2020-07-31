@@ -1,4 +1,5 @@
-﻿using DatabaseCommon.DTO;
+﻿using CommonLibrary.Utils;
+using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace DatabaseCommon.DAO
 {
    public class AuthorDao : GenericDao<AuthorDto>
    {
+      private static Dictionary<int, AuthorDto> AuthorIdMap = new Dictionary<int, AuthorDto>();
       public static List<AuthorDto> GetAll()
       {
          return DatabaseUtils.GetEntityList<AuthorDto>();
@@ -23,7 +25,17 @@ namespace DatabaseCommon.DAO
       }
       public static AuthorDto GetById(int Id)
       {
-         return DatabaseUtils.GetEntity<AuthorDto>(Id);
+         if (AuthorIdMap.ContainsKey(Id))
+         {
+            return AuthorIdMap.GetValue(Id);
+         }
+         AuthorDto dto = DatabaseUtils.GetEntity<AuthorDto>(Id);
+         AuthorIdMap[Id] = dto;
+         return dto;
+      }
+      public static bool Delete(int Id)
+      {
+         return DatabaseUtils.ExecuteQuery("UPDATE AUTHOR SET IS_DELETED = 1 WHERE AUTHOR_ID=" + Id) > 0;
       }
    }
 }

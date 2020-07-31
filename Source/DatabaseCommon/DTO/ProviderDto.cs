@@ -14,10 +14,10 @@ namespace DatabaseCommon.DTO
       public ProviderDto() : base() { }
       public ProviderDto(Object data) : base(data)
       {
-         DTOService.PassValueByAttribute<UserDto>(data, this);
+         DTOService.PassValueByAttribute<ProviderDto>(data, this);
       }
       [DTO(Column = "PROVIDER_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
-      public int AuthorId { get; set; }
+      public int ProviderId { get; set; }
       [DTO(Column = "NAME", DataType = DATATYPE.STRING)]
       public string Name { get; set; }
       [DTO(Column = "ADDRESS", DataType = DATATYPE.STRING)]
@@ -28,7 +28,7 @@ namespace DatabaseCommon.DTO
       public string Email { get; set; }
       [DTO(Column = "NOTE", DataType = DATATYPE.STRING)]
       public string Note { get; set; }
-	  [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
+	   [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
       public bool IsDeleted { get; set; }  
    }
 }

@@ -14,6 +14,7 @@ namespace DatabaseCommon
 {
    public class DatabaseUtils
    {
+      public static int CurrentUserId { get; set; }
       public class Entity
       {
          public string TableName { get; set; }
@@ -66,6 +67,7 @@ namespace DatabaseCommon
          DataTable result = new DataTable(TableName);
          dataAdapter.Fill(result);
          dataAdapter.Dispose();
+         command.Dispose();
          return result;
       }
       public static int ExecuteQuery(string sql)
@@ -131,7 +133,7 @@ namespace DatabaseCommon
       public static T GetEntity<T>(int id)
       {
          string tableName = GetTableName<T>();
-         string PrimaryKey = GetEntityProperties<T>(tableName).PrimaryKeyPropertyName;
+         string PrimaryKey = GetEntityProperties<T>(tableName).PrimaryKeyAttribute.Column;
          string sql = "SELECT * FROM " + tableName + " where " + PrimaryKey + " = " + id;
          if (String.IsNullOrEmpty(PrimaryKey)) sql = "SELECT * FROM " + tableName;
          Object data = DatabaseUtils.ExcuteSelectQuery(sql);
@@ -144,6 +146,20 @@ namespace DatabaseCommon
             }
          }
          return default(T);
+      }
+      public static string GetTableName(Type type)
+      {
+         string str = type.Name;
+         if (type.IsDefined(typeof(TableAttribute), true))
+            str = ((TableAttribute[])type.GetCustomAttributes(typeof(TableAttribute), true))[0].Name;
+         return str;
+      }
+      internal static string GetInheritanceColumn(Type type)
+      {
+         string str = type.Name;
+         if (type.IsDefined(typeof(TableAttribute), true))
+            str = ((TableAttribute[])type.GetCustomAttributes(typeof(TableAttribute), true))[0].InheritanceColumn;
+         return str;
       }
       public static int UpdateEntity<T>(T dto, bool includeParentAttribute = false)
       {
@@ -179,7 +195,7 @@ namespace DatabaseCommon
       }
       public static void InitDTOProperties()
       {
-         DTOProperties = Assembly.GetExecutingAssembly().GetTypes().Where(n => n.IsClass && n.Namespace == "DatabaseCommon.DTO").ToDictionary(k => k, v => v.GetProperties(System.Reflection.BindingFlags.Public
+         DTOProperties = Assembly.GetExecutingAssembly().GetTypes().Where(n => n.IsClass && n.Namespace == "DatabaseCommon.DTO").ToDictionary(k => k, v => v.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic
              | System.Reflection.BindingFlags.Instance
              | System.Reflection.BindingFlags.DeclaredOnly).ToList());
       }
@@ -196,6 +212,79 @@ namespace DatabaseCommon
             InitDTOProperties();
 
          list = DTOProperties[type];
+      }
+      public static List<S> GetPropertyValueList<S>(string sql, List<string> valueNames)
+      {
+         List<S> result = new List<S>();
+
+         var constructorParameters = typeof(S).GetConstructors().Count() != 0 ? typeof(S).GetConstructors()[0].GetParameters() : null;
+
+         Object data = DatabaseUtils.ExcuteSelectQuery(sql);
+         if (data != null)
+         {
+            DataTable dt = (DataTable)data;
+
+            bool dynamicType = typeof(S).Name.Contains("AnonymousType");
+
+            foreach (DataRow dr in dt.Rows)
+            {
+               if (dynamicType)
+               {
+                  var rowValue = new List<object>();
+                  for (Int32 i = 0; i < dt.Columns.Count; i++)
+                  {
+                     var value = dr[i];
+                     if (value is DBNull)
+                        value = GetDefaultGeneric(dt.Columns[i].DataType);
+
+                     rowValue.Add(value);
+                  }
+
+                  var dfsdf = ParseAnomynousSourceFormat(rowValue, constructorParameters);
+                  result.Add((S)Activator.CreateInstance(typeof(S), ParseAnomynousSourceFormat(rowValue, constructorParameters)));
+               }
+               else
+               {
+                  for (Int32 i = 0; i < dt.Columns.Count; i++)
+                  {
+                     var value = dr[i];
+                     if (value is DBNull)
+                        value = GetDefaultGeneric(dt.Columns[i].DataType);
+
+                     if (typeof(S) == typeof(int))
+                        result.Add((S)((object)value.ToInt32()));
+                     else if (typeof(S) == typeof(long))
+                        result.Add((S)((object)value.ToInt64()));
+                     else result.Add((S)value);
+                  }
+               }
+            }
+         }
+         return result;
+      }
+      public static T GetDefaultGeneric<T>(T input) => default(T);
+      private static object[] ParseAnomynousSourceFormat(List<object> listSources, ParameterInfo[] constructorParameters)
+      {
+         for (int i = 0; i < listSources.Count; i++)
+         {
+            var parameter = constructorParameters[i];
+
+            var objectValue = listSources[i];
+
+            //if (listSources[i] is DBNull)
+            //   listSources[i] = GetDefaultGeneric(parameter);
+            if (parameter.ParameterType == typeof(int))
+               listSources[i] = listSources[i].ToInt32();
+            else if (parameter.ParameterType == typeof(long))
+               listSources[i] = listSources[i].ToInt64();
+            else if (parameter.ParameterType == typeof(double))
+               listSources[i] = listSources[i].ToDouble();
+
+            if (objectValue is DateTime)
+               listSources[i] = listSources[i].ToString();
+         }
+
+         return listSources.ToArray();
       }
       public static DTOAttribute GetCustomAttribute<T>(string propertyName)
       {
@@ -218,6 +307,47 @@ namespace DatabaseCommon
 
          return null;
       }
+      public static DTOAttribute GetCustomAttribute(Type type, string propertyName, bool isFollowChangeset = false)
+      {
+         PropertyInfo propertyInfo = type.GetProperty(propertyName);
+         Object[] attribute = propertyInfo.GetCustomAttributes(typeof(DTOAttribute), true);
+
+         if (attribute.Length > 0)
+         {
+            if (attribute.Length == 1)
+            {
+               DTOAttribute myAttribute = (DTOAttribute)attribute[0];
+               myAttribute.PropertyInfo = propertyInfo;
+               return myAttribute;
+            }
+            else
+            {
+               List<DTOAttribute> list = attribute.Select(x => (DTOAttribute)x).ToList();
+               foreach (DTOAttribute attr in list)
+               {
+                  if (attr != null)
+                  {
+                     attr.PropertyInfo = propertyInfo;
+                     return attr;
+                  }
+               }
+            }
+         }
+         return null;
+      }
+      public static object GetPropertyValue(string sql, string property_name)
+      {
+         Object data = DatabaseUtils.ExcuteSelectQuery(sql);
+         if (data != null)
+         {
+            DataTable dt = (DataTable)data;
+            foreach (DataRow dr in dt.Rows)
+            {
+               return dr[property_name];
+            }
+         }
+         return null;
+      }
       private static Entity GetEntityProperties<T>(string tableName)
       {
          Entity result = new Entity();
@@ -234,6 +364,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in m_propertyInfos)
             {
                DTOAttribute attr = GetCustomAttribute<T>(info.Name);
+               if (attr == null) continue;
                result.AttributeDictionary[info.Name] = attr;
                if (attr.isPrimaryKey && result.PrimaryKeyAttribute == null)
                {
@@ -269,6 +400,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in m_propertyInfos)
             {
                DTOAttribute attr = GetCustomAttribute<T>(info.Name);
+               if (attr == null) continue;
                result.AttributeDictionary[info.Name] = attr;
                if (attr.isPrimaryKey && result.PrimaryKeyAttribute == null)
                {
@@ -379,7 +511,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in entity.Properties)
             {
                DTOAttribute attr = entity.AttributeDictionary.GetValue(info.Name);
-               if (attr.isPrimaryKey || attr.Column.Equals("CREATE_DATE")) continue;
+               if (attr == null || attr.isPrimaryKey || attr.Column.Equals("CREATE_DATE")) continue;
                if (!String.IsNullOrEmpty(columns))
                   columns += ", ";
 
@@ -477,59 +609,66 @@ namespace DatabaseCommon
             string propertyName = entry.Key.ToString();
             object value = typeof(T).GetProperty(propertyName).GetValue(dto, (object[])null);
             DTOAttribute attribute = entity.AttributeDictionary.GetValue(propertyName);
+            var valueType = attribute.DataType;
+            var defaultValue = attribute.DefaultValue;
+            string paraName = entry.Value.ToString();
 
-            if (attribute.Column.Equals("CREATE_DATE"))
+            if (attribute.Column.Equals("CREATE_DATE") && value.Equals(default(DateTime)))
             {
-               command.Parameters.Add(entry.Value.ToString(), SqlDbType.NVarChar).Value = DateTime.Now;
+               command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = DateTime.Now;
                continue;
             }
 
             if (attribute.Column.Equals("UPDATED_DATE"))
             {
-               command.Parameters.Add(entry.Value.ToString(), SqlDbType.NVarChar).Value = DateTime.Now;
+               command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = DateTime.Now;
                continue;
             }
-            //--------------------------------------------------
 
-            var valueType = attribute.DataType;
-            var defaultValue = attribute.DefaultValue;
-
-            string paraName = entry.Value.ToString();
-            SqlCommand cmd = (SqlCommand)command;
+            if (attribute.Column.Equals("CREATED_BY") && value.ToInt32() == 0)
+            {
+               command.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(CurrentUserId, valueType, defaultValue).ToInt32();
+               continue;
+            }
+            if (attribute.Column.Equals("UPDATED_BY"))
+            {
+               command.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(CurrentUserId, valueType, defaultValue).ToInt32();
+               continue;
+            }
             switch (valueType)
             {
                case DATATYPE.STRING:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
+                     command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
                      break;
                   }
                case DATATYPE.INTEGER:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
+                     command.Parameters.Add(paraName, SqlDbType.Int).Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
                      break;
                   }
                case DATATYPE.BIGINT:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.BigInt).Value = (long)ParseDataSQL(value, valueType, defaultValue);
+                     command.Parameters.Add(paraName, SqlDbType.BigInt).Value = (long)ParseDataSQL(value, valueType, defaultValue);
                      break;
                   }
                case DATATYPE.GENERATED_ID:
                   {
                      int Value = ParseDataSQL(value, valueType, defaultValue).ToInt32();
                      if (Value != 0)
-                        cmd.Parameters.Add(paraName, SqlDbType.Int).Value = Value;
+                        command.Parameters.Add(paraName, SqlDbType.Int).Value = Value;
                      else
-                        cmd.Parameters.Add(paraName, SqlDbType.Int).Value = null;
+                        command.Parameters.Add(paraName, SqlDbType.Int).Value = null;
                      break;
                   }
                case DATATYPE.BOOLEAN:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.Bit).Value = ParseDataSQL(value, valueType, defaultValue).ToBoolean();
+                     command.Parameters.Add(paraName, SqlDbType.Bit).Value = ParseDataSQL(value, valueType, defaultValue).ToBoolean();
                      break;
                   }
                case DATATYPE.TIMESTAMP:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.Timestamp).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
+                     command.Parameters.Add(paraName, SqlDbType.Timestamp).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
 
                      break;
                   }
@@ -537,16 +676,16 @@ namespace DatabaseCommon
                   {
                      int digit = 2;
                      string key = attribute.Column.ToUpper();
-                     cmd.Parameters.Add(paraName, SqlDbType.Float).Value = ParseDataSQL(value, valueType, defaultValue).ToDouble(digit);
+                     command.Parameters.Add(paraName, SqlDbType.Float).Value = ParseDataSQL(value, valueType, defaultValue).ToDouble(digit);
                      break;
                   }
                case DATATYPE.DATE:
                   {
-                     cmd.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
+                     command.Parameters.Add(paraName, SqlDbType.NVarChar).Value = ParseDataSQL(value, valueType, defaultValue).ToString();
                      break;
                   }
                default:
-                  cmd.Parameters.Add(paraName, SqlDbType.Int).Value = null;
+                  command.Parameters.Add(paraName, SqlDbType.Int).Value = null;
                   break;
             }
          }

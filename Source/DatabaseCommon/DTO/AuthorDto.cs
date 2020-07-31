@@ -14,7 +14,7 @@ namespace DatabaseCommon.DTO
       public AuthorDto() : base() { }
       public AuthorDto(Object data) : base(data)
       {
-         DTOService.PassValueByAttribute<UserDto>(data, this);
+         DTOService.PassValueByAttribute<AuthorDto>(data, this);
       }
       [DTO(Column = "AUTHOR_ID", DataType = DATATYPE.GENERATED_ID, isPrimaryKey = true)]
       public int AuthorId { get; set; }
@@ -22,7 +22,7 @@ namespace DatabaseCommon.DTO
       public string Name { get; set; }
       [DTO(Column = "NOTE", DataType = DATATYPE.STRING)]
       public string Note { get; set; }
-	  [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
+	   [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
       public bool IsDeleted { get; set; }  
    }
 }
