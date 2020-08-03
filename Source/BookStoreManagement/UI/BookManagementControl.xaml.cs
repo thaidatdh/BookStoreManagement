@@ -151,15 +151,6 @@ namespace BookStoreManagement.UI
             return;
          }
          //Code Here if authorized
-         if (tableBooks.SelectedItem == null)
-         {
-            MessageBox.Show("Please select a book in table to continue!");
-            return;
-         }
-         BookDto selectedItem = (BookDto)tableBooks.SelectedItem;
-         if (selectedItem == null)
-            return;
-         //Code here
          MainWindow.AddSubChild(new BookInfoControl());
       }
 
