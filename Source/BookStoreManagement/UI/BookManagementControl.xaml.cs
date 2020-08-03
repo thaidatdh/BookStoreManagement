@@ -30,11 +30,11 @@ namespace BookStoreManagement.UI
    /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
    /// </summary>
    /// 
-   [Feature(Id = 2, Name = "Book Management",   Group = "Book Management")]
-   [Feature(Id = 3, Name = "Import Books",      Group = "Book Management")]
-   [Feature(Id = 4, Name = "Add New Book",      Group = "Book Management")]
-   [Feature(Id = 5, Name = "Edit Book",         Group = "Book Management")]
-   [Feature(Id = 6, Name = "Delete Book",       Group = "Book Management")]
+   [Feature(Id = 2, Name = FeatureNameUtils.Book.MANAGEMENT,   Group = FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT)]
+   [Feature(Id = 3, Name = FeatureNameUtils.Book.IMPORT,      Group = FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT)]
+   [Feature(Id = 4, Name = FeatureNameUtils.Book.NEW,      Group = FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT)]
+   [Feature(Id = 5, Name = FeatureNameUtils.Book.EDIT,         Group = FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT)]
+   [Feature(Id = 6, Name = FeatureNameUtils.Book.DELETE,       Group = FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT)]
    public partial class BookManagementControl : UserControl
    {
       int pageNumber = 1;
@@ -121,7 +121,7 @@ namespace BookStoreManagement.UI
 
       private void btnImport_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Import Books", "Book Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Book.IMPORT, FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;
@@ -145,7 +145,7 @@ namespace BookStoreManagement.UI
       }
       private void btnAdd_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Add New Book", "Book Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Book.NEW, FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;
@@ -165,7 +165,7 @@ namespace BookStoreManagement.UI
 
       private void btnEdit_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Edit Book", "Book Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Book.EDIT, FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;
@@ -185,7 +185,7 @@ namespace BookStoreManagement.UI
       
       private async void btnDelete_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Delete Book", "Book Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Book.DELETE, FeatureNameUtils.FeatureGroup.BOOK_MANAGEMENT))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;

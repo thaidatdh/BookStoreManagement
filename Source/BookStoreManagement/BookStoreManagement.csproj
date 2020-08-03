@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BUS\AuthorBUS.cs" />
+    <Compile Include="BUS\DiscountBUS.cs" />
     <Compile Include="BUS\TransactionBUS.cs" />
     <Compile Include="BUS\BookBUS.cs" />
     <Compile Include="BUS\CustomerBUS.cs" />
@@ -96,6 +97,18 @@
     <Compile Include="UI\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProviderTransactionControl.xaml.cs">
+      <DependentUpon>ProviderTransactionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SaleTransactionControl.xaml.cs">
+      <DependentUpon>SaleTransactionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StaffTransactionControl.xaml.cs">
+      <DependentUpon>StaffTransactionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TransactionDetailEditControl.xaml.cs">
+      <DependentUpon>TransactionDetailEditControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\TransactionManagementControl.xaml.cs">
       <DependentUpon>TransactionManagementControl.xaml</DependentUpon>
     </Compile>
@@ -106,6 +119,7 @@
     <Compile Include="Utils\CustomType.cs" />
     <Compile Include="Utils\FeatureAttribute.cs" />
     <Compile Include="BUS\FeatureAttributeService.cs" />
+    <Compile Include="Utils\FeatureNameUtils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,6 +145,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProviderTransactionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SaleTransactionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\StaffTransactionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\TransactionDetailEditControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

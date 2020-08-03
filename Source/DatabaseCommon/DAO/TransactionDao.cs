@@ -21,7 +21,8 @@ namespace DatabaseCommon.DAO
             foreach (TransactionDetailDto detailDto in dto.TransactionDetails)
             {
                detailDto.TransactionId = TransactionId;
-               DatabaseUtils.InsertEntity<TransactionDetailDto>(detailDto);
+               int detailId = DatabaseUtils.InsertEntity<TransactionDetailDto>(detailDto);
+               detailDto.TransactionDetailId = detailId;
             }
          }
          return TransactionId;
@@ -44,14 +45,19 @@ namespace DatabaseCommon.DAO
             {
                TransactionDetailDto newDto = dto.TransactionDetails.FirstOrDefault(n => n.TransactionDetailId == old.TransactionDetailId);
                if (newDto == null)
+               {
                   TransactionDetailDao.Delete(old);
+               }
                else
+               {
                   TransactionDetailDao.Update(newDto);
+               }
             }
             foreach (TransactionDetailDto detailDto in dto.TransactionDetails.Where(n => n.TransactionDetailId == 0))
             {
                detailDto.TransactionId = dto.TransactionId;
                int id = DatabaseUtils.InsertEntity<TransactionDetailDto>(detailDto);
+               detailDto.TransactionDetailId = id;
             }
          }
          return dto.TransactionId;

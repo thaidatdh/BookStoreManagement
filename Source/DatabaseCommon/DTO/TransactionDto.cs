@@ -9,7 +9,7 @@ using DatabaseCommon.Services;
 
 namespace DatabaseCommon.DTO
 {
-   [Table("TRANSACTION")]
+   [Table("TRANSACTIONS")]
    public class TransactionDto : ChangeInformation
    {
       public TransactionDto() : base() { }
@@ -43,10 +43,12 @@ namespace DatabaseCommon.DTO
             if (listDetail == null && TransactionId != default(int))
             {
                listDetail = TransactionDetailDao.GetByTransaction(TransactionId); //Get transaction detail
-               return listDetail;
             }
-            else
-               return listDetail;
+            if (listDetail == null || TransactionId == default(int))
+            {
+               listDetail = new List<TransactionDetailDto>();
+            }
+            return listDetail;
          }
          set
          {

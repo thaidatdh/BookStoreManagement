@@ -106,13 +106,31 @@ namespace CommonLibrary
       }
       public static string FormatDate(DateTime date)
       {
-         return date.ToString("yyyyMMdd");
+         try
+         {
+            return date.ToString("yyyyMMdd");
+         }
+         catch
+         {
+            return "";
+         }
       }
       public static DateTime? ParseDate(string formatedDate)
       {
          try
          {
             return DateTime.ParseExact(formatedDate, "yyyyMMdd", null);
+         }
+         catch
+         {
+            return ToDate(formatedDate);
+         }
+      }
+      public static DateTime? ToDate(string formatedDate)
+      {
+         try
+         {
+            return DateTime.Parse(formatedDate);
          }
          catch
          {

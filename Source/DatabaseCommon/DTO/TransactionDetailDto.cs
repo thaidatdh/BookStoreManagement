@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DatabaseCommon.Const;
+using DatabaseCommon.DAO;
 using DatabaseCommon.Services;
 
 namespace DatabaseCommon.DTO
@@ -30,6 +31,25 @@ namespace DatabaseCommon.DTO
       public long Discount { get; set; }
       [DTO(Column = "DISCOUNT_ID", DataType = DATATYPE.INTEGER)]
       public int DiscountId { get; set; }
+
+      public string BookName
+      {
+         get
+         {
+            if (BookId != 0)
+               return BookDao.Select(n => n.Name).First(n => n.BookId == BookId);
+            return "";
+         }
+      }
+      public string DiscountCode
+      {
+         get
+         {
+            if (DiscountId != 0)
+               return DiscountDao.Select(n => n.Code).First(n => n.DiscountId == DiscountId);
+            return "";
+         }
+      }
    }
 }
 

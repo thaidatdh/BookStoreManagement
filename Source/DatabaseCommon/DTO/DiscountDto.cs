@@ -23,9 +23,9 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "CODE", DataType = DATATYPE.STRING)]
       public string Code { get; set; }
       [DTO(Column = "PERCENTAGE", DataType = DATATYPE.DOUBLE)]
-      public string Percentage { get; set; }
+      public double Percentage { get; set; }
       [DTO(Column = "Amount", DataType = DATATYPE.BIGINT)]
-      public string Amount { get; set; }
+      public long Amount { get; set; }
       [DTO(Column = "TYPE", DataType = DATATYPE.STRING)]
       public string Type { get; set; }
       [DTO(Column = "START_DATE", DataType = DATATYPE.STRING)]

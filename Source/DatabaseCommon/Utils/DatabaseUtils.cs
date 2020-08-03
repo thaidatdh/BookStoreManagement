@@ -564,6 +564,7 @@ namespace DatabaseCommon
             foreach (PropertyInfo info in entity.Properties)
             {
                DTOAttribute attr = entity.AttributeDictionary.GetValue(info.Name);
+               if (attr == null) continue;
                if (attr.isPrimaryKey)
                {
                   if (!insertIncludeID)

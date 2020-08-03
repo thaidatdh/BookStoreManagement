@@ -20,46 +20,6 @@ namespace BookStoreManagement.BUS
          }
          return allTransaction;
       }
-      public static int Insert(Dictionary<String, Object> map)
-      {
-         if (map == null)
-            return 0;
-         try
-         {
-            TransactionDto dto = (TransactionDto)map.GetValue("OBJECT");
-            int id = TransactionDao.Insert(dto);
-            dto.TransactionId = id;
-            allTransaction.Add(dto);
-            return id;
-         }
-         catch (Exception ex)
-         {
-            return 0;
-         }
-      }
-      public static bool Update(Dictionary<String, Object> map)
-      {
-         if (map == null)
-            return false;
-         try
-         {
-            TransactionDto dto = (TransactionDto)map.GetValue("OBJECT");
-            TransactionDto oldDto = allTransaction.FirstOrDefault(n => n.TransactionId == dto.TransactionId);
-            int result = TransactionDao.Update(dto);
-            if (result > 0)
-            {
-               if (oldDto != null)
-                  allTransaction.Remove(oldDto);
-               allTransaction.Add(dto);
-               allTransaction.OrderBy(n => n.TransactionId);
-            }
-            return result > 0;
-         }
-         catch (Exception ex)
-         {
-            return false;
-         }
-      }
       public static int Insert(TransactionDto dto)
       {
          int id = TransactionDao.Insert(dto);
@@ -68,13 +28,20 @@ namespace BookStoreManagement.BUS
          allTransaction.OrderBy(n => n.TransactionId);
          return id;
       }
-      public static bool Delete(TransactionDto dto)
+      public static int Update(TransactionDto dto)
       {
          TransactionDto oldDto = allTransaction.FirstOrDefault(n => n.TransactionId == dto.TransactionId);
          if (oldDto != null)
             allTransaction.Remove(oldDto);
          allTransaction.Add(dto);
          allTransaction.OrderBy(n => n.TransactionId);
+         return TransactionDao.Update(dto);
+      }
+      public static bool Delete(TransactionDto dto)
+      {
+         TransactionDto oldDto = allTransaction.FirstOrDefault(n => n.TransactionId == dto.TransactionId);
+         if (oldDto != null)
+            allTransaction.Remove(oldDto);
          return TransactionDao.Delete(dto.TransactionId);
       }
    }

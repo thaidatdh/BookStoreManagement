@@ -77,7 +77,7 @@ namespace DatabaseCommon.DAO
          var fromLink = GenericDaoHelper.CreateLinkInheritancePart(objectType, predicate.Parameters[0].Name, alphabetExpressionMap);
          var query = GenericDaoHelper.CreateWherePart(predicate.Body, alphabetExpressionMap);
 
-         return DatabaseUtils.GetEntity<T>(String.Format("SELECT * FROM {0} WHERE {1} LIMIT 1", fromLink, query.Replace("\"", "'")));
+         return DatabaseUtils.GetEntity<T>(String.Format("SELECT TOP 1 * FROM {0} WHERE {1}", fromLink, query.Replace("\"", "'")));
       }
 
       public static bool Exist(Expression<Func<T, bool>> predicate)
@@ -95,7 +95,7 @@ namespace DatabaseCommon.DAO
          var fromLink = GenericDaoHelper.CreateLinkInheritancePart(objectType, predicate.Parameters[0].Name, alphabetExpressionMap);
          var query = GenericDaoHelper.CreateWherePart(predicate.Body, alphabetExpressionMap);
 
-         return (long)DatabaseUtils.GetPropertyValue("SELECT EXISTS(SELECT * FROM "+ fromLink + " WHERE "+ query.Replace("\"", "'") + " LIMIT 1) as RESULT", "RESULT") == 1 ? true : false;
+         return (long)DatabaseUtils.GetPropertyValue("SELECT EXISTS(SELECT TOP 1 * FROM "+ fromLink + " WHERE "+ query.Replace("\"", "'") + ") as RESULT", "RESULT") == 1 ? true : false;
       }
    }
    public static class GenericDaoHelper
@@ -358,7 +358,7 @@ namespace DatabaseCommon.DAO
          var fromLink = (!PredicateIgnoreList.Contains(selectPredicate)) ? GenericDaoHelper.CreateLinkInheritancePart(objectType, predicate.Parameters[0].Name, alphabetExpressionMap) : tableName;
          var whereLink = GenericDaoHelper.CreateWherePart(predicate.Body, alphabetExpressionMap);
          string selectLink = GenericDaoHelper.CreateSelectPart(selectPredicate, alphabetExpressionMap, out List<string> valuesName);
-         string query = String.Format("SELECT {0} FROM {1} WHERE {2} LIMIT 1", selectLink, fromLink, whereLink.Replace("\"", "'"));
+         string query = String.Format("SELECT TOP 1 {0} FROM {1} WHERE {2} ", selectLink, fromLink, whereLink.Replace("\"", "'"));
 
          if (PredicateIgnoreList.Contains(selectPredicate))
             PredicateIgnoreList.Remove(selectPredicate);

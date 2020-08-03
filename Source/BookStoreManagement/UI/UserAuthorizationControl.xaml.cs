@@ -26,7 +26,7 @@ namespace BookStoreManagement.UI
    /// Interaction logic for UserAuthorizationControl.xaml
    /// </summary>
    /// 
-   [Feature(Id = 1, Name = "User Authorization", Group = "Authorization")]
+   [Feature(Id = 1, Name = FeatureNameUtils.Authorization.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.AUTHORIZATION)]
    public partial class UserAuthorizationControl : UserControl
    {
       private List<DefinitionDto> ListDto = new List<DefinitionDto>();

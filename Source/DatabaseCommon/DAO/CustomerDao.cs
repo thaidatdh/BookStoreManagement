@@ -13,6 +13,10 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.GetEntityList<CustomerDto>("SELECT C.*, U.* from CUSTOMER C, USERS U WHERE C.USER_ID = U.USER_ID");
       }
+      public static CustomerDto GetById(int id)
+      {
+         return DatabaseUtils.GetEntity<CustomerDto>("SELECT C.*, U.* from CUSTOMER C, USERS U WHERE C.USER_ID = U.USER_ID AND U.USER_ID=" + id);
+      }
       public static int Insert(CustomerDto dto)
       {
          dto.UserType = Const.CONST.USERS.USER_TYPE_CUSTOMER;
