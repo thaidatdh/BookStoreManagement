@@ -224,16 +224,16 @@ namespace BookStoreManagement
                 }
                     break;
             case "Transaction":
-               //if (FeatureAttributeService.isAuthorized(typeof(TransactionManagementControl)))
-               //{
-               //   if (!isShowed(typeof(TransactionManagementControl)))
-               //   {
-               //      usc = new CustomerManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
+               if (FeatureAttributeService.isAuthorized(typeof(TransactionManagementControl)))
+               {
+                  if (!isShowed(typeof(TransactionManagementControl)))
+                  {
+                     usc = new TransactionManagementControl();
+                     GridMain.Children.Clear();
+                     GridMain.Children.Add(usc);
+                  }
+                  isAuthorized = true;
+               }
                break;
             default:
                break;

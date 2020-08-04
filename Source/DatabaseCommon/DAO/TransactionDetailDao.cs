@@ -18,5 +18,13 @@ namespace DatabaseCommon.DAO
       {
          return DatabaseUtils.InsertEntity<TransactionDetailDto>(dto);
       }
+      public static bool Delete(TransactionDetailDto dto)
+      {
+         return DatabaseUtils.DeleteEntity<TransactionDetailDto>(dto.TransactionDetailId) > 0;
+      }
+      public static bool DeleteAllTransactionDetail(long transactionId)
+      {
+         return DatabaseUtils.ExecuteQuery("DELETE FROM TRANSACTION_DETAIL WHERE TRANSACTION_ID=" + transactionId) > 0;
+      }
    }
 }
