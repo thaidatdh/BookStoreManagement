@@ -24,10 +24,10 @@ namespace BookStoreManagement.UI
    /// Interaction logic for CategoryManagementControl.xaml
    /// </summary>
    /// 
-   [Feature(Id = 7,  Name = "Category Management", Group = "Category Management")]
-   [Feature(Id = 8,  Name = "Add New Category",    Group = "Category Management")]
-   [Feature(Id = 9,  Name = "Edit Category",       Group = "Category Management")]
-   [Feature(Id = 10, Name = "Delete Category",     Group = "Category Management")]
+   [Feature(Id = 7, Name = FeatureNameUtils.Category.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.CATEGORY_MANAGEMENT)]
+   [Feature(Id = 8, Name = FeatureNameUtils.Category.NEW, Group = FeatureNameUtils.FeatureGroup.CATEGORY_MANAGEMENT)]
+   [Feature(Id = 9, Name = FeatureNameUtils.Category.EDIT, Group = FeatureNameUtils.FeatureGroup.CATEGORY_MANAGEMENT)]
+   [Feature(Id = 10, Name = FeatureNameUtils.Category.DELETE, Group = FeatureNameUtils.FeatureGroup.CATEGORY_MANAGEMENT)]
    public partial class CategoryManagementControl : UserControl
    {
       int pageNumber = 1;
@@ -83,7 +83,7 @@ namespace BookStoreManagement.UI
 
       private void btnAdd_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Add New Category", "Category Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Category.NEW, FeatureNameUtils.FeatureGroup.CATEGORY_MANAGEMENT))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;
@@ -97,7 +97,7 @@ namespace BookStoreManagement.UI
 
       private void btnEdit_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Edit Category", "Category Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Category.EDIT, FeatureNameUtils.FeatureGroup.CATEGORY_MANAGEMENT))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;
@@ -119,7 +119,7 @@ namespace BookStoreManagement.UI
 
       private async void btnDelete_Click(object sender, RoutedEventArgs e)
       {
-         if (!FeatureAttributeService.isAuthorized("Delete Category", "Book Management"))
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Category.DELETE, "Book Management"))
          {
             MessageBox.Show("You are not authorized for this feature!");
             return;

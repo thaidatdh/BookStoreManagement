@@ -27,7 +27,7 @@ namespace DatabaseCommon.DTO
       [DTO(Column = "BANK_NAME", DataType = DATATYPE.STRING)]
       public string BankName { get; set; }
       [DTO(Column = "POINT", DataType = DATATYPE.INTEGER)]
-      public string Point { get; set; }
+      public int Point { get; set; }
       [DTO(Column = "IS_DELETED", DataType = DATATYPE.BOOLEAN)]
       public bool IsDeleted { get; set; }
    }
