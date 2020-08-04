@@ -86,6 +86,15 @@
     <Compile Include="UI\BookInfoControl.xaml.cs">
       <DependentUpon>BookInfoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\AuthorManagementControl.xaml.cs">
+      <DependentUpon>AuthorManagementControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PublisherManagementControl.xaml.cs">
+      <DependentUpon>PublisherManagementControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProviderManagementControl.xaml.cs">
+      <DependentUpon>ProviderManagementControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\BookManagementControl.xaml.cs">
       <DependentUpon>BookManagementControl.xaml</DependentUpon>
     </Compile>
@@ -117,6 +126,18 @@
     <Page Include="UI\BookInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\AuthorManagementControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\PublisherManagementControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ProviderManagementControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\BookManagementControl.xaml">
       <SubType>Designer</SubType>

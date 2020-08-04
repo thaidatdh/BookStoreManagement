@@ -190,7 +190,7 @@ namespace BookStoreManagement.UI
             if (publisherList != null)
                publisherList.Clear();
             publisherList = new List<string>() { "" };
-            publisherList.AddRange(PublisherBUS.GetProviderNameList());
+            publisherList.AddRange(PublisherBUS.GetPublisherNameList());
             this.Dispatcher.Invoke(new Action(() => {
                cbProvider.Items.Clear();
                cbProvider.ItemsSource = providerList;

@@ -11,14 +11,24 @@ namespace BookStoreManagement.BUS
    public class PublisherBUS
    {
       private static List<PublisherDto> publisherList = new List<PublisherDto>();
-      public static List<string> GetProviderNameList()
-      {
-         if (publisherList == null || publisherList.Count == 0)
-         {
+        private static List<PublisherDto> allNotDeletedPublishers = new List<PublisherDto>();
+        public static List<PublisherDto> GetAllNotDeletedPublishers()
+        {
+            if (allNotDeletedPublishers == null || allNotDeletedPublishers.Count == 0)
+            {
+                allNotDeletedPublishers = PublisherDao.Where(n => n.IsDeleted == false).ToList();
+            }
+            return allNotDeletedPublishers;
+        }
+
+        public static List<string> GetPublisherNameList()
+        {
+            if (publisherList == null || publisherList.Count == 0)
+            {
             publisherList = PublisherDao.Where(n => n.IsDeleted == false).ToList();
-         }
-         return publisherList.Select(n => n.Name).ToList();
-      }
+            }
+            return publisherList.Select(n => n.Name).ToList();
+        }
       public static int GetPublisherId(string name)
       {
          if (publisherList == null || publisherList.Count == 0)
@@ -33,5 +43,34 @@ namespace BookStoreManagement.BUS
          else
             return dto.PublisherId;
       }
+
+        public static bool Update(PublisherDto dto)
+        {
+
+            PublisherDto oldDto = allNotDeletedPublishers.FirstOrDefault(n => n.PublisherId == dto.PublisherId);
+            bool result = PublisherDao.Update(dto);
+            if (result)
+            {
+                if (oldDto != null)
+                allNotDeletedPublishers.Remove(oldDto);
+                allNotDeletedPublishers.Add(dto);
+                allNotDeletedPublishers = allNotDeletedPublishers.OrderBy(n => n.PublisherId).ToList();
+            }
+            return result;
+
+        }
+        public static int Insert(PublisherDto dto)
+        {
+            int id = PublisherDao.Insert(dto);
+            dto.PublisherId = id;
+            allNotDeletedPublishers.Add(dto);
+            allNotDeletedPublishers = allNotDeletedPublishers.OrderByDescending(n => n.PublisherId).ToList();
+            return id;
+        }
+        public static bool Delete(PublisherDto dto)
+        {
+            allNotDeletedPublishers.Remove(dto);
+            return PublisherDao.Delete(dto.PublisherId);
+        }
    }
 }

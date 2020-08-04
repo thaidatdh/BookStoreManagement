@@ -176,29 +176,29 @@ namespace BookStoreManagement
                //}
                break;
             case "Provider":
-               //if (FeatureAttributeService.isAuthorized(typeof(ProviderManagementControl)))
-               //{
-               //   if (!isShowed(typeof(ProviderManagementControl)))
-               //   {
-               //      usc = new ProviderManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
-               break;
+                if (FeatureAttributeService.isAuthorized(typeof(ProviderManagementControl)))
+                {
+                    if (!isShowed(typeof(ProviderManagementControl)))
+                    {
+                        usc = new ProviderManagementControl();
+                        GridMain.Children.Clear();
+                        GridMain.Children.Add(usc);
+                    }
+                    isAuthorized = true;
+                }
+                    break;
             case "Publisher":
-               //if (FeatureAttributeService.isAuthorized(typeof(PublisherManagementControl)))
-               //{
-               //   if (!isShowed(typeof(PublisherManagementControl)))
-               //   {
-               //      usc = new PublisherManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
-               break;
+                if (FeatureAttributeService.isAuthorized(typeof(PublisherManagementControl)))
+                {
+                    if (!isShowed(typeof(PublisherManagementControl)))
+                    {
+                        usc = new PublisherManagementControl();
+                        GridMain.Children.Clear();
+                        GridMain.Children.Add(usc);
+                    }
+                    isAuthorized = true;
+                }
+                    break;
             case "Category":
                if (FeatureAttributeService.isAuthorized(typeof(CategoryManagementControl)))
                {
@@ -212,17 +212,17 @@ namespace BookStoreManagement
                }
                break;
             case "Author":
-               //if (FeatureAttributeService.isAuthorized(typeof(AuthorManagementControl)))
-               //{
-               //   if (!isShowed(typeof(AuthorManagementControl)))
-               //   {
-               //      usc = new AuthorManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
-               break;
+                if (FeatureAttributeService.isAuthorized(typeof(AuthorManagementControl)))
+                {
+                    if (!isShowed(typeof(AuthorManagementControl)))
+                    {
+                        usc = new AuthorManagementControl();
+                        GridMain.Children.Clear();
+                        GridMain.Children.Add(usc);
+                    }
+                    isAuthorized = true;
+                }
+                    break;
             case "Transaction":
                //if (FeatureAttributeService.isAuthorized(typeof(TransactionManagementControl)))
                //{

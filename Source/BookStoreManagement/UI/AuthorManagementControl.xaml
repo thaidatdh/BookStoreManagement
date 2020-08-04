@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="BookStoreManagement.UI.AuthorManagementControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookStoreManagement.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+            d:DesignHeight="708" d:DesignWidth="1080" Foreground="Black" Loaded="UserControl_Loaded" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+        <StackPanel Orientation="Vertical">
+            <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" FontFamily="Segoe Print">Author Management</Label>
+            <StackPanel HorizontalAlignment="Left" Height="50" Margin="50,0,0,0" Width="940" Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" Width="450" Orientation="Horizontal">
+                    <Label Content="Name: " Width="100" FontSize="20" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <TextBox TextWrapping="Wrap" Text="" Width="300" Name="txtName" Margin="10,0,0,0" FontSize="15"  VerticalContentAlignment="Center" />
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Height="50" Margin="50,10,0,0" Width="900" Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" Width="850" Orientation="Horizontal">
+                    <Label Content="Note:" Width="100" FontSize="20" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <TextBox TextWrapping="Wrap" Text="" Width="740" Name="txtNote"  Margin="10,0,0,0" FontSize="15"  VerticalContentAlignment="Center" />
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Left" Height="40" Margin="90,20,0,0" Width="900" Orientation="Horizontal">
+                <Button Name="buttonSearch" Content="Search" Height="Auto" Width="120" FontSize="20" Margin="220,00,0,0" Background="Black" Click="btnSearch"/>
+                <Button Name="buttonSave" Content="Save" Height="Auto" Width="120" FontSize="20" Margin="20,00,0,0" Background="#FF5CCF0C" Click="btnSave"/>
+                <Button Name="buttonClean" Content="Clean" Height="Auto" Width="120" FontSize="20" Margin="20,00,0,0" Background="#FF2A88D3" Click="btnClean"/>
+            </StackPanel>
+
+            <!--<StackPanel Orientation="Horizontal"  Margin="0,10,0,10" Width="900">
+                <ComboBox x:Name="cbType" IsEditable="False" Width="150" FontWeight="Bold" FontSize="20" Background="White" Height="38" SelectionChanged="cbType_SelectionChanged" >
+                    <ComboBox.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                    </ComboBox.Effect>
+                </ComboBox>
+                <materialDesign:PackIcon Kind="Search" Height="38" Width="38" VerticalAlignment="Top" Background="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <TextBox x:Name="txtSearchValue" Width="711" TextChanged="txtSearchValue_TextChanged" FontSize="20" Background="White" Height="38" >
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBox Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </StackPanel>-->
+
+            <StackPanel Height="370" Margin="90,20">
+
+                <DataGrid x:Name="tableAuthors"  Background="WhiteSmoke" Margin="0,5,0,0" Width="900" Height="315" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="WhiteSmoke" />
+                        </Style>
+                        <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="{x:Type DataGridRow}">
+                            <Setter Property="Background" Value="White" />
+                        </Style>
+                        
+                    </DataGrid.Resources>
+                    <DataGrid.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                    </DataGrid.Effect>
+                    <DataGrid.ItemContainerStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="selectRow"/>
+                        </Style>
+                        
+                    </DataGrid.ItemContainerStyle>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="120" />
+                        <DataGridTextColumn Header="Note" Binding="{Binding Note}" Width="650"/>
+                        <DataGridTemplateColumn Width="50" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Button Name="itemDelete" Height="25" Click="btnDelete" Background="Transparent" Foreground="Gray" Padding="0,0,0,0" BorderThickness="0" BorderBrush="Transparent">
+                                        <materialDesign:PackIcon Kind="TrashCan"  Width="25" Height="25" Foreground="Red"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
+
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock x:Name="lbPaging" Text="Loading"/>
+                    </StackPanel>
+                    <Button Margin="0,0" Padding="5,0" x:Name="btnPrevious" Click="btnPrevious_Click" Background="Transparent" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" >
+                        <materialDesign:PackIcon Kind="ArrowLeftBoldCircleOutline"  Width="25" Height="25"/>
+                    </Button>
+                    <Button Margin="0,0" Padding="5,0" x:Name="btnNext" Click="btnNext_Click" Background="Transparent" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" >
+                        <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline"  Width="25" Height="25"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

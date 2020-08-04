@@ -33,28 +33,28 @@
                </Button>
             </StackPanel>
          </Grid>
-         <Grid x:Name="HeaderPanel" Height="Auto" IsEnabled="False" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
-               <TextBlock Text="Name: " FontSize="20" Width="80" Foreground="Black"></TextBlock>
-               <TextBox x:Name="txtName" Text="" Width="200" Background="White" FontSize="20" Foreground="Black" TextAlignment="Center"></TextBox>
-            </StackPanel>
-         </Grid>
-         <Grid x:Name="ContentPanel" IsEnabled="False" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
-            <Grid.ColumnDefinitions>
-               <ColumnDefinition Width="350"/>
-               <ColumnDefinition Width="350"/>
-               <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" x:Name="ListControls1" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" >
-               
-            </StackPanel>
-            <StackPanel Grid.Column="1" x:Name="ListControls2" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" >
+            <Grid x:Name="HeaderPanel" Height="Auto" IsEnabled="False" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
+                    <TextBlock Text="Name: " FontSize="20" Width="80" Foreground="Black"></TextBlock>
+                    <TextBox x:Name="txtName" Text="" Width="200" Background="White" FontSize="20" Foreground="Black" TextAlignment="Center"></TextBox>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="ContentPanel" IsEnabled="False" Margin="20,20,20,20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="Auto" Height="520">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" x:Name="ListControls1" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" >
 
-            </StackPanel>
-            <StackPanel Grid.Column="2" x:Name="ListControls3" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" >
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" x:Name="ListControls2" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" >
 
-            </StackPanel>
-         </Grid>
-      </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" x:Name="ListControls3" Margin="20,20,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" >
+
+                    </StackPanel>
+                </Grid>
+        </StackPanel>
    </Grid>
 </UserControl>
