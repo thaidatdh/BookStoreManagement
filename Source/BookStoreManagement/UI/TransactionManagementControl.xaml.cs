@@ -313,9 +313,8 @@ namespace BookStoreManagement.UI
          var rs = MessageBox.Show("Are you sure you want to delete this transaction?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
          if (rs.Equals(MessageBoxResult.Yes))
          {
-            allShowedTransaction.Remove(selectedItem);
-            allTransaction.Remove(selectedItem);
             TransactionBUS.Delete(selectedItem);
+            selectedItem.IsDeleted = true;
             await reloadTable(pageNumber);
          }
       }
