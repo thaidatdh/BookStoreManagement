@@ -25,16 +25,16 @@ using System.Windows.Shapes;
 
 namespace BookStoreManagement.UI
 {
-   /// <summary>
-   /// Interaction logic for PublisherManagementControl.xaml
-   /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
-   /// </summary>
-   /// 
-   [Feature(Id = 24, Name = "Publisher Management",   Group = "Publisher Management")]
-   [Feature(Id = 25, Name = "Add New Publisher",      Group = "Publisher Management")]
-   [Feature(Id = 26, Name = "Edit Publisher",         Group = "Publisher Management")]
-   [Feature(Id = 27, Name = "Delete Publisher",       Group = "Publisher Management")]
-   //[Feature(Id = 28, Name = "Import Publishers",      Group = "Publisher Management")]
+    /// <summary>
+    /// Interaction logic for PublisherManagementControl.xaml
+    /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
+    /// </summary>
+    /// 
+    [Feature(Id = 19, Name = FeatureNameUtils.Publisher.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 20, Name = FeatureNameUtils.Publisher.NEW, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 21, Name = FeatureNameUtils.Publisher.EDIT, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 22, Name = FeatureNameUtils.Publisher.DELETE, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    //[Feature(Id = 23, Name = FeatureNameUtils.Publisher.IMPORT,      Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
 
     public partial class PublisherManagementControl : UserControl
    {
@@ -50,12 +50,12 @@ namespace BookStoreManagement.UI
       {
 
         InitializeComponent();
-            if (!FeatureAttributeService.isAuthorized("Add New Publisher", "Publisher Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Publisher.NEW, FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT))
             {
                 buttonSave.IsEnabled = false;
             }
 
-            if (!FeatureAttributeService.isAuthorized("Delete Publisher", "Publisher Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Publisher.DELETE, FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT))
             {
                 tablePublishers.IsEnabled = false;
             }
@@ -189,7 +189,7 @@ namespace BookStoreManagement.UI
 
         private void selectRow(object sender, MouseButtonEventArgs e)
         {
-            if (!FeatureAttributeService.isAuthorized("Edit Publisher", "Publisher Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Publisher.EDIT, FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT))
             {
                 MessageBox.Show("You are not authorized for this feature!");
                 return;

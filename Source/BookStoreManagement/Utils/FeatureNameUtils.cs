@@ -14,7 +14,10 @@ namespace BookStoreManagement.Utils
          public const string BOOK_MANAGEMENT = "Book Management";
          public const string AUTHORIZATION = "Authorization";
          public const string CATEGORY_MANAGEMENT = "Category Management";
-      }
+            public const string PROVIDER_MANAGEMENT = "Provider Management";
+            public const string PUBLISHER_MANAGEMENT = "Publisher Management";
+            public const string AUTHOR_MANAGEMENT = "Author Management";
+        }
       public class Transaction
       {
          public const string TRANSACTION_MANAGEMENT = "Transaction Management";
@@ -45,5 +48,31 @@ namespace BookStoreManagement.Utils
       {
          public const string MANAGEMENT = "User Authorization";
       }
-   }
+        public class Provider
+        {
+            public const string MANAGEMENT = "Provider Management";
+            public const string IMPORT = "Import Provider";
+            public const string EDIT = "Edit Provider";
+            public const string DELETE = "Delete Provider";
+            public const string NEW = "Add New Provider";
+        }
+
+        public class Publisher
+        {
+            public const string MANAGEMENT = "Publisher Management";
+            public const string IMPORT = "Import Publisher";
+            public const string EDIT = "Edit Publisher";
+            public const string DELETE = "Delete Publisher";
+            public const string NEW = "Add New Publisher";
+        }
+
+        public class Author
+        {
+            public const string MANAGEMENT = "Author Management";
+            public const string IMPORT = "Import Author";
+            public const string EDIT = "Edit Author";
+            public const string DELETE = "Delete Author";
+            public const string NEW = "Add New Author";
+        }
+    }
 }
