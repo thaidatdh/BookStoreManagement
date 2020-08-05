@@ -26,7 +26,7 @@ namespace BookStoreManagement.UI
    /// Interaction logic for UserAuthorizationControl.xaml
    /// </summary>
    /// 
-   [Feature(Id = 1, Name = FeatureNameUtils.Authorization.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.AUTHORIZATION)]
+   [Feature(Id = 1, Name = "User Authorization", Group = "Authorization")]
    public partial class UserAuthorizationControl : UserControl
    {
       private List<DefinitionDto> ListDto = new List<DefinitionDto>();
@@ -43,25 +43,19 @@ namespace BookStoreManagement.UI
       public void InitListControlsCheckbox()
       {
          ListPanel = new List<StackPanel>() { ListControls1, ListControls2, ListControls3 };
-         ListPanel.ForEach(n => n.Children.Clear());
+         ListControls1.Children.Clear();
          var groups = FeatureAttributeService.GetListFeatureAttribute().GroupBy(n => n.Group).OrderBy(n => n.Key);
          int count = 0, controlIndex = 0;
          foreach (var group in groups)
          {
-            if (count > 25 && controlIndex < 2)
-            {
-               count = 0;
-               controlIndex += 1;
-            }
+            if (count > 10 && controlIndex < 2) controlIndex += 1;
             TextBlock textBlock = new TextBlock();
             textBlock.Text = group.Key.ToString();
             textBlock.Foreground = new SolidColorBrush(Colors.Black);
             textBlock.FontSize = 20.0;
             textBlock.Margin = new Thickness(0, 10, 0, 10);
             ListPanel[controlIndex].Children.Add(textBlock);
-            count += 2;
             var listFeatures = group.ToList();
-            int countAttr = 0;
             foreach (var attr in listFeatures)
             {
                CheckBox checkBox = new CheckBox();
@@ -71,13 +65,6 @@ namespace BookStoreManagement.UI
                checkBox.Visibility = Visibility.Visible;
                ListPanel[controlIndex].Children.Add(checkBox);
                ListCheckbox.Add(checkBox);
-               count++;
-               countAttr++;
-               if ((count > 25 || (count > 23 && countAttr == listFeatures.Count)) && controlIndex < 2)
-               {
-                  count = 0;
-                  controlIndex += 1;
-               }
             }
          }
       }

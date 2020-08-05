@@ -20,7 +20,7 @@ namespace CommonLibrary
          }
          catch
          {
-            return Regex.Replace(date, "[^0-9]","");
+            return "";
          }
       }
       public static string FormatMoney(long value)
@@ -106,31 +106,13 @@ namespace CommonLibrary
       }
       public static string FormatDate(DateTime date)
       {
-         try
-         {
-            return date.ToString("yyyyMMdd");
-         }
-         catch
-         {
-            return "";
-         }
+         return date.ToString("yyyyMMdd");
       }
       public static DateTime? ParseDate(string formatedDate)
       {
          try
          {
             return DateTime.ParseExact(formatedDate, "yyyyMMdd", null);
-         }
-         catch
-         {
-            return ToDate(formatedDate);
-         }
-      }
-      public static DateTime? ToDate(string formatedDate)
-      {
-         try
-         {
-            return DateTime.Parse(formatedDate);
          }
          catch
          {
