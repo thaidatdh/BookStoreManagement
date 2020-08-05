@@ -63,7 +63,7 @@ namespace BookStoreManagement.Utils
       {
          foreach (UIElement element in control.Children)
          {
-            if (element.GetType().Equals(typeof(TextBlock)) || element.GetType().Equals(typeof(Button)))
+            if (element.GetType().Equals(typeof(TextBlock))|| element.GetType().Equals(typeof(Label)) || element.GetType().Equals(typeof(Button)))
             {
                continue;
             }

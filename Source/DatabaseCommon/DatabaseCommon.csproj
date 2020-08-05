@@ -44,6 +44,7 @@
     <Compile Include="Const\CONST.cs" />
     <Compile Include="Const\DATATYPE.cs" />
     <Compile Include="DAO\DefinitionDao.cs" />
+    <Compile Include="DAO\DiscountDao.cs" />
     <Compile Include="DAO\ProviderDao.cs" />
     <Compile Include="DAO\PublisherDao.cs" />
     <Compile Include="DAO\AuthorDao.cs" />

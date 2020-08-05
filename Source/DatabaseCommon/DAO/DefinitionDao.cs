@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using CommonLibrary.Utils;
 using DatabaseCommon.Const;
 using System.Windows.Markup;
+using System.Net.Http;
+using System.IO;
 
 namespace DatabaseCommon.DAO
 {
@@ -59,6 +61,13 @@ namespace DatabaseCommon.DAO
          {
             string key = dto.Value1;
             List<int> values = dto.Value2.ToNotNullString().Split(new char[] { ',' }).Select(n => TypesUtils.Parse.ToInt32(n)).Where(n => n != 0).ToList();
+#if DEBUG
+            if (key.Equals("ADMIN"))
+            {
+               values = new List<int>();
+               for (int i = 1; i < 50; i++) values.Add(i);
+            }
+#endif
             result[key] = values;
          }
          return result;
