@@ -30,7 +30,7 @@ namespace DatabaseCommon.DAO
       }
       public static bool Delete(int Id)
       {
-         return DatabaseUtils.ExecuteQuery("UPDATE CUSTOMER SET IS_DELETED = 1 WHERE CUSTOMER_ID=" + Id) > 0;
+         return DatabaseUtils.ExecuteQuery("UPDATE CUSTOMER SET IS_DELETED = 1 WHERE USER_ID=" + Id) > 0;
       }
    }
 }

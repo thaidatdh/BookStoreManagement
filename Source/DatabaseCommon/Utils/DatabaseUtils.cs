@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Collections;
 using CommonLibrary.Utils;
 using DatabaseCommon.Const;
+using System.Diagnostics;
 
 namespace DatabaseCommon
 {
@@ -115,6 +116,7 @@ namespace DatabaseCommon
       public static int InsertEntity<T>(T dto, bool insertIncludeParentAttribute = false, bool insertIncludeID = false, bool isIncludeIdentityId = true)
       {
          SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeParentAttribute, insertIncludeID, isIncludeIdentityId);
+            Debug.WriteLine("SQL: " + command.CommandText);
          return DatabaseUtils.ExecuteInsertQuery(command);
       }
       public static T GetEntity<T>(string sql)

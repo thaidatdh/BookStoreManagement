@@ -38,11 +38,17 @@ namespace BookStoreManagement
          UserControl userControl = new LoginControl();
          GridMain.Children.Add(userControl);
          MainGrid = GridMain;
-         PanelLogin = panelLogin;
-         ProfileButton = btnProfile;
-         AuthorizationButton = btnAuthorization;
-         HideLoginMenu();
-      }
+            //PanelLogin = panelLogin;
+            //ProfileButton = btnProfile;
+            //AuthorizationButton = btnAuthorization;
+            //HideLoginMenu();
+
+            UserControl memberMamngement = new MemberManagement();
+            GridMain.Children.Add(memberMamngement);
+
+            //UserControl createMember = new CreateMember();
+            //GridMain.Children.Add(createMember);
+        }
       public static void AddSubChild(UserControl subControl)
       {
          if (subControl == null || MainGrid == null)

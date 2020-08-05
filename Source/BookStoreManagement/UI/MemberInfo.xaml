@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="BookStoreManagement.UI.MemberInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookStoreManagement.UI"
+             Loaded="loaded"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="708" d:DesignWidth="1080">
+    <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+        <Button Name="btnBack" Height="40" Background="Transparent" Foreground="Black" Click="back_click" Margin="0,0,940,638">
+            <materialDesign:PackIcon Kind="ArrowBack"  Width="25" Height="25"/>
+        </Button>
+        <Image Name="avatar" Source="/Images/Cristiano_Ronaldo_2018.jpg" Margin="13,40,748,269"/>
+        <Button Name="btnEdit" Height="40" Click="Edit_Click" Margin="853,10,33,628">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Edit" FontSize="25"/>
+                <materialDesign:PackIcon Kind="Edit"  Width="25" Height="25" Margin="10,5,0,0"/>
+            </StackPanel>
+        </Button>
+
+        <TextBlock Text="Name: " FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="332,62,548,576"/>
+        <TextBlock Name="textName" Text="Ronaldo" Foreground="Black" FontSize="25" Height="40" Margin="499,62,0,576"/>
+
+        <TextBlock Text="Gender: " FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="332,111,548,527"/>
+        <TextBlock Name="textGender" Text="MALE" Foreground="Black" FontSize="25" Height="40" Margin="499,111,0,527"/>
+
+        <TextBlock Text="Day of Birth: " FontWeight="Bold" Foreground="Black" FontSize="25" Height="40" Margin="332,165,466,473"/>
+        <TextBlock Name="textDoB" Text="12/12/1985" Foreground="Black" FontSize="25" Height="40" Margin="499,165,0,473"/>
+
+        <TextBlock Text="Email: " FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="332,223,548,415"/>
+        <TextBlock Name="textEmail" Text="Ronaldo@gmail.com" FontSize="25" Foreground="Black" Height="40" Margin="499,223,0,415"/>
+
+        <TextBlock Text="Phone: " FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="332,279,548,359"/>
+        <TextBlock Name="textPhone" Text="0892822829" Foreground="Black" FontSize="25" Height="40" Margin="499,280,0,358"/>
+
+        <TextBlock Text="Address: " FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="332,335,548,303"/>
+        <TextBlock Name="textAddress" Text="NewYork, USA" Foreground="Black" FontSize="25" Height="40" TextWrapping="Wrap" Margin="499,335,0,303"/>
+
+        <TextBlock Text="Credit Card: " FontWeight="Bold" Foreground="Black" FontSize="25" Height="40" Margin="49,439,772,199"/>
+        <TextBlock Name="textCreditCard" Text="48292872282" Foreground="Black" FontSize="25" Height="40" Margin="234,439,483,199"/>
+
+        <TextBlock Text="MoMo: " FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="49,494,831,144"/>
+        <TextBlock Name="textMoMo" Text="48292872282" Foreground="Black" FontSize="25" Height="40" Margin="234,494,483,144"/>
+
+        <TextBlock Text="Bank Number: " FontWeight="Bold" Foreground="Black" FontSize="25" Height="40" Margin="49,549,716,89"/>
+        <TextBlock Name="textBankNumber" Text="48292872282" Foreground="Black" FontSize="25" Height="40" Margin="234,549,483,89"/>
+
+        <TextBlock Text="Bank Name: " FontWeight="Bold" Foreground="Black" FontSize="25" Height="40" Margin="49,607,748,31"/>
+        <TextBlock Name="textBankName" Text="48292872282" Foreground="Black" FontSize="25" Height="40" Margin="234,607,483,31"/>
+
+        <TextBlock Text="Note" FontWeight="Bold" Foreground="Black" FontSize="25" Width="200" Height="40" Margin="499,439,381,199"/>
+        <TextBox Name="textNote" Background="White" FontSize="25" BorderBrush="Black" Foreground="Black" IsReadOnly="True" TextWrapping="Wrap" Margin="499,479,33,46"/>
+    </Grid>
+</UserControl>
