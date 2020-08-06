@@ -2,6 +2,7 @@
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -25,25 +26,92 @@ namespace BookStoreManagement.UI
     public partial class CreateMember : UserControl
     {
         string avatar_path = "Images/bg_default.jpg";
+        CustomerDto member = null;
+        bool update = false;
         public CreateMember()
         {
             InitializeComponent();
+            this.member = new CustomerDto();
+        }
+
+        public CreateMember(CustomerDto member)
+        {
+            InitializeComponent();
+            this.member = member;
+            this.update = true;
         }
 
         private void loaded(object sender, RoutedEventArgs e)
         {
             cbBankName.SelectedIndex = 0;
 
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            string image_path = path + avatar_path;
-            BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
-            avatar.Source = image;
+            if (update==false)
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                string image_path = path + avatar_path;
+                BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+                avatar.Source = image;
+            }
+            else
+            {
+                boxName.Text = member.FirstName +" "+ member.LastName;
+                
+                if (member.Gender=="MALE")
+                {
+                    radioMale.IsChecked = true;
+                }else if (member.Gender=="FEMALE")
+                {
+                    radioFemale.IsChecked = true;
+                }else
+                {
+                    radioOther.IsChecked = true;
+                }
+
+                try
+                {
+                    boxDoB.Text = member.DOB.Substring(6, 2) + "/" + member.DOB.Substring(4, 2) + "/" + member.DOB.Substring(0, 4);
+                }
+                catch(ArgumentOutOfRangeException ex)
+                {
+                    boxDoB.Text = "Empty";
+                }
+
+                boxEmail.Text = member.Email;
+                boxPhone.Text = member.Phone;
+                boxAddress.Text = member.Address;
+                boxCreditCard.Text = member.CreditCard;
+                boxMoMo.Text = member.Momo;
+                boxBankNumber.Text = member.BankNumber;
+                boxNote.Text = member.Note;
+                
+                for (int i=0;i<cbBankName.Items.Count;i++)
+                {
+                    string bank = cbBankName.Items.GetItemAt(i).ToString();
+                    string bank_name = bank.Substring(38, bank.Length - 38);
+                    if (bank_name==member.BankName)
+                    {
+                        cbBankName.SelectedIndex = i;
+                        break;
+                    }
+                }
+
+                avatar_path = member.PhotoLink;
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                string image_path = path + avatar_path;
+                if (!File.Exists(image_path))
+                {
+                    image_path = path + "Images/bg_default.jpg";
+                }
+
+                BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+                avatar.Source = image;
+
+                btnConfirm.Content = "Update";
+            }
         }
 
         private void confirm_click(object sender, RoutedEventArgs e)
         {
-            CustomerDto member = new CustomerDto();
-
             string[] tokenName = boxName.Text.Split(' ');
             if (tokenName.Length==0)
             {
@@ -56,6 +124,7 @@ namespace BookStoreManagement.UI
             }else
             {
                 member.FirstName = tokenName[0];
+                member.LastName = "";
                 for (int i=1;i<tokenName.Length;i++)
                 {
                     member.LastName += tokenName[i];
@@ -155,27 +224,54 @@ namespace BookStoreManagement.UI
 
             member.PhotoLink = avatar_path;
             member.Note = boxNote.Text;
-            member.UserType = "CUSTOMER";
-            member.CreateDate = new DateTime();
-            member.CreateBy = 1;
-            member.UpdatedDate = new DateTime();
-            member.UpdatedBy = 1;
-            member.Point = 0;
-            member.IsDeleted = false;
 
-            CustomerBUS.Insert(member);
-            MessageBox.Show("Create member success!");
+            if (update)
+            {
+                member.UpdatedDate = new DateTime();
+                member.UpdatedBy = 1;
 
-            MainWindow.MainGrid.Children.Clear();
-            UserControl memberManagement = new MemberManagement();
-            MainWindow.MainGrid.Children.Add(memberManagement);
+                if (CustomerBUS.Update(member))
+                {
+                    MessageBox.Show("Update member success!");
+                }
+
+                MainWindow.MainGrid.Children.Clear();
+                UserControl memberInfo = new MemberInfo(member);
+                MainWindow.MainGrid.Children.Add(memberInfo);
+            }
+            else
+            {
+                member.UserType = "CUSTOMER";
+                member.CreateDate = new DateTime();
+                member.CreateBy = 1;
+                member.UpdatedDate = new DateTime();
+                member.UpdatedBy = 1;
+                member.Point = 0;
+                member.IsDeleted = false;
+
+                CustomerBUS.Insert(member);
+                MessageBox.Show("Create member success!");
+
+                MainWindow.MainGrid.Children.Clear();
+                UserControl memberManagement = new MemberManagement();
+                MainWindow.MainGrid.Children.Add(memberManagement);
+            }
         }
 
         private void back_click(object sender, RoutedEventArgs e)
         {
             MainWindow.MainGrid.Children.Clear();
-            UserControl memberManagement = new MemberManagement();
-            MainWindow.MainGrid.Children.Add(memberManagement);
+            if (update)
+            {
+                UserControl memberInfo = new MemberInfo(member);
+                MainWindow.MainGrid.Children.Add(memberInfo);
+            }
+            else
+            {
+                UserControl memberManagement = new MemberManagement();
+                MainWindow.MainGrid.Children.Add(memberManagement);
+            }
+
         }
 
         private void choose_avatar_click(object sender, RoutedEventArgs e)

@@ -10,6 +10,7 @@ using System.Collections;
 using CommonLibrary.Utils;
 using DatabaseCommon.Const;
 using System.Diagnostics;
+using DatabaseCommon.DTO;
 
 namespace DatabaseCommon
 {
@@ -491,7 +492,7 @@ namespace DatabaseCommon
       {
          Hashtable paraMap = new Hashtable();
          string result = "";
-
+         
          Entity entity = null;
          string tableName = GetTableName<T>();
          if (EntityMap.ContainsKey(tableName))
@@ -530,13 +531,12 @@ namespace DatabaseCommon
                paraMap[entity.PrimaryKeyPropertyName] = "@" + attrKey.Column;
             }
             if (whereClause.Equals("")) { return null; }
-
+            //Debug.WriteLine("WhereClause: " + whereClause);
             result += String.Format("UPDATE {0} SET {1} WHERE {2}", tableName, columns, whereClause);
          }
 
          if (result == "")
             return null;
-
          SqlCommand command = new SqlCommand(result, Connection);
          FillValues<T>(dto, command, entity, paraMap);
          return command;

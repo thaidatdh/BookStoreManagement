@@ -69,7 +69,9 @@ namespace BookStoreManagement.UI
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainWindow.MainGrid.Children.Clear();
+            UserControl createMember = new CreateMember(member);
+            MainWindow.MainGrid.Children.Add(createMember);
         }
 
         private void back_click(object sender, RoutedEventArgs e)

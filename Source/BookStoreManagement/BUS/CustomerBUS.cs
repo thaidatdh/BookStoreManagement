@@ -53,5 +53,19 @@ namespace BookStoreManagement.BUS
             allNotDeletedMembers.OrderBy(n => n.UserId);
             return id;
         }
+
+        public static bool Update(CustomerDto member)
+        {
+            bool result = CustomerDao.Update(member);
+            if (result)
+            {
+                CustomerDto oldDto = allNotDeletedMembers.FirstOrDefault(n => n.UserId == member.UserId);
+                if (oldDto != null)
+                    allNotDeletedMembers.Remove(oldDto);
+                allNotDeletedMembers.Add(member);
+                allNotDeletedMembers.OrderBy(n => n.UserId);
+            }
+            return result;
+        }
     }
 }
