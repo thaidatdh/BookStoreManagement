@@ -94,6 +94,9 @@
     <Compile Include="UI\CategoryManagementControl.xaml.cs">
       <DependentUpon>CategoryManagementControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\CreateMember.xaml.cs">
       <DependentUpon>CreateMember.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,12 @@
     </Compile>
     <Compile Include="UI\SaleTransactionControl.xaml.cs">
       <DependentUpon>SaleTransactionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StaffInfo.xaml.cs">
+      <DependentUpon>StaffInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StaffManagement.xaml.cs">
+      <DependentUpon>StaffManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\StaffTransactionControl.xaml.cs">
       <DependentUpon>StaffTransactionControl.xaml</DependentUpon>
@@ -153,6 +162,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\CreateMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,6 +187,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\SaleTransactionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\StaffInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\StaffManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

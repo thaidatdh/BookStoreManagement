@@ -19,12 +19,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using BookStoreManagement.Utils;
 
 namespace BookStoreManagement.UI
 {
     /// <summary>
     /// Interaction logic for MemberManagement.xaml
     /// </summary>
+    [Feature(Id = 18, Name = FeatureNameUtils.Member.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT)]
+    [Feature(Id = 19, Name = FeatureNameUtils.Member.IMPORT, Group = FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT)]
+    [Feature(Id = 20, Name = FeatureNameUtils.Member.NEW, Group = FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT)]
+    [Feature(Id = 21, Name = FeatureNameUtils.Member.EDIT, Group = FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT)]
+    [Feature(Id = 22, Name = FeatureNameUtils.Member.DELETE, Group = FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT)]
     public partial class MemberManagement : UserControl
     {
         /// <summary>
@@ -60,7 +66,7 @@ namespace BookStoreManagement.UI
             {
                 if (loadType==1 && allShowedMembers == null)
                 {
-                    allMembers = CustomerBUS.GetAllNotDeletedBooks();
+                    allMembers = CustomerBUS.GetAllNotDeletedMembers();
                     allShowedMembers = new List<CustomerDto>();
                     allShowedMembers.AddRange(allMembers);
                 }else if (loadType==2)
@@ -114,9 +120,8 @@ namespace BookStoreManagement.UI
         {
             string typeString = cbType.SelectedItem.ToString().ToUpper();
             string type = typeString.Substring(38, typeString.Length - 38);
-            Debug.WriteLine(type);
             string value = txtSearchValue.Text.ToUpper();
-            string temp = "";
+
             switch (type)
             {
                 case "NAME":
@@ -165,10 +170,14 @@ namespace BookStoreManagement.UI
             }
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Member member = (Member)tableMembers.SelectedItem;
             CustomerBUS.Delete(member.BarCode);
+
+            allShowedMembers = null;
+            await reloadTable(pageNumber);
+
             MessageBox.Show("Delete member success!");
         }
 

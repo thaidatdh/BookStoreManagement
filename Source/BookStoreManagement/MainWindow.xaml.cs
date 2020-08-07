@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using BookStoreManagement.UI;
 using DatabaseCommon.Const;
 using BookStoreManagement.BUS;
+using System.Diagnostics;
 
 namespace BookStoreManagement
 {
@@ -35,19 +36,17 @@ namespace BookStoreManagement
          DatabaseCommon.DatabaseUtils.Open();
          InitializeComponent();
          GridMain.Children.Clear();
-         UserControl userControl = new LoginControl();
-         GridMain.Children.Add(userControl);
+         //UserControl userControl = new LoginControl();
+         //GridMain.Children.Add(userControl);
          MainGrid = GridMain;
             //PanelLogin = panelLogin;
             //ProfileButton = btnProfile;
             //AuthorizationButton = btnAuthorization;
             //HideLoginMenu();
 
-            UserControl memberMamngement = new MemberManagement();
-            GridMain.Children.Add(memberMamngement);
+            UserControl staffMenagement = new StaffManagement();
+            GridMain.Children.Add(staffMenagement);
 
-            //UserControl createMember = new CreateMember();
-            //GridMain.Children.Add(createMember);
         }
       public static void AddSubChild(UserControl subControl)
       {
@@ -158,16 +157,18 @@ namespace BookStoreManagement
                }
                break;
             case "Customer":
-               //if (FeatureAttributeService.isAuthorized(typeof(CustomerManagementControl)))
-               //{
-               //   if (!isShowed(typeof(CustomerManagementControl)))
-               //   {
-               //      usc = new CustomerManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
+               if (FeatureAttributeService.isAuthorized(typeof(MemberManagement)))
+               {
+                        MessageBox.Show("Customer show");
+                   if (!isShowed(typeof(MemberManagement)))
+                   {
+                            MessageBox.Show("Member show");
+                       usc = new MemberManagement();
+                       GridMain.Children.Clear();
+                       GridMain.Children.Add(usc);
+                   }
+                   isAuthorized = true;
+               }
                break;
             case "Staff":
                //if (FeatureAttributeService.isAuthorized(typeof(StaffManagementControl)))

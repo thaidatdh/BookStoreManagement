@@ -11,7 +11,7 @@ namespace BookStoreManagement.BUS
    class CustomerBUS
    {
         private static List<CustomerDto> allNotDeletedMembers = new List<CustomerDto>();
-        public static List<CustomerDto> GetAllNotDeletedBooks()
+        public static List<CustomerDto> GetAllNotDeletedMembers()
         {
             if (allNotDeletedMembers == null || allNotDeletedMembers.Count == 0)
             {
