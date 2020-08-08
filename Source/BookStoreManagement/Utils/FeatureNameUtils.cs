@@ -12,7 +12,8 @@ namespace BookStoreManagement.Utils
       {
          public const string TRANSACTION_MANAGEMENT = "Transaction Management";
          public const string BOOK_MANAGEMENT = "Book Management";
-            public const string MEMBER_MANAGEMENT = "Member Management";
+         public const string MEMBER_MANAGEMENT = "Member Management";
+         public const string STAFF_MANAGEMENT = "Staff Management";
          public const string AUTHORIZATION = "Authorization";
          public const string CATEGORY_MANAGEMENT = "Category Management";
       }
@@ -43,6 +44,15 @@ namespace BookStoreManagement.Utils
             public const string EDIT = "Edit Member";
             public const string DELETE = "Delete Member";
             public const string NEW = "Add New Member";
+      }
+
+      public class Staff
+      {
+          public const string MANAGEMENT = "Staff Managerment";
+          public const string IMPORT = "Import Staffs";
+          public const string EDIT = "Edit Staff";
+          public const string DELETE = "Delete Staff";
+          public const string NEW = "Add New Staff";
       }
       public class Category
       {

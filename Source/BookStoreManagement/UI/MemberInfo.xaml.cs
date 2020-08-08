@@ -54,7 +54,6 @@ namespace BookStoreManagement.UI
             textBankName.Text = member.BankName;
             textNote.Text = member.Note;
 
-            //If run IDE
             string path = AppDomain.CurrentDomain.BaseDirectory;
             string avatar_path = path + member.PhotoLink;
             Debug.WriteLine(avatar_path);

@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="BookStoreManagement.UI.CreateStaff"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookStoreManagement.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Loaded="loaded"
+             d:DesignHeight="708" d:DesignWidth="1080">
+    <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+        <Button Name="btnBack" Height="40" Background="Transparent" Foreground="Black" Click="back_click" Margin="0,0,940,638">
+            <materialDesign:PackIcon Kind="ArrowBack"  Width="25" Height="25"/>
+        </Button>
+        <Image Name="avatar" Source="/Images/Cristiano_Ronaldo_2018.jpg" Margin="13,40,753,299"/>
+        <Button Name="btnChooseAvatar" Content="Choose avatar +" Height="40" FontSize="25" Background="#770080FF" Click="choose_avatar_click" Margin="25,194,764,434"/>
+
+        <TextBlock Text="Name: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,38,548,600"/>
+        <TextBox Name="boxName" Background="White" Foreground="Black" FontSize="22" Height="45" Margin="481,32,51,601"/>
+
+        <TextBlock Text="Gender: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,89,548,549"/>
+        <RadioButton GroupName="gender" Name="radioMale" Content="Male" FontSize="22" Foreground="Black" Width="200" Height="40" IsChecked="True" Margin="476,87,404,551"/>
+        <RadioButton GroupName="gender" Name="radioFemale" Content="Female" FontSize="22" Foreground="Black" Width="200" Height="40" Margin="661,87,219,551"/>
+        <RadioButton GroupName="gender" Name="radioOther" Content="Other" FontSize="22" Foreground="Black" Width="200" Height="40" Margin="847,89,33,549"/>
+
+        <TextBlock Text="Day of Birth: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="332,141,497,497"/>
+        <TextBox Name="boxDoB" materialDesign:HintAssist.Hint="dd/MM/yyyy" Background="White" Foreground="Black" FontSize="22" Height="45" Margin="481,137,51,496"/>
+
+        <TextBlock Text="Email: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,199,548,439"/>
+        <TextBox Name="boxEmail" FontSize="22" Background="White" Foreground="Black" Height="45" Margin="481,195,51,438"/>
+
+        <TextBlock Text="Phone: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,255,548,383"/>
+        <TextBox Name="boxPhone" Background="White" Foreground="Black" FontSize="22" Height="45" Margin="481,251,51,382"/>
+
+        <TextBlock Text="Address: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,311,548,327"/>
+        <TextBox Name="boxAddress" Background="White" Foreground="Black" FontSize="22" TextWrapping="Wrap" Margin="481,311,51,299"/>
+
+        <TextBlock Text="Username: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="49,387,831,251"/>
+        <TextBox Name="boxUsername" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="198,387,586,251"/>
+
+        <TextBlock Text="Password: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="49,442,831,196"/>
+        <PasswordBox Name="boxPassword" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="198,440,586,198"/>
+
+        <TextBlock Text="Re-Password: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="49,497,753,141"/>
+        <PasswordBox Name="boxRePassword" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="198,497,586,141"/>
+
+        <TextBlock Text="Salary: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="49,555,789,83"/>
+        <TextBox Name="boxSalary" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="198,555,586,83"/>
+
+        <TextBlock Text="Start day: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="522,389,316,249"/>
+        <TextBox Name="boxStartDay" Background="White" Foreground="Black" FontSize="22" Height="40" materialDesign:HintAssist.Hint="dd/MM/yyyy" Margin="644,387,51,251"/>
+
+        <TextBlock Text="End day: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="522,442,316,196"/>
+        <TextBox Name="boxEndDay" Background="White" Foreground="Black" FontSize="22" Height="40" materialDesign:HintAssist.Hint="dd/MM/yyyy" Margin="644,440,51,198"/>
+
+        <TextBlock Text="Note" FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Margin="523,497,357,150"/>
+        <TextBox Name="boxNote" Background="White" FontSize="22" BorderBrush="Black" Foreground="Black" TextWrapping="Wrap" Margin="523,538,51,83"/>
+
+        <Button Name="btnConfirm" Content="Confirm" FontSize="25" Height="50" Click="confirm_click" Margin="412,610,357,18"/>
+    </Grid>
+</UserControl>

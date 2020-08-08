@@ -69,7 +69,17 @@ namespace BookStoreManagement.UI
 
             textNote.Text = staff.Note;
 
-            //If run IDE
+            if (staff.Active == true)
+            {
+                textActive.Text = "Active";
+                textActive.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                textActive.Text = "Lock";
+                textActive.Foreground = new SolidColorBrush(Colors.Red);
+            }
+
             string path = AppDomain.CurrentDomain.BaseDirectory;
             string avatar_path = path + staff.PhotoLink;
 
@@ -84,7 +94,9 @@ namespace BookStoreManagement.UI
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.MainGrid.Children.Clear();
+            UserControl editStaff = new EditStaff(staff);
+            MainWindow.MainGrid.Children.Add(editStaff);
         }
         
         private void btn_change_password_click(object sender, RoutedEventArgs e)

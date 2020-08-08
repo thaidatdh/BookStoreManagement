@@ -100,6 +100,12 @@
     <Compile Include="UI\CreateMember.xaml.cs">
       <DependentUpon>CreateMember.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\CreateStaff.xaml.cs">
+      <DependentUpon>CreateStaff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EditStaff.xaml.cs">
+      <DependentUpon>EditStaff.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
@@ -167,6 +173,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\CreateMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\CreateStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\EditStaff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

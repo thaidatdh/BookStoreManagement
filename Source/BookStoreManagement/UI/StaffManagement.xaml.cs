@@ -17,12 +17,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using BookStoreManagement.Utils;
 
 namespace BookStoreManagement.UI
 {
     /// <summary>
     /// Interaction logic for StaffManagement.xaml
     /// </summary>
+    [Feature(Id = 23, Name = FeatureNameUtils.Staff.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT)]
+    [Feature(Id = 24, Name = FeatureNameUtils.Staff.IMPORT, Group = FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT)]
+    [Feature(Id = 25, Name = FeatureNameUtils.Staff.NEW, Group = FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT)]
+    [Feature(Id = 26, Name = FeatureNameUtils.Staff.EDIT, Group = FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT)]
+    [Feature(Id = 27, Name = FeatureNameUtils.Staff.DELETE, Group = FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT)]
     public partial class StaffManagement : UserControl
     {
         /// <summary>
@@ -156,7 +162,9 @@ namespace BookStoreManagement.UI
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.MainGrid.Children.Clear();
+            UserControl createStaff = new CreateStaff();
+            MainWindow.MainGrid.Children.Add(createStaff);
         }
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)

@@ -112,12 +112,14 @@ namespace BookStoreManagement.UI
 
         private void confirm_click(object sender, RoutedEventArgs e)
         {
-            string[] tokenName = boxName.Text.Split(' ');
-            if (tokenName.Length==0)
+            if (boxName.Text.Length == 0)
             {
                 MessageBox.Show("Name Box is empty");
                 return;
-            }else if (tokenName.Length == 1)
+            }
+
+            string[] tokenName = boxName.Text.Split(' ');
+            if (tokenName.Length == 1)
             {
                 member.FirstName = "";
                 member.LastName = tokenName[0];
@@ -162,7 +164,12 @@ namespace BookStoreManagement.UI
                 MailAddress email = new MailAddress(boxEmail.Text);
                 member.Email = email.ToString();
             }
-            catch(FormatException ex)
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("Email is empty");
+                return;
+            }
+            catch (FormatException ex)
             {
                 MessageBox.Show("Email is wrong format");
                 return;
@@ -271,7 +278,6 @@ namespace BookStoreManagement.UI
                 UserControl memberManagement = new MemberManagement();
                 MainWindow.MainGrid.Children.Add(memberManagement);
             }
-
         }
 
         private void choose_avatar_click(object sender, RoutedEventArgs e)

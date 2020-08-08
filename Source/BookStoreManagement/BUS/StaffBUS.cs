@@ -57,6 +57,20 @@ namespace BookStoreManagement.BUS
           return id;
       }
 
+      public static bool update(StaffDto staff)
+      {
+          bool result = StaffDao.Update(staff);
+          if (result)
+          {
+              StaffDto oldDto = allStaffs.FirstOrDefault(n => n.UserId == staff.UserId);
+              if (oldDto != null)
+                  allStaffs.Remove(oldDto);
+              allStaffs.Add(staff);
+              allStaffs.OrderBy(n => n.UserId);
+          }
+          return result;
+        }
+
       public static bool delete(int UserId)
       {
           foreach (StaffDto staff in allStaffs)
