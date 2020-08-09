@@ -30,11 +30,11 @@ namespace BookStoreManagement.UI
    /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
    /// </summary>
    /// 
-   [Feature(Id = 29, Name = "Author Management",   Group = "Author Management")]
-   [Feature(Id = 30, Name = "Add New Author",      Group = "Author Management")]
-   [Feature(Id = 31, Name = "Edit Author",         Group = "Author Management")]
-   [Feature(Id = 32, Name = "Delete Author",       Group = "Author Management")]
-   //[Feature(Id = 33, Name = "Import Authors",      Group = "Author Management")]
+   [Feature(Id = 29, Name = FeatureNameUtils.Author.MANAGEMENT,     Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 30, Name = FeatureNameUtils.Author.NEW,            Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 31, Name = FeatureNameUtils.Author.EDIT,           Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 32, Name = FeatureNameUtils.Author.DELETE,         Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+    //[Feature(Id = 33, Name = FeatureNameUtils.Author.IMPORT,      Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
 
     public partial class AuthorManagementControl : UserControl
    {
@@ -50,12 +50,12 @@ namespace BookStoreManagement.UI
       {
 
         InitializeComponent();
-            if (!FeatureAttributeService.isAuthorized("Add New Author", "Author Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Author.NEW, FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT))
             {
                 buttonSave.IsEnabled = false;
             }
 
-            if (!FeatureAttributeService.isAuthorized("Delete Author", "Author Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Author.DELETE, FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT))
             {
                 tableAuthors.IsEnabled = false;
             }
@@ -181,7 +181,7 @@ namespace BookStoreManagement.UI
 
         private void selectRow(object sender, MouseButtonEventArgs e)
         {
-            if (!FeatureAttributeService.isAuthorized("Edit Author", "Author Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Author.EDIT, FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT))
             {
                 MessageBox.Show("You are not authorized for this feature!");
                 return;

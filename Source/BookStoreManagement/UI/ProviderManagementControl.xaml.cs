@@ -25,16 +25,16 @@ using System.Windows.Shapes;
 
 namespace BookStoreManagement.UI
 {
-   /// <summary>
-   /// Interaction logic for ProviderManagementControl.xaml
-   /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
-   /// </summary>
-   /// 
-   [Feature(Id = 19, Name = "Provider Management",   Group = "Provider Management")]
-   [Feature(Id = 20, Name = "Add New Provider",      Group = "Provider Management")]
-   [Feature(Id = 21, Name = "Edit Provider",         Group = "Provider Management")]
-   [Feature(Id = 22, Name = "Delete Provider",       Group = "Provider Management")]
-   //[Feature(Id = 23, Name = "Import Providers",      Group = "Provider Management")]
+    /// <summary>
+    /// Interaction logic for ProviderManagementControl.xaml
+    /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
+    /// </summary>
+    /// 
+    [Feature(Id = 19, Name = FeatureNameUtils.Provider.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 20, Name = FeatureNameUtils.Provider.NEW, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 21, Name = FeatureNameUtils.Provider.EDIT, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 22, Name = FeatureNameUtils.Provider.DELETE, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    //[Feature(Id = 23, Name = FeatureNameUtils.Provider.IMPORT,      Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
 
     public partial class ProviderManagementControl : UserControl
    {
@@ -50,12 +50,12 @@ namespace BookStoreManagement.UI
       {
 
         InitializeComponent();
-            if (!FeatureAttributeService.isAuthorized("Add New Provider", "Provider Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Provider.NEW, FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT))
             {
                 buttonSave.IsEnabled = false;
             }
 
-            if (!FeatureAttributeService.isAuthorized("Delete Provider", "Provider Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Provider.DELETE, FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT))
             {
                 tableProviders.IsEnabled = false;
             }
@@ -189,7 +189,7 @@ namespace BookStoreManagement.UI
 
         private void selectRow(object sender, MouseButtonEventArgs e)
         {
-            if (!FeatureAttributeService.isAuthorized("Edit Provider", "Provider Management"))
+            if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Provider.EDIT, FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT))
             {
                 MessageBox.Show("You are not authorized for this feature!");
                 return;
