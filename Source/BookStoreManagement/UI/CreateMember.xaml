@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="BookStoreManagement.UI.CreateMember"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookStoreManagement.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Loaded="loaded"
+             d:DesignHeight="708" d:DesignWidth="1080">
+    <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+        <Button Name="btnBack" Height="40" Background="Transparent" Foreground="Black" Click="back_click" Margin="0,0,940,638">
+            <materialDesign:PackIcon Kind="ArrowBack"  Width="25" Height="25"/>
+        </Button>
+        <Image Name="avatar" Source="/Images/Cristiano_Ronaldo_2018.jpg" Margin="13,40,753,299"/>
+        <Button Name="btnChooseAvatar" Content="Choose avatar +" Height="40" FontSize="25" Background="#770080FF" Click="choose_avatar_click" Margin="25,194,764,434"/>
+
+        <TextBlock Text="Name: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,46,548,592"/>
+        <TextBox Name="boxName" Background="White" Foreground="Black" FontSize="22" Height="45" Margin="481,40,51,593"/>
+
+        <TextBlock Text="Gender: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,97,548,541"/>
+        <RadioButton GroupName="gender" Name="radioMale" Content="Male" FontSize="22" Foreground="Black" Width="200" Height="40" IsChecked="True" Margin="476,95,404,543"/>
+        <RadioButton GroupName="gender" Name="radioFemale" Content="Female" FontSize="22" Foreground="Black" Width="200" Height="40" Margin="661,95,219,543"/>
+        <RadioButton GroupName="gender" Name="radioOther" Content="Other" FontSize="22" Foreground="Black" Width="200" Height="40" Margin="847,97,33,541"/>
+
+        <TextBlock Text="Day of Birth: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="332,149,497,489"/>
+        <TextBox Name="boxDoB" materialDesign:HintAssist.Hint="dd/MM/yyyy" Background="White" Foreground="Black" FontSize="22" Height="45" Margin="481,145,51,488"/>
+
+        <TextBlock Text="Email: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,207,548,431"/>
+        <TextBox Name="boxEmail" FontSize="22" Background="White" Foreground="Black" Height="45" Margin="481,203,51,430"/>
+
+        <TextBlock Text="Phone: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,263,548,375"/>
+        <TextBox Name="boxPhone" Background="White" Foreground="Black" FontSize="22" Height="45" Margin="481,259,51,374"/>
+
+        <TextBlock Text="Address: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="332,319,548,319"/>
+        <TextBox Name="boxAddress" Background="White" Foreground="Black" FontSize="22" TextWrapping="Wrap" Margin="481,319,51,291"/>
+
+        <TextBlock Text="Credit Card: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="49,387,831,251"/>
+        <TextBox Name="boxCreditCard" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="234,387,609,251"/>
+
+        <TextBlock Text="MoMo: " FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Height="40" Margin="49,442,831,196"/>
+        <TextBox Name="boxMoMo" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="234,440,609,198"/>
+
+        <TextBlock Text="Bank Number: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="49,497,753,141"/>
+        <TextBox Name="boxBankNumber" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="234,497,609,141"/>
+
+        <TextBlock Text="Bank Name: " FontWeight="Bold" Foreground="Black" FontSize="22" Height="40" Margin="49,555,789,83"/>
+        <ComboBox Name="cbBankName" Background="White" Foreground="Black" FontSize="22" Height="40" Margin="234,555,609,83">
+            <ComboBoxItem Content="Empty" FontSize="22"/>
+            <ComboBoxItem Content="AgriBank" FontSize="22"/>
+            <ComboBoxItem Content="VietcomBank" FontSize="22"/>
+            <ComboBoxItem Content="TechcomBank" FontSize="22"/>
+            <ComboBoxItem Content="OceanBank" FontSize="22"/>
+            <ComboBoxItem Content="BIDV" FontSize="22"/>
+            <ComboBoxItem Content="HDBank" FontSize="22"/>
+            <ComboBoxItem Content="TPBank" FontSize="22"/>
+            <ComboBoxItem Content="SacomBank" FontSize="22"/>
+            <ComboBoxItem Content="SeaBank" FontSize="22"/>
+            <ComboBoxItem Content="BaoVietBank" FontSize="22"/>
+        </ComboBox>
+
+        <TextBlock Text="Note" FontWeight="Bold" Foreground="Black" FontSize="22" Width="200" Margin="499,396,381,251"/>
+        <TextBox Name="boxNote" Background="White" FontSize="22" BorderBrush="Black" Foreground="Black" TextWrapping="Wrap" Margin="499,427,33,83"/>
+
+        <Button Name="btnConfirm" Content="Confirm" FontSize="25" Height="50" Click="confirm_click" Margin="412,610,357,18"/>
+    </Grid>
+</UserControl>

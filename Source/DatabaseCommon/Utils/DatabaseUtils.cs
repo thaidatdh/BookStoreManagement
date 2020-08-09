@@ -9,6 +9,8 @@ using System.Reflection;
 using System.Collections;
 using CommonLibrary.Utils;
 using DatabaseCommon.Const;
+using System.Diagnostics;
+using DatabaseCommon.DTO;
 
 namespace DatabaseCommon
 {
@@ -115,6 +117,7 @@ namespace DatabaseCommon
       public static int InsertEntity<T>(T dto, bool insertIncludeParentAttribute = false, bool insertIncludeID = false, bool isIncludeIdentityId = true)
       {
          SqlCommand command = GenerateInsertQuery<T>(dto, insertIncludeParentAttribute, insertIncludeID, isIncludeIdentityId);
+            Debug.WriteLine("SQL: " + command.CommandText);
          return DatabaseUtils.ExecuteInsertQuery(command);
       }
       public static T GetEntity<T>(string sql)
@@ -489,7 +492,7 @@ namespace DatabaseCommon
       {
          Hashtable paraMap = new Hashtable();
          string result = "";
-
+         
          Entity entity = null;
          string tableName = GetTableName<T>();
          if (EntityMap.ContainsKey(tableName))
@@ -528,13 +531,12 @@ namespace DatabaseCommon
                paraMap[entity.PrimaryKeyPropertyName] = "@" + attrKey.Column;
             }
             if (whereClause.Equals("")) { return null; }
-
+            //Debug.WriteLine("WhereClause: " + whereClause);
             result += String.Format("UPDATE {0} SET {1} WHERE {2}", tableName, columns, whereClause);
          }
 
          if (result == "")
             return null;
-
          SqlCommand command = new SqlCommand(result, Connection);
          FillValues<T>(dto, command, entity, paraMap);
          return command;

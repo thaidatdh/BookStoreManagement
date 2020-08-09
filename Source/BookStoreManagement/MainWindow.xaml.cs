@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using BookStoreManagement.UI;
 using DatabaseCommon.Const;
 using BookStoreManagement.BUS;
+using System.Diagnostics;
 
 namespace BookStoreManagement
 {
@@ -42,7 +43,7 @@ namespace BookStoreManagement
          ProfileButton = btnProfile;
          AuthorizationButton = btnAuthorization;
          HideLoginMenu();
-      }
+        }
       public static void AddSubChild(UserControl subControl)
       {
          if (subControl == null || MainGrid == null)
@@ -152,28 +153,28 @@ namespace BookStoreManagement
                }
                break;
             case "Customer":
-               //if (FeatureAttributeService.isAuthorized(typeof(CustomerManagementControl)))
-               //{
-               //   if (!isShowed(typeof(CustomerManagementControl)))
-               //   {
-               //      usc = new CustomerManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
+               if (FeatureAttributeService.isAuthorized(typeof(MemberManagement)))
+               {
+                   if (!isShowed(typeof(MemberManagement)))
+                   {
+                       usc = new MemberManagement();
+                       GridMain.Children.Clear();
+                       GridMain.Children.Add(usc);
+                   }
+                   isAuthorized = true;
+               }
                break;
             case "Staff":
-               //if (FeatureAttributeService.isAuthorized(typeof(StaffManagementControl)))
-               //{
-               //   if (!isShowed(typeof(StaffManagementControl)))
-               //   {
-               //      usc = new StaffManagementControl();
-               //      GridMain.Children.Clear();
-               //      GridMain.Children.Add(usc);
-               //   }
-               //   isAuthorized = true;
-               //}
+               if (FeatureAttributeService.isAuthorized(typeof(StaffManagement)))
+               {
+                   if (!isShowed(typeof(StaffManagement)))
+                   {
+                       usc = new StaffManagement();
+                       GridMain.Children.Clear();
+                       GridMain.Children.Add(usc);
+                   }
+                   isAuthorized = true;
+               }
                break;
             case "Provider":
                 if (FeatureAttributeService.isAuthorized(typeof(ProviderManagementControl)))

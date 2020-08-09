@@ -68,7 +68,7 @@ namespace DatabaseCommon.DAO
       }
       public static bool Delete(int Id)
       {
-         return DatabaseUtils.ExecuteQuery("UPDATE TRANSACTIONS SET IS_DELETED = 1, UPDATED_BY=" + DatabaseUtils.CurrentUserId +" WHERE TRANSACTION_ID=" + Id) > 0;
+         return DatabaseUtils.ExecuteQuery("UPDATE TRANSACTIONS SET IS_DELETED = 1 WHERE TRANSACTION_ID=" + Id) > 0;
       }
       public static List<TransactionDto> GetByCustomer(int customer_id)
       {

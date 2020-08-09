@@ -39,6 +39,9 @@ namespace BookStoreManagement.BUS
       }
       public static bool Delete(TransactionDto dto)
       {
+         TransactionDto oldDto = allTransaction.FirstOrDefault(n => n.TransactionId == dto.TransactionId);
+         if (oldDto != null)
+            allTransaction.Remove(oldDto);
          return TransactionDao.Delete(dto.TransactionId);
       }
    }

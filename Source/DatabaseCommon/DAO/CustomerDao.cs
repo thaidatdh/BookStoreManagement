@@ -1,6 +1,8 @@
 ﻿using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +28,20 @@ namespace DatabaseCommon.DAO
       }
       public static bool Update(CustomerDto dto)
       {
-         return DatabaseUtils.UpdateEntity<UserDto>(dto, true) > 0 && DatabaseUtils.UpdateEntity<CustomerDto>(dto) > 0;
-      }
-      public static bool Delete(int Id)
+            string sql_user = "Update Users Set first_name='" + dto.FirstName + "', last_name='" + dto.LastName
+                  + "', dob='" + dto.DOB + "', address='" + dto.Address + "', phone='" + dto.Phone + "', gender='"
+                  + dto.Gender + "', email='" + dto.Email + "', note='" + dto.Note + "', photo_link='" + dto.PhotoLink
+                  + "', updated_date='" + dto.UpdatedDate + "', updated_by=" + dto.UpdatedBy + " Where user_id="+dto.UserId;
+            string sql_customer = "Update Customer Set credit_card='" + dto.Momo + "', momo='" + dto.Momo + "', bank_number='"
+                + dto.BankNumber + "', bank_name='" + dto.BankName + "' Where user_id=" + dto.UserId;
+
+            return (DatabaseUtils.ExecuteQuery(sql_user) > 0) && (DatabaseUtils.ExecuteQuery(sql_customer) > 0);
+
+         //return DatabaseUtils.UpdateEntity<UserDto>(dto, true) > 0 && DatabaseUtils.UpdateEntity<CustomerDto>(dto) > 0;
+        }
+        public static bool Delete(int Id)
       {
-         return DatabaseUtils.ExecuteQuery("UPDATE CUSTOMER SET IS_DELETED = 1 WHERE CUSTOMER_ID=" + Id) > 0;
+         return DatabaseUtils.ExecuteQuery("UPDATE CUSTOMER SET IS_DELETED = 1 WHERE USER_ID=" + Id) > 0;
       }
    }
 }

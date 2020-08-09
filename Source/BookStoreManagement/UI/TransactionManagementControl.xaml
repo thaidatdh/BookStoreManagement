@@ -65,15 +65,6 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                      <Setter Property="Background" Value="White" />
                   </Style>
                </DataGrid.Resources>
-               <DataGrid.RowStyle>
-                  <Style TargetType="DataGridRow">
-                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDeleted}" Value="True">
-                           <Setter Property="local:DataGridHelper.TextDecoration" Value="Strikethrough"/>
-                        </DataTrigger>
-                     </Style.Triggers>
-                  </Style>
-               </DataGrid.RowStyle>
                <DataGrid.Effect>
                   <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
                </DataGrid.Effect>
