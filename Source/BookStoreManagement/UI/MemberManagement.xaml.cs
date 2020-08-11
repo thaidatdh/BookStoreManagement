@@ -100,9 +100,9 @@ namespace BookStoreManagement.UI
                 {
                     member.DoB = e.DOB.Substring(6, 2) + "/" + e.DOB.Substring(4, 2) + "/" + e.DOB.Substring(0, 4);
                 }
-                catch(ArgumentOutOfRangeException ex)
+                catch(Exception ex)
                 {
-                    member.DoB = "Empty";
+                    member.DoB = "";
                 }
 
                 data.Add(member);
