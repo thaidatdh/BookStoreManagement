@@ -234,5 +234,19 @@ namespace BookStoreManagement.UI
             await reloadTable(pageNumber);
          }
       }
+
+      private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+      {
+         if (tableBooks.SelectedItem == null)
+         {
+            MessageBox.Show("Please select a book in table to continue!");
+            return;
+         }
+         BookDto selectedItem = (BookDto)tableBooks.SelectedItem;
+         if (selectedItem == null)
+            return;
+         //Code here
+         MainWindow.AddSubChild(new BookInfoControl(selectedItem, FormMode.View));
+      }
    }
 }

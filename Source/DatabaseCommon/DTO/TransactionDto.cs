@@ -44,7 +44,11 @@ namespace DatabaseCommon.DTO
             {
                listDetail = TransactionDetailDao.GetByTransaction(TransactionId); //Get transaction detail
             }
-            if (listDetail == null || TransactionId == default(int))
+            if (listDetail == null && TransactionId == default(int))
+            {
+               listDetail = new List<TransactionDetailDto>();
+            }
+            if (listDetail == null)
             {
                listDetail = new List<TransactionDetailDto>();
             }

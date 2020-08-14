@@ -43,6 +43,8 @@ namespace BookStoreManagement.UI
       {
          listStaff = StaffDao.GetAll();
          cbStaff.ItemsSource = listStaff.Select(n => (n.FirstName + " " + n.LastName).Trim()).ToList();
+         if (mode == FormMode.New)
+            dateTransaction.SelectedDate = DateTime.Now;
       }
       private void InitData()
       {

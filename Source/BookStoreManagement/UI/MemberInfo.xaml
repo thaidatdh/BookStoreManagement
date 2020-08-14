@@ -9,10 +9,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="708" d:DesignWidth="1080">
     <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
-        <Button Name="btnBack" Height="40" Background="Transparent" Foreground="Black" Click="back_click" Margin="0,0,940,638">
+        <Button Name="btnBack" Height="40" Background="Transparent" Foreground="Black" Click="back_click" Margin="0,0,940,638" BorderThickness="0" BorderBrush="Transparent">
             <materialDesign:PackIcon Kind="ArrowBack"  Width="25" Height="25"/>
         </Button>
-        <Image Name="avatar" Source="/Images/Cristiano_Ronaldo_2018.jpg" Margin="13,40,748,269"/>
+        <Image Name="avatar" Source="/persistent/images/default_user_photo.png" Margin="13,40,772,269"/>
         <Button Name="btnEdit" Height="40" Click="Edit_Click" Margin="853,10,33,628">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Edit" FontSize="25"/>

@@ -29,7 +29,7 @@
                   <Border.Effect>
                      <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
                   </Border.Effect>
-                  <Image Width="300" Height="400">
+                  <Image Width="300" Height="400" x:Name="image" Source="/persistent/images/default_book_photo.png">
                      <Image.Effect >
                         <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
                      </Image.Effect>

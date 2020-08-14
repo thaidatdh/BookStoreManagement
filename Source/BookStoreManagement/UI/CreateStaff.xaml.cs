@@ -1,5 +1,6 @@
 ﻿using BookStoreManagement.BUS;
 using CommonLibrary.Utils;
+using DatabaseCommon.Const;
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace BookStoreManagement.UI
    /// </summary>
    public partial class CreateStaff : UserControl
    {
-      string avatar_path = "Images/bg_default.jpg";
+      string avatar_path = CONST.USERS.DEFAULT_PHOTO_LINK;
       StaffDto staff = null;
 
       public CreateStaff()
@@ -72,12 +73,23 @@ namespace BookStoreManagement.UI
             int lastIndex = filename.LastIndexOf('.');
             string extension = filename.Substring(lastIndex, filename.Length - lastIndex);
             Guid guid = Guid.NewGuid();
-            avatar_path = "Images/" + guid.ToString() + extension;
+            avatar_path = "\\persistent\\images\\" + guid.ToString() + extension;
             string image_path = path + avatar_path;
+            int dup = 0;
+            while (File.Exists(image_path))
+            {
+               avatar_path = "\\persistent\\images\\" + guid.ToString() + (++dup) + extension;
+               image_path = path + avatar_path;
+            }
+            File.Copy(filename, image_path);
             File.Copy(filename, image_path);
 
-            BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
-            avatar.Source = image;
+            try
+            {
+               BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+               avatar.Source = image;
+            }
+            catch (Exception ex) { }
          }
       }
 
@@ -149,6 +161,10 @@ namespace BookStoreManagement.UI
             MessageBox.Show("Email is wrong format");
             return;
          }
+         catch (Exception ex)
+         {
+            return;
+         }
 
          if (boxPhone.Text.Length > 0)
          {
@@ -179,6 +195,10 @@ namespace BookStoreManagement.UI
          catch (FormatException ex)
          {
             MessageBox.Show("Salary box is wrong format");
+            return;
+         }
+         catch (Exception ex)
+         {
             return;
          }
 

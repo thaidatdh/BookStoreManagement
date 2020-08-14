@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,6 +18,7 @@ using BookStoreManagement.BUS;
 using BookStoreManagement.Utils;
 using CommonLibrary;
 using CommonLibrary.Utils;
+using DatabaseCommon.Const;
 using DatabaseCommon.DTO;
 
 namespace BookStoreManagement.UI
@@ -30,7 +32,7 @@ namespace BookStoreManagement.UI
       BookDto BookDto;
       private static List<string> providerList;
       private static List<string> publisherList;
-      private string photoLink = "";
+      private string photoLink = CONST.BOOK.DEFAULT_PHOTO_LINK;
       private static readonly List<string> formatList = new List<string>() 
       { 
          "Paperback","Compact Disc", 
@@ -94,6 +96,18 @@ namespace BookStoreManagement.UI
                {
                   cbPublisher.SelectedItem = dto.PublisherDto.Name;
                }
+               string path = AppDomain.CurrentDomain.BaseDirectory;
+               string image_path = path + dto.PhotoLink;
+               if (!File.Exists(image_path))
+               {
+                  image_path = path + CONST.BOOK.DEFAULT_PHOTO_LINK;
+               }
+               try
+               {
+                  BitmapImage my_image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+                  image.Source = my_image;
+               }
+               catch (Exception ex) { }
             }));
             return false;
          });
@@ -214,7 +228,44 @@ namespace BookStoreManagement.UI
 
       private void btnBrowse_Click(object sender, RoutedEventArgs e)
       {
-         MessageBox.Show("This button not yet implemented!");
+         // Create OpenFileDialog 
+         Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+         // Set filter for file extension and default file extension 
+         dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+         // Display OpenFileDialog by calling ShowDialog method 
+         Nullable<bool> result = dlg.ShowDialog();
+
+
+         // Get the selected file name and display in a TextBox 
+         if (result == true)
+         {
+            // Open document 
+            string filename = dlg.FileName;
+
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            int lastIndex = filename.LastIndexOf('.');
+            string extension = filename.Substring(lastIndex, filename.Length - lastIndex);
+            Guid guid = Guid.NewGuid();
+            string avatar_path = "\\persistent\\images\\" + guid.ToString() + extension;
+            string image_path = path + avatar_path;
+            int dup = 0;
+            while (File.Exists(image_path))
+            {
+               avatar_path = "\\persistent\\images\\" + guid.ToString() + (++dup) + extension;
+               image_path = path + avatar_path;
+            }
+            File.Copy(filename, image_path);
+
+            try
+            {
+               BitmapImage my_image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+               image.Source = my_image;
+               photoLink = avatar_path;
+            }
+            catch (Exception ex) { }
+         }
       }
 
       private void txtPage_TextChanged(object sender, TextChangedEventArgs e)

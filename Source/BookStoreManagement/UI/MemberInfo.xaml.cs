@@ -1,4 +1,5 @@
 ﻿using BookStoreManagement.BUS;
+using DatabaseCommon.Const;
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
@@ -19,65 +20,68 @@ using System.Windows.Shapes;
 
 namespace BookStoreManagement.UI
 {
-    /// <summary>
-    /// Interaction logic for MemberInfo.xaml
-    /// </summary>
-    public partial class MemberInfo : UserControl
-    {
-        CustomerDto member = null;
-        public MemberInfo(CustomerDto member)
-        {
-            this.member = member;
-            InitializeComponent();
-        }
+   /// <summary>
+   /// Interaction logic for MemberInfo.xaml
+   /// </summary>
+   public partial class MemberInfo : UserControl
+   {
+      CustomerDto member = null;
+      public MemberInfo(CustomerDto member)
+      {
+         this.member = member;
+         InitializeComponent();
+      }
 
-        private void loaded(object sender, RoutedEventArgs e)
-        {
-            textName.Text = member.FirstName + " " + member.LastName;
-            textGender.Text = member.Gender;
-            
-            try
-            {
-                textDoB.Text = member.DOB.Substring(6, 2) + "/" + member.DOB.Substring(4, 2) + "/" + member.DOB.Substring(0, 4);
-            }
-            catch(ArgumentOutOfRangeException ex)
-            {
-                textDoB.Text = "Empty";
-            }
+      private void loaded(object sender, RoutedEventArgs e)
+      {
+         textName.Text = member.FirstName + " " + member.LastName;
+         textGender.Text = member.Gender;
 
-            textEmail.Text = member.Email;
-            textPhone.Text = member.Phone;
-            textAddress.Text = member.Address;
-            textCreditCard.Text = member.CreditCard;
-            textMoMo.Text = member.Momo;
-            textBankNumber.Text = member.BankNumber;
-            textBankName.Text = member.BankName;
-            textNote.Text = member.Note;
+         try
+         {
+            textDoB.Text = member.DOB.Substring(6, 2) + "/" + member.DOB.Substring(4, 2) + "/" + member.DOB.Substring(0, 4);
+         }
+         catch (Exception ex)
+         {
+            textDoB.Text = "Empty";
+         }
 
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            string avatar_path = path + member.PhotoLink;
-            Debug.WriteLine(avatar_path);
-            if (!File.Exists(avatar_path))
-            {
-                avatar_path = path + "Images/bg_default.jpg";
-            }
+         textEmail.Text = member.Email;
+         textPhone.Text = member.Phone;
+         textAddress.Text = member.Address;
+         textCreditCard.Text = member.CreditCard;
+         textMoMo.Text = member.Momo;
+         textBankNumber.Text = member.BankNumber;
+         textBankName.Text = member.BankName;
+         textNote.Text = member.Note;
 
+         string path = AppDomain.CurrentDomain.BaseDirectory;
+         string avatar_path = path + member.PhotoLink;
+         if (!File.Exists(avatar_path))
+         {
+            avatar_path = path + CONST.USERS.DEFAULT_PHOTO_LINK;
+         }
+
+         try
+         {
             BitmapImage image = new BitmapImage(new Uri(avatar_path, UriKind.Absolute));
             avatar.Source = image;
-        }
+         }
+         catch (Exception ex) { }
+      }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.MainGrid.Children.Clear();
-            UserControl createMember = new CreateMember(member);
-            MainWindow.MainGrid.Children.Add(createMember);
-        }
+      private void Edit_Click(object sender, RoutedEventArgs e)
+      {
+         MainWindow.MainGrid.Children.Clear();
+         UserControl createMember = new CreateMember(member);
+         MainWindow.MainGrid.Children.Add(createMember);
+      }
 
-        private void back_click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.MainGrid.Children.Clear();
-            UserControl memberManagement = new MemberManagement();
-            MainWindow.MainGrid.Children.Add(memberManagement);
-        }
-    }
+      private void back_click(object sender, RoutedEventArgs e)
+      {
+         MainWindow.MainGrid.Children.Clear();
+         UserControl memberManagement = new MemberManagement();
+         MainWindow.MainGrid.Children.Add(memberManagement);
+      }
+   }
 }

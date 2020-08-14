@@ -116,7 +116,7 @@ namespace BookStoreManagement
          }
          if (AuthorizationButton != null && Config.Manager.CURRENT_USER != null)
          {
-            if (Config.Manager.CURRENT_USER.UserType.Equals(CONST.USERS.USER_TYPE_ADMIN))
+            if (FeatureAttributeService.isAuthorized(FeatureNameUtils.Authorization.MANAGEMENT, FeatureNameUtils.FeatureGroup.AUTHORIZATION))
                AuthorizationButton.Visibility = Visibility.Visible;
             else
                AuthorizationButton.Visibility = Visibility.Collapsed;

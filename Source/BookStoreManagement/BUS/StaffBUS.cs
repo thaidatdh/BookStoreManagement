@@ -11,14 +11,14 @@ namespace BookStoreManagement.BUS
    class StaffBUS
    {
       private static List<StaffDto> allStaffs = new List<StaffDto>();
-      public static bool Login(string username, string encryptedPassword)
+      public static int Login(string username, string encryptedPassword)
       {
-         StaffDto dto = StaffDao.Where(n => n.Username.Equals(username) && n.Password.Equals(encryptedPassword) && n.Active == true).FirstOrDefault();
+         StaffDto dto = StaffDao.Where(n => n.Username.Equals(username) && n.Password.Equals(encryptedPassword)).FirstOrDefault();
          if (dto == null) 
-            return false;
+            return 0;
          Config.Manager.CURRENT_USER = dto;
          DatabaseCommon.DatabaseUtils.CurrentUserId = dto.UserId;
-         return true;
+         return dto.Active ? 1 : -1;
       }
       public static void Logout()
       {

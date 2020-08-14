@@ -11,6 +11,7 @@ using CommonLibrary.Utils;
 using DatabaseCommon.Const;
 using System.Diagnostics;
 using DatabaseCommon.DTO;
+using System.IO;
 
 namespace DatabaseCommon
 {
@@ -28,14 +29,39 @@ namespace DatabaseCommon
       public static Dictionary<string, Entity> EntityMap = new Dictionary<string, Entity>(); // table name -> entity properties
       public static Dictionary<Type, List<PropertyInfo>> DTOProperties;
       private static SqlConnection connection;
+      private static string _connectionString;
       private static String ConnectionString
       {
          get
          {
-            //return @"Server=.;Database=BSDB;User Id=sa;Password=hello123;";
-            return @"Server=.;Database=BSDB;Integrated Security = True;";
-            //return @"Data Source=DESKTOP-4QAS9I7\SQLEXPRESS;Initial Catalog=BSDB;Integrated Security=True";
+            InitConnectionString();
+            return _connectionString;
          }
+      }
+      private static void WriteDefaultSettingFile()
+      {
+         File.WriteAllText("/Settings.ini", "connectionstring = " + _connectionString);
+      }
+      private static void InitConnectionString()
+      {
+         if (!File.Exists("/Settings.ini"))
+         {
+            _connectionString = @"Server=.;Database=BSDB;Integrated Security = True;";
+            WriteDefaultSettingFile();
+            return;
+         }
+         List<string> settings = File.ReadAllLines("/Settings.ini").ToList();
+         _connectionString = settings.FirstOrDefault(n => n.ToLower().Contains("connectionstring"));
+         if (!String.IsNullOrEmpty(_connectionString))
+         {
+            _connectionString = _connectionString.Substring(_connectionString.IndexOf("=") + 1).Trim();
+            return;
+         }
+         foreach (string setting in settings)
+         {
+            _connectionString += setting + ";";
+         }
+         _connectionString = _connectionString.Trim(new char[] { ' ', ';' }) + ";";
       }
       private static SqlConnection Connection
       {

@@ -88,6 +88,8 @@ namespace BookStoreManagement.UI
       private void InitComponentValue()
       {
          dateTransaction.SelectedDate = FormatUtils.ParseDate(Transaction.EntryDate);
+         if (mode == FormMode.New)
+            dateTransaction.SelectedDate = DateTime.Now;
          if (Transaction.ProviderDto != null)
          {
             string name = (Transaction.ProviderDto.Name).Trim();

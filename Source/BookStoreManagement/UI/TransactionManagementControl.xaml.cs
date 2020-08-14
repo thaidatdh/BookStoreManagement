@@ -29,7 +29,7 @@ namespace BookStoreManagement.UI
    [Feature(Id = 11, Name = FeatureNameUtils.Transaction.TRANSACTION_MANAGEMENT,       Group =  FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
    [Feature(Id = 12, Name = FeatureNameUtils.Transaction.EDIT_STAFF,       Group =  FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
    [Feature(Id = 13, Name = FeatureNameUtils.Transaction.EDIT_PROVIDER,             Group =  FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
-   [Feature(Id = 18, Name = FeatureNameUtils.Transaction.EDIT_SALE, Group = FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
+   [Feature(Id = 36, Name = FeatureNameUtils.Transaction.EDIT_SALE, Group = FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
    [Feature(Id = 14, Name = FeatureNameUtils.Transaction.DELETE,           Group =  FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
    [Feature(Id = 15, Name = FeatureNameUtils.Transaction.NEW_STAFF,    Group =  FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]
    [Feature(Id = 16, Name = FeatureNameUtils.Transaction.NEW_SALE,     Group =  FeatureNameUtils.FeatureGroup.TRANSACTION_MANAGEMENT)]

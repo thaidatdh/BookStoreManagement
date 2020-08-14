@@ -47,7 +47,6 @@ namespace BookStoreManagement.UI
          EnableEditMode();
          Transaction = new TransactionDto();
          mode = FormMode.New;
-         dateTransaction.SelectedDate = DateTime.Now;
          allDetails = new List<TransactionDetailDto>();
       }
       private void EnableViewMode()
@@ -89,6 +88,8 @@ namespace BookStoreManagement.UI
       private void InitComponentValue()
       {
          dateTransaction.SelectedDate = FormatUtils.ParseDate(Transaction.EntryDate);
+         if (mode == FormMode.New)
+            dateTransaction.SelectedDate = DateTime.Now;
          if (Transaction.CustomerDto != null)
          {
             string name = (Transaction.CustomerDto.FirstName + " " + Transaction.CustomerDto.LastName).Trim();

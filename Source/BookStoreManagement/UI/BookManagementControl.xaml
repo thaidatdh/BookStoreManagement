@@ -52,6 +52,7 @@
                   </Style>
                   <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="{x:Type DataGridRow}">
                      <Setter Property="Background" Value="White" />
+                     <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
                   </Style>
                </DataGrid.Resources>
                <DataGrid.Effect>

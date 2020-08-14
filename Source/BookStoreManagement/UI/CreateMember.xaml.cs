@@ -1,4 +1,5 @@
 ﻿using BookStoreManagement.BUS;
+using DatabaseCommon.Const;
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace BookStoreManagement.UI
    /// </summary>
    public partial class CreateMember : UserControl
    {
-      string avatar_path = "Images/bg_default.jpg";
+      string avatar_path = CONST.USERS.DEFAULT_PHOTO_LINK;
       CustomerDto member = null;
       bool update = false;
       public CreateMember()
@@ -80,7 +81,7 @@ namespace BookStoreManagement.UI
             {
                boxDoB.Text = member.DOB.Substring(6, 2) + "/" + member.DOB.Substring(4, 2) + "/" + member.DOB.Substring(0, 4);
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (Exception ex)
             {
                boxDoB.Text = "Empty";
             }
@@ -109,11 +110,15 @@ namespace BookStoreManagement.UI
             string image_path = path + avatar_path;
             if (!File.Exists(image_path))
             {
-               image_path = path + "Images/bg_default.jpg";
+               image_path = path + CONST.USERS.DEFAULT_PHOTO_LINK;
             }
 
-            BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
-            avatar.Source = image;
+            try
+            {
+               BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+               avatar.Source = image;
+            }
+            catch (Exception ex) { }
 
             btnConfirm.Content = "Update";
          }
@@ -184,6 +189,10 @@ namespace BookStoreManagement.UI
          catch (FormatException ex)
          {
             MessageBox.Show("Email is wrong format");
+            return;
+         }
+         catch (Exception ex)
+         {
             return;
          }
 
@@ -314,12 +323,22 @@ namespace BookStoreManagement.UI
             int lastIndex = filename.LastIndexOf('.');
             string extension = filename.Substring(lastIndex, filename.Length - lastIndex);
             Guid guid = Guid.NewGuid();
-            avatar_path = "Images/" + guid.ToString() + extension;
+            avatar_path = "\\persistent\\images\\" + guid.ToString() + extension;
             string image_path = path + avatar_path;
+            int dup = 0;
+            while (File.Exists(image_path))
+            {
+               avatar_path = "\\persistent\\images\\" + guid.ToString() + (++dup) + extension;
+               image_path = path + avatar_path;
+            }
             File.Copy(filename, image_path);
 
-            BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
-            avatar.Source = image;
+            try
+            {
+               BitmapImage image = new BitmapImage(new Uri(image_path, UriKind.Absolute));
+               avatar.Source = image;
+            }
+            catch (Exception ex) { }
          }
       }
    }

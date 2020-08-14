@@ -35,10 +35,17 @@ namespace BookStoreManagement.UI
             return;
          }
          string encryptedPassword = CryptoUtils.encryptSHA256(txtPassword.Password);
-         if (!StaffBUS.Login(txtUsername.Text.Trim(), encryptedPassword))
+         int result = StaffBUS.Login(txtUsername.Text.Trim(), encryptedPassword);
+         switch (result)
          {
-            lbError.Content = "Username or Password is incorrect!";
-            return;
+            case 0:
+               lbError.Content = "Username or Password is incorrect!";
+               return;
+            case -1:
+               lbError.Content = "This account is inactive!";
+               return;
+            default:
+               break;
          }
          lbError.Content = "";
          MainWindow.MainGrid.Children.Clear();

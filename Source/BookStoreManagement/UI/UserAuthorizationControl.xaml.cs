@@ -143,6 +143,11 @@ namespace BookStoreManagement.UI
       }
       private void btnEdit_Click(object sender, RoutedEventArgs e)
       {
+         if (ComboBoxType.SelectedItem.ToString().Equals(CONST.USERS.USER_TYPE_ADMIN))
+         {
+            MessageBox.Show("Can not edit ADMIN!");
+            return;
+         }
          ContentPanel.IsEnabled = true;
          HeaderPanel.IsEnabled = false;
          txtName.IsEnabled = false;

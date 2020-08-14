@@ -8,78 +8,81 @@
              Loaded="loaded"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="708" d:DesignWidth="1080">
-    <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
-        <StackPanel Orientation="Vertical">
-            <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold">Member Management</Label>
-            <StackPanel Orientation="Horizontal"  Margin="0,10,0,10" Width="900">
-                <ComboBox x:Name="cbType" IsEditable="False" Width="157" FontSize="20" Foreground="Black" Background="White" Height="38">
-                    <ComboBox.Effect>
-                        <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
-                    </ComboBox.Effect>
-                    <ComboBoxItem Content="Name"/>
-                    <ComboBoxItem Content="Email"/>
-                    <ComboBoxItem Content="Phone Number"/>
-                </ComboBox>
-                <materialDesign:PackIcon Kind="Search" Height="38" Width="38" VerticalAlignment="Top" Foreground="Black" Background="White">
-                    <materialDesign:PackIcon.Effect>
-                        <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
-                    </materialDesign:PackIcon.Effect>
-                </materialDesign:PackIcon>
-                <TextBox x:Name="txtSearchValue" Width="711" TextChanged="txtSearchValue_TextChanged" FontSize="20" Foreground="Black" Background="White" 
+   <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+      <StackPanel Orientation="Vertical">
+         <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold">Member Management</Label>
+         <StackPanel Orientation="Horizontal"  Margin="0,10,0,10" Width="900">
+            <ComboBox x:Name="cbType" IsEditable="False" Width="157" FontSize="20" Foreground="Black" Background="White" Height="38">
+               <ComboBox.Effect>
+                  <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+               </ComboBox.Effect>
+               <ComboBoxItem Content="Name"/>
+               <ComboBoxItem Content="Email"/>
+               <ComboBoxItem Content="Phone Number"/>
+            </ComboBox>
+            <materialDesign:PackIcon Kind="Search" Height="38" Width="38" VerticalAlignment="Top" Foreground="Black" Background="White">
+               <materialDesign:PackIcon.Effect>
+                  <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+               </materialDesign:PackIcon.Effect>
+            </materialDesign:PackIcon>
+            <TextBox x:Name="txtSearchValue" Width="711" TextChanged="txtSearchValue_TextChanged" FontSize="20" Foreground="Black" Background="White" 
                          Height="38" materialDesign:HintAssist.Hint="Enter the keyword you want to search">
-                    <TextBox.Effect>
-                        <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
-                    </TextBox.Effect>
-                </TextBox>
+               <TextBox.Effect>
+                  <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+               </TextBox.Effect>
+            </TextBox>
+         </StackPanel>
+         <StackPanel Width="900" Height="530">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+               <Button x:Name="btnAdd" Background="Transparent" Foreground="Green" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnAdd_Click">
+                  <materialDesign:PackIcon Kind="Add"  Width="25" Height="25"/>
+               </Button>
+               <Button x:Name="btnView" Background="Transparent" Foreground="CornflowerBlue" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnView_Click">
+                  <materialDesign:PackIcon Kind="FileSearch"  Width="25" Height="25"/>
+               </Button>
+               <Button x:Name="btnImport" Background="Transparent" Foreground="Orange" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnImport_Click">
+                  <materialDesign:PackIcon Kind="NoteAdd"  Width="25" Height="25" />
+               </Button>
+               <Button x:Name="btnDelete" Background="Transparent" Foreground="Red" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnDelete_Click">
+                  <materialDesign:PackIcon Kind="TrashCan"  Width="25" Height="25"/>
+               </Button>
             </StackPanel>
-            <StackPanel Width="900" Height="530">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
-                    <Button x:Name="btnAdd" Background="Transparent" Foreground="Green" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnAdd_Click">
-                        <materialDesign:PackIcon Kind="Add"  Width="25" Height="25"/>
-                    </Button>
-                    <Button x:Name="btnImport" Background="Transparent" Foreground="Orange" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnImport_Click">
-                        <materialDesign:PackIcon Kind="NoteAdd"  Width="25" Height="25" />
-                    </Button>
-                    <Button x:Name="btnDelete" Background="Transparent" Foreground="Red" Padding="10,0,10,0" BorderThickness="0" BorderBrush="Transparent" Click="btnDelete_Click">
-                        <materialDesign:PackIcon Kind="TrashCan"  Width="25" Height="25"/>
-                    </Button>
-                </StackPanel>
-                <DataGrid x:Name="tableMembers"  Background="WhiteSmoke" Margin="0,5,0,0" Width="900" Height="450" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-                    <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background" Value="WhiteSmoke" />
-                        </Style>
-                        <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="{x:Type DataGridRow}">
-                            <Setter Property="Background" Value="White" />
-                            <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Effect>
-                        <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
-                    </DataGrid.Effect>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="No." Binding="{Binding Number}" Width="80" />
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="230" />
-                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="100" />
-                        <DataGridTextColumn Header="Day Of Birth" Binding="{Binding DoB}" Width="130" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" />
-                        <DataGridTextColumn Header="Phone Number" Binding="{Binding Phone}" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="btnConfirm" Content="Confirm" Foreground="White" FontSize="20" Width="220" Height="40"
+            <DataGrid x:Name="tableMembers"  Background="WhiteSmoke" Margin="0,5,0,0" Width="900" Height="450" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+               <DataGrid.Resources>
+                  <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                     <Setter Property="Background" Value="WhiteSmoke" />
+                  </Style>
+                  <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="{x:Type DataGridRow}">
+                     <Setter Property="Background" Value="White" />
+                     <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                  </Style>
+               </DataGrid.Resources>
+               <DataGrid.Effect>
+                  <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+               </DataGrid.Effect>
+               <DataGrid.Columns>
+                  <DataGridTextColumn Header="No." Binding="{Binding Number}" Width="80" />
+                  <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="230" />
+                  <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="100" />
+                  <DataGridTextColumn Header="Day Of Birth" Binding="{Binding DoB}" Width="130" />
+                  <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" />
+                  <DataGridTextColumn Header="Phone Number" Binding="{Binding Phone}" Width="*" />
+               </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
+               <Button x:Name="btnConfirm" Content="Confirm" Foreground="White" FontSize="20" Width="220" Height="40"
                             Click="confirm_click" Visibility="Hidden" Margin="0,0,220,0"/>
-                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                        <TextBlock x:Name="lbPaging" Text="Loading" Foreground="Black"/>
-                    </StackPanel>
-                    <Button Margin="0,0" Padding="5,0" x:Name="btnPrevious" Click="btnPrevious_Click" Background="Transparent" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" >
-                        <materialDesign:PackIcon Kind="ArrowLeftBoldCircleOutline"  Width="25" Height="25"/>
-                    </Button>
-                    <Button Margin="0,0" Padding="5,0" x:Name="btnNext" Click="btnNext_Click" Background="Transparent" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" >
-                        <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline"  Width="25" Height="25"/>
-                    </Button>
-                </StackPanel>
+               <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                  <TextBlock x:Name="lbPaging" Text="Loading" Foreground="Black"/>
+               </StackPanel>
+               <Button Margin="0,0" Padding="5,0" x:Name="btnPrevious" Click="btnPrevious_Click" Background="Transparent" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" >
+                  <materialDesign:PackIcon Kind="ArrowLeftBoldCircleOutline"  Width="25" Height="25"/>
+               </Button>
+               <Button Margin="0,0" Padding="5,0" x:Name="btnNext" Click="btnNext_Click" Background="Transparent" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" >
+                  <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline"  Width="25" Height="25"/>
+               </Button>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+         </StackPanel>
+      </StackPanel>
+   </Grid>
 </UserControl>

@@ -30,10 +30,10 @@ namespace BookStoreManagement.UI
     /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
     /// </summary>
     /// 
-    [Feature(Id = 19, Name = FeatureNameUtils.Publisher.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
-    [Feature(Id = 20, Name = FeatureNameUtils.Publisher.NEW, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
-    [Feature(Id = 21, Name = FeatureNameUtils.Publisher.EDIT, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
-    [Feature(Id = 22, Name = FeatureNameUtils.Publisher.DELETE, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 23, Name = FeatureNameUtils.Publisher.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 24, Name = FeatureNameUtils.Publisher.NEW, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 25, Name = FeatureNameUtils.Publisher.EDIT, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
+    [Feature(Id = 26, Name = FeatureNameUtils.Publisher.DELETE, Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
     //[Feature(Id = 23, Name = FeatureNameUtils.Publisher.IMPORT,      Group = FeatureNameUtils.FeatureGroup.PUBLISHER_MANAGEMENT)]
 
     public partial class PublisherManagementControl : UserControl

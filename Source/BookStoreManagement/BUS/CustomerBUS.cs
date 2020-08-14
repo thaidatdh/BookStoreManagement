@@ -1,4 +1,5 @@
-﻿using DatabaseCommon.DAO;
+﻿using DatabaseCommon.Const;
+using DatabaseCommon.DAO;
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace BookStoreManagement.BUS
         {
             if (allNotDeletedMembers == null || allNotDeletedMembers.Count == 0)
             {
-                allNotDeletedMembers = CustomerDao.Where(n => n.IsDeleted == false).ToList();
+                allNotDeletedMembers = CustomerDao.Where(n => n.IsDeleted == false && n.UserType.Equals(CONST.USERS.USER_TYPE_CUSTOMER)).ToList();
             }
             return allNotDeletedMembers;
         }

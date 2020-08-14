@@ -30,10 +30,10 @@ namespace BookStoreManagement.UI
    /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
    /// </summary>
    /// 
-   [Feature(Id = 29, Name = FeatureNameUtils.Author.MANAGEMENT,     Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
-   [Feature(Id = 30, Name = FeatureNameUtils.Author.NEW,            Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
-   [Feature(Id = 31, Name = FeatureNameUtils.Author.EDIT,           Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
-   [Feature(Id = 32, Name = FeatureNameUtils.Author.DELETE,         Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 39, Name = FeatureNameUtils.Author.MANAGEMENT,     Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 40, Name = FeatureNameUtils.Author.NEW,            Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 41, Name = FeatureNameUtils.Author.EDIT,           Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
+   [Feature(Id = 42, Name = FeatureNameUtils.Author.DELETE,         Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
     //[Feature(Id = 33, Name = FeatureNameUtils.Author.IMPORT,      Group = FeatureNameUtils.FeatureGroup.AUTHOR_MANAGEMENT)]
 
     public partial class AuthorManagementControl : UserControl

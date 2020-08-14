@@ -30,10 +30,10 @@ namespace BookStoreManagement.UI
     /// Paging: https://www.youtube.com/watch?v=L1wpQ_fKjVw
     /// </summary>
     /// 
-    [Feature(Id = 19, Name = FeatureNameUtils.Provider.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
-    [Feature(Id = 20, Name = FeatureNameUtils.Provider.NEW, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
-    [Feature(Id = 21, Name = FeatureNameUtils.Provider.EDIT, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
-    [Feature(Id = 22, Name = FeatureNameUtils.Provider.DELETE, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 27, Name = FeatureNameUtils.Provider.MANAGEMENT, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 28, Name = FeatureNameUtils.Provider.NEW, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 29, Name = FeatureNameUtils.Provider.EDIT, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
+    [Feature(Id = 30, Name = FeatureNameUtils.Provider.DELETE, Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
     //[Feature(Id = 23, Name = FeatureNameUtils.Provider.IMPORT,      Group = FeatureNameUtils.FeatureGroup.PROVIDER_MANAGEMENT)]
 
     public partial class ProviderManagementControl : UserControl
