@@ -138,6 +138,11 @@ namespace BookStoreManagement.UI
 
       private async void btnImport_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Staff.IMPORT, FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          // Create OpenFileDialog 
          Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
@@ -162,6 +167,11 @@ namespace BookStoreManagement.UI
 
       private void btnAdd_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Staff.NEW, FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          MainWindow.MainGrid.Children.Clear();
          UserControl createStaff = new CreateStaff();
          MainWindow.MainGrid.Children.Add(createStaff);
@@ -169,6 +179,11 @@ namespace BookStoreManagement.UI
 
       private async void btnDelete_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Staff.DELETE, FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          Staff selection = (Staff)tableStaffs.SelectedItem;
          if (StaffBUS.delete(selection.userId))
          {

@@ -93,7 +93,7 @@ namespace BookStoreManagement.UI
          }
 
          avatar_path = staff.PhotoLink;
-         string path = AppDomain.CurrentDomain.BaseDirectory;
+         string path = CONST.APPLICATION_PATH;
          string image_path = path + avatar_path;
          if (!File.Exists(image_path))
          {
@@ -128,7 +128,7 @@ namespace BookStoreManagement.UI
             // Open document 
             string filename = dlg.FileName;
 
-            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string path = CONST.APPLICATION_PATH;
             int lastIndex = filename.LastIndexOf('.');
             string extension = filename.Substring(lastIndex, filename.Length - lastIndex);
             Guid guid = Guid.NewGuid();

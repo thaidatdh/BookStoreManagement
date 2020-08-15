@@ -1,4 +1,6 @@
-﻿using DatabaseCommon.Const;
+﻿using BookStoreManagement.BUS;
+using BookStoreManagement.Utils;
+using DatabaseCommon.Const;
 using DatabaseCommon.DTO;
 using System;
 using System.Collections.Generic;
@@ -81,7 +83,7 @@ namespace BookStoreManagement.UI
             textActive.Foreground = new SolidColorBrush(Colors.Red);
          }
 
-         string path = AppDomain.CurrentDomain.BaseDirectory;
+         string path = CONST.APPLICATION_PATH;
          string avatar_path = path + staff.PhotoLink;
 
          if (!File.Exists(avatar_path))
@@ -98,6 +100,11 @@ namespace BookStoreManagement.UI
 
       private void Edit_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Staff.EDIT, FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          MainWindow.MainGrid.Children.Clear();
          UserControl editStaff = new EditStaff(staff);
          MainWindow.MainGrid.Children.Add(editStaff);
@@ -105,6 +112,11 @@ namespace BookStoreManagement.UI
 
       private void btn_change_password_click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Staff.EDIT, FeatureNameUtils.FeatureGroup.STAFF_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          ChangePassword changePassword = new ChangePassword(staff.StaffId);
          changePassword.Show();
       }

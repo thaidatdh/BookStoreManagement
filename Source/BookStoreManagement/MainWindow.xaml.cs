@@ -19,6 +19,7 @@ using BookStoreManagement.UI;
 using DatabaseCommon.Const;
 using BookStoreManagement.BUS;
 using System.Diagnostics;
+using System.IO;
 
 namespace BookStoreManagement
 {
@@ -34,6 +35,10 @@ namespace BookStoreManagement
       public MainWindow()
       {
          DatabaseCommon.DatabaseUtils.Open();
+         if (!Directory.Exists(CONST.APPLICATION_PATH + "\\persistent\\images\\"))
+         {
+            Directory.CreateDirectory(CONST.APPLICATION_PATH + "\\persistent\\images\\");
+         }
          InitializeComponent();
          GridMain.Children.Clear();
          UserControl userControl = new LoginControl();

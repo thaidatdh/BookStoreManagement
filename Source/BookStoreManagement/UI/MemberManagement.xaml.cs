@@ -143,6 +143,11 @@ namespace BookStoreManagement.UI
 
       private void btnAdd_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Member.NEW, FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          MainWindow.MainGrid.Children.Clear();
          UserControl createMember = new CreateMember();
          MainWindow.MainGrid.Children.Add(createMember);
@@ -150,6 +155,11 @@ namespace BookStoreManagement.UI
 
       private async void btnImport_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Member.IMPORT, FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          // Create OpenFileDialog 
          Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
@@ -174,6 +184,11 @@ namespace BookStoreManagement.UI
 
       private async void btnDelete_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Member.DELETE, FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          Member member = (Member)tableMembers.SelectedItem;
          CustomerBUS.Delete(member.BarCode);
 

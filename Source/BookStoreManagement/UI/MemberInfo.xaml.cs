@@ -1,4 +1,5 @@
 ﻿using BookStoreManagement.BUS;
+using BookStoreManagement.Utils;
 using DatabaseCommon.Const;
 using DatabaseCommon.DTO;
 using System;
@@ -55,7 +56,7 @@ namespace BookStoreManagement.UI
          textBankName.Text = member.BankName;
          textNote.Text = member.Note;
 
-         string path = AppDomain.CurrentDomain.BaseDirectory;
+         string path = CONST.APPLICATION_PATH;
          string avatar_path = path + member.PhotoLink;
          if (!File.Exists(avatar_path))
          {
@@ -72,6 +73,11 @@ namespace BookStoreManagement.UI
 
       private void Edit_Click(object sender, RoutedEventArgs e)
       {
+         if (!FeatureAttributeService.isAuthorized(FeatureNameUtils.Member.EDIT, FeatureNameUtils.FeatureGroup.MEMBER_MANAGEMENT))
+         {
+            MessageBox.Show("You are not authorized for this feature!");
+            return;
+         }
          MainWindow.MainGrid.Children.Clear();
          UserControl createMember = new CreateMember(member);
          MainWindow.MainGrid.Children.Add(createMember);
