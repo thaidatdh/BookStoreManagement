@@ -40,17 +40,18 @@ namespace DatabaseCommon
       }
       private static void WriteDefaultSettingFile()
       {
-         File.WriteAllText("/Settings.ini", "connectionstring = " + _connectionString);
+         File.WriteAllText(CONST.APPLICATION_PATH + "/Settings.ini", "connectionstring = " + _connectionString);
       }
       private static void InitConnectionString()
       {
-         if (!File.Exists("/Settings.ini"))
+         if (!File.Exists(CONST.APPLICATION_PATH + "/Settings.ini"))
          {
             _connectionString = @"Server=.;Database=BSDB;Integrated Security = True;";
             WriteDefaultSettingFile();
             return;
          }
-         List<string> settings = File.ReadAllLines("/Settings.ini").ToList();
+         FileInfo fileInfo = new FileInfo(CONST.APPLICATION_PATH + "/Settings.ini");
+         List<string> settings = File.ReadAllLines(CONST.APPLICATION_PATH + "/Settings.ini").ToList();
          _connectionString = settings.FirstOrDefault(n => n.ToLower().Contains("connectionstring"));
          if (!String.IsNullOrEmpty(_connectionString))
          {

@@ -8,6 +8,7 @@ namespace DatabaseCommon.Const
 {
    public class CONST
    {
+      public static readonly string APPLICATION_PATH = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
       public class USERS
       {
          public const string USER_TYPE_CUSTOMER = "CUSTOMER";
