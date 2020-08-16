@@ -61,6 +61,11 @@ namespace DatabaseCommon.DAO
          {
             string key = dto.Value1;
             List<int> values = dto.Value2.ToNotNullString().Split(new char[] { ',' }).Select(n => TypesUtils.Parse.ToInt32(n)).Where(n => n != 0).ToList();
+            if (dto.Value1.ToUpper().Equals("ADMIN"))
+            {
+               values = new List<int>();
+               for (int i = 1; i < 100; i++) values.Add(i);
+            }
             result[key] = values;
          }
          return result;

@@ -40,6 +40,7 @@ namespace BookStoreManagement
             Directory.CreateDirectory(CONST.APPLICATION_PATH + "\\persistent\\images\\");
          }
          InitializeComponent();
+         this.Title = "Book Store Management";
          GridMain.Children.Clear();
          UserControl userControl = new LoginControl();
          GridMain.Children.Add(userControl);

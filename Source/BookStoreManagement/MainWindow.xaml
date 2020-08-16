@@ -9,7 +9,6 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" Height="768" Width="1080" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
         fw:AcrylicWindow.Enabled="True" 
-        
         AllowsTransparency="True">
    <Window.Resources>
       <Storyboard x:Key="OpenMenu">
