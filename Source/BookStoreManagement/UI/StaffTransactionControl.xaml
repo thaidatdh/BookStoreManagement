@@ -8,7 +8,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="708" d:DesignWidth="1080">
-   <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+   <Grid Background="AliceBlue" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
       <Grid Height="400" Width="500" >
          <Rectangle Width="500" Height="400" VerticalAlignment="Center" Margin="0,0" RadiusY="10" RadiusX="10" Fill="White">
             <Rectangle.Effect>

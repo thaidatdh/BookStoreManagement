@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="708" d:DesignWidth="1080">
-    <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+    <Grid Background="AliceBlue" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
         <Button Name="btnBack" Height="40" Background="Transparent" Foreground="Black" Click="back_click" Margin="0,0,940,638" BorderThickness="0" BorderBrush="Transparent">
             <materialDesign:PackIcon Kind="ArrowBack"  Width="25" Height="25"/>
         </Button>

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:local="clr-namespace:BookStoreManagement"
-        Title="MainWindow"
+        Title="Book Store Management"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="768" Width="1080" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        fw:AcrylicWindow.Enabled="True" 
+        mc:Ignorable="d" Height="768" Width="1080" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown"
+        fw:AcrylicWindow.Enabled="False" 
         AllowsTransparency="True">
    <Window.Resources>
       <Storyboard x:Key="OpenMenu">
@@ -55,21 +55,48 @@
          <Grid.Effect>
             <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
          </Grid.Effect>
-         <StackPanel x:Name="panelLogin" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btnProfile" Content="Admin" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" FontSize="16" Click="btnProfile_Click"/>
-            <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
-               <StackPanel Width="150">
-                  <Button Content="Profile" Click="btnProfile_Click"/>
-                  <Button Content="Authorization" x:Name="btnAuthorization" Click="btnAuthorization_Click" Visibility="Collapsed"/>
-                  <Button Content="Logout" x:Name="btnLogOut" Click="btnLogOut_Click"/>
-                  <Separator/>
-                  <Button Content="Exit" x:Name="btnCloseApplication" Click="btnCloseApplication_Click"/>
-               </StackPanel>
-            </materialDesign:PopupBox>
+         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel x:Name="panelLogin" Orientation="Horizontal">
+               <Button x:Name="btnProfile" Content="Admin" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" FontSize="16" Click="btnProfile_Click"/>
+               <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
+                  <StackPanel Width="150">
+                     <Button Click="btnProfile_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                           <materialDesign:PackIcon Kind="User" Height="25" Width="25"/>
+                           <TextBlock Text="Profile" Margin="5,5"></TextBlock>
+                        </StackPanel>
+                     </Button>
+                     <Button x:Name="btnAuthorization" Click="btnAuthorization_Click" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                           <materialDesign:PackIcon Kind="TwoFactorAuthentication" Height="25" Width="25"/>
+                           <TextBlock Text="Authorization" Margin="5,5"></TextBlock>
+                        </StackPanel>
+                     </Button>
+                     <Button x:Name="btnLogOut" Click="btnLogOut_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                           <materialDesign:PackIcon Kind="Logout" Height="25" Width="25"/>
+                           <TextBlock Text="Logout" Margin="5,5"></TextBlock>
+                        </StackPanel>
+                     </Button>
+                     <Separator/>
+                     <Button x:Name="btnCloseApplication" Click="btnCloseApplication_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                           <materialDesign:PackIcon Kind="Close" Height="25" Width="25"/>
+                           <TextBlock Text="Exit" Margin="5,5"></TextBlock>
+                        </StackPanel>
+                     </Button>
+                  </StackPanel>
+               </materialDesign:PopupBox>
+
+            </StackPanel>
+            <Button x:Name="btnEdit" Click="btnCloseApplication_Click" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Visibility="Visible" Width="30" Padding="0,0,0,0" Foreground="Red" Margin="0,0,5,0">
+               <materialDesign:PackIcon Kind="Close" Height="25" Width="25" Margin="0,0,0,0"/>
+            </Button>
          </StackPanel>
-         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Management</TextBlock>
+         
+         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Book Store Management</TextBlock>
       </Grid>
-      <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#7FFFFFFF">
+      <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#8F013774">
          <Grid.Effect>
             <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
          </Grid.Effect>
@@ -83,60 +110,60 @@
                      <TranslateTransform/>
                   </TransformGroup>
                </Grid.RenderTransform>
-               <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
+               <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonOpenMenu_Click">
                   <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
                </Button>
-               <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="60" Width="60" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonCloseMenu_Click">
+               <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="60" Width="60" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonCloseMenu_Click">
                   <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
                </Button>
             </Grid>
             <ListView x:Name="ListViewMenu" Foreground="Black" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
-               <ListViewItem x:Name="Book" Height="60">
+               <ListViewItem x:Name="Book" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="Bookshelf" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Book" VerticalAlignment="Center" Margin="20 10"/>
+                     <TextBlock Text="Book" VerticalAlignment="Center" Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Customer" Height="60">
+               <ListViewItem x:Name="Customer" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="UserBoxes" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Customer" VerticalAlignment="Center" Margin="20 10"/>
+                     <TextBlock Text="Customer" VerticalAlignment="Center" Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Staff" Height="60">
+               <ListViewItem x:Name="Staff" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="UserBadge" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Staff" VerticalAlignment="Center"  Margin="20 10"/>
+                     <TextBlock Text="Staff" VerticalAlignment="Center"  Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Provider" Height="60">
+               <ListViewItem x:Name="Provider" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="BoxDown" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Provider" VerticalAlignment="Center"  Margin="20 10"/>
+                     <TextBlock Text="Provider" VerticalAlignment="Center"  Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Publisher" Height="60">
+               <ListViewItem x:Name="Publisher" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="Newspaper" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Publisher" VerticalAlignment="Center"  Margin="20 10"/>
+                     <TextBlock Text="Publisher" VerticalAlignment="Center"  Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Category" Height="60">
+               <ListViewItem x:Name="Category" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="ContentDuplicate" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Category" VerticalAlignment="Center"  Margin="20 10"/>
+                     <TextBlock Text="Category" VerticalAlignment="Center"  Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Author" Height="60">
+               <ListViewItem x:Name="Author" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="UserMultipleCheck" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Author" VerticalAlignment="Center"  Margin="20 10"/>
+                     <TextBlock Text="Author" VerticalAlignment="Center"  Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
-               <ListViewItem x:Name="Transaction" Height="60">
+               <ListViewItem x:Name="Transaction" Height="60" Foreground="White">
                   <StackPanel Orientation="Horizontal">
                      <materialDesign:PackIcon Kind="NotebookMultiple" Height="25" Width="25" Margin="10"/>
-                     <TextBlock Text="Transaction" VerticalAlignment="Center"  Margin="20 10"/>
+                     <TextBlock Text="Transaction" VerticalAlignment="Center"  Margin="20 10" FontSize="20"/>
                   </StackPanel>
                </ListViewItem>
             </ListView>

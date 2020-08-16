@@ -7,11 +7,11 @@
 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
             d:DesignHeight="708" d:DesignWidth="1080" Foreground="Black" Loaded="UserControl_Loaded" IsVisibleChanged="UserControl_IsVisibleChanged">
-   <Grid Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+   <Grid Background="AliceBlue" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
       <StackPanel Orientation="Vertical">
          <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold">Transaction Management</Label>
          <StackPanel Orientation="Horizontal"  Margin="0,10,0,10" Width="900">
-            <ComboBox x:Name="cbType" IsEditable="False" Width="150" FontWeight="Bold" FontSize="20" Background="White" Height="38" >
+            <ComboBox x:Name="cbType" IsEditable="False" Width="150" FontSize="18" Background="White" Height="38" >
                <ComboBox.Effect>
                   <DropShadowEffect BlurRadius="10" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
                </ComboBox.Effect>
@@ -81,8 +81,8 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                   <DataGridTextColumn Header="ID" Binding="{Binding TransactionId}" Width="80" />
                   <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="200" />
                   <DataGridTextColumn Header="Date" Binding="{Binding EntryDate}" Width="*" />
-                  <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="*" />
-                  <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="*" />
+                  <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat=N}" Width="*" />
+                  <DataGridTextColumn Header="Discount" Binding="{Binding Discount, StringFormat=N}" Width="*" />
                   <DataGridTextColumn Header="Receiver" Binding="{Binding ReceiverName}" Width="*" />
                </DataGrid.Columns>
             </DataGrid>

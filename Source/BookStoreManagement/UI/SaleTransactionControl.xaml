@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1080" Foreground="Black" Background="AliceBlue" Loaded="UserControl_Loaded" IsVisibleChanged="UserControl_IsVisibleChanged">
    <ScrollViewer>
-      <StackPanel x:Name="transactionContent" Orientation="Vertical" Background="AliceBlue" Margin="0,30,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+      <StackPanel x:Name="transactionContent" Orientation="Vertical" Background="AliceBlue" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
          <Grid Height="470" Width="960" Margin="0,20,0,0">
             <Rectangle Width="960" Height="470" VerticalAlignment="Center" Margin="0,0" RadiusY="10" RadiusX="10" Fill="White">
                <Rectangle.Effect>

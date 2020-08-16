@@ -254,7 +254,7 @@ namespace BookStoreManagement
 
       private void btnProfile_Click(object sender, RoutedEventArgs e)
       {
-
+         MainWindow.AddSubChild(new StaffInfo(Config.Manager.CURRENT_USER)); 
       }
 
       private void btnCloseApplication_Click(object sender, RoutedEventArgs e)
@@ -276,6 +276,12 @@ namespace BookStoreManagement
          GridMain.Children.Clear();
          usc = new UserAuthorizationControl();
          GridMain.Children.Add(usc);
+      }
+
+      private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+      {
+         if (e.ChangedButton == MouseButton.Left)
+            this.DragMove();
       }
    }
 }

@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="708" d:DesignWidth="1080">
-   <Grid Background="White" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
+   <Grid Background="White" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
       <StackPanel Margin="0,0,0,0">
          <Grid Height="50" Background="AliceBlue">
             <TextBlock Text="Authorization Setting" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="30"></TextBlock>
